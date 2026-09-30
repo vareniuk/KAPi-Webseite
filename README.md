@@ -1,6 +1,6 @@
-# KAPi – Kappelrodeck international · Webseite
+# KAPi – Kappelrodeck International · Webseite
 
-Neue Vereinswebseite für **KAPi – Kappelrodeck international** („Stark durch Vielfalt“) und den **Bürgertreff KaMin – Kappler Marktplatz**.
+Neue Webseite für **KAPi – Kappelrodeck International** („Stark durch Vielfalt“) und den **Bürgertreff KaM·in – Kappler Marktplatz** (Marktplatz 108, 77876 Kappelrodeck).
 
 ## Aktueller Stand: drei Design-Varianten zur Auswahl
 
@@ -8,16 +8,17 @@ Die Startseite `index.html` ist eine Übersicht, die zu den drei Entwürfen füh
 
 | Variante | Ordner | Charakter |
 |---|---|---|
-| 1 – Klar & Leicht | `varianten/klar/` | Apple-Ästhetik: Weiß, große Typografie, schwebende Farbflächen |
-| 2 – Vielfalt | `varianten/vielfalt/` | Animierter Farbverlauf, Bento-Kacheln, Laufband |
-| 3 – Begegnung | `varianten/begegnung/` | Warm, Handschrift-Akzente, animierter Figurenbogen |
+| 1 – Klar & Leicht | `varianten/klar/` | Apple-Klarheit: Weiß, große runde Typografie, schwebende Farbflächen |
+| 2 – Bunt & Lebendig | `varianten/bunt/` | Animierter Farbverlauf, Bento-Kacheln, Laufband |
+| 3 – Warm & Herzlich | `varianten/herzlich/` | Off-White, Handschrift-Akzente, animierter Ring aus Menschen |
 
 Sobald eine Variante gewählt ist, wird sie zur eigentlichen Startseite; die anderen beiden werden entfernt.
 
 ## Technik
 
 - Reines HTML, CSS und JavaScript – **kein Build-Schritt**, keine Frameworks, keine externen Dienste.
-- Keine Cookies, kein Tracking, keine Google-Fonts-Einbindung: die Schriften **Inter** und **Caveat** liegen selbst gehostet in `assets/fonts/` (SIL Open Font License).
+- Keine Cookies, kein Tracking, keine Google-Fonts-Einbindung: die Schriften **Nunito**, **Baloo 2** und **Caveat** liegen selbst gehostet in `assets/fonts/` (SIL Open Font License), inklusive kyrillischer Zeichen für Ukrainisch.
+- Dreisprachig: Deutsch (Standard), Ukrainisch, Englisch – Umschalter oben auf jeder Seite; die Übersetzungen stehen je Variante in `i18n.js`.
 - Logos in `assets/logo/`.
 - `impressum.html` und `datenschutz.html` sind **Platzhalter** und müssen vor Veröffentlichung ausgefüllt werden. Alle weiteren Platzhalter sind im HTML mit `<!-- TODO: prüfen -->` markiert und oben in jeder `index.html` aufgelistet.
 
