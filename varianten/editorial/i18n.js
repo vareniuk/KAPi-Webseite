@@ -69,7 +69,7 @@ window.I18N = {
     "programm.naechster": "Next date",
     "programm.mo1.name": "We speak German",
     "programm.mo1.desc": "Practise German in a relaxed group, every level",
-    "programm.mo2.name": "Homework help / ABC",
+    "programm.mo2.name": "Homework help /\u00a0ABC",
     "programm.mo2.desc": "Homework, learning to read & write",
     "programm.di.leer": "Open meeting place – no fixed programme",
     "programm.mi1.name": "After-work get-together",
@@ -112,7 +112,7 @@ window.I18N = {
     "angebote.a1.name": "We speak German",
     "angebote.a1.tag": "Monday",
     "angebote.a1.desc": "Practise German in a relaxed group – for every level. No book, no exam, just conversation.",
-    "angebote.a2.name": "Homework help / ABC",
+    "angebote.a2.name": "Homework help /\u00a0ABC",
     "angebote.a2.tag": "Monday",
     "angebote.a2.desc": "Support with homework and learning to read and write – for children and adults.",
     "angebote.a3.name": "After-work get-together",
@@ -144,7 +144,7 @@ window.I18N = {
     "aktuelles.n2.text": "You speak good German and like people? Become a language buddy – even 1 hour helps.",
     "aktuelles.n3.datum": "18 April 2026",
     "aktuelles.n3.title": "Recap: drumming workshop",
-    "aktuelles.n3.text": "Over 30 children and adults drummed together. A new date is coming soon.",
+    "aktuelles.n3.text": "Children and adults drummed together – an afternoon full of rhythm. A new date is coming soon.",
 
     /* 06 Über uns */
     "ueber.kicker": "About us",
@@ -205,6 +205,7 @@ window.I18N = {
     "kontakt.email": "E-mail",
     "kontakt.instagramText": "Profile to follow",
     "kontakt.route": "Open route on OpenStreetMap",
+    "kontakt.routeShort": "Open route",
     "kontakt.mapCaption": "No embedded map – we protect your data. The link opens OpenStreetMap.",
 
     /* 09 Newsletter */
@@ -288,7 +289,7 @@ window.I18N = {
     "programm.naechster": "Найближчий термін",
     "programm.mo1.name": "Розмовляємо німецькою",
     "programm.mo1.desc": "Практика німецької у невимушеній компанії, усі рівні",
-    "programm.mo2.name": "Допомога з уроками / ABC",
+    "programm.mo2.name": "Допомога з уроками /\u00a0ABC",
     "programm.mo2.desc": "Домашні завдання, навчання читання й письма",
     "programm.di.leer": "Відкрита зустріч — без сталої програми",
     "programm.mi1.name": "Вечірні посиденьки",
@@ -331,7 +332,7 @@ window.I18N = {
     "angebote.a1.name": "Розмовляємо німецькою",
     "angebote.a1.tag": "Понеділок",
     "angebote.a1.desc": "Практика німецької у невимушеній компанії — для всіх рівнів. Без підручника, без іспиту, просто в розмові.",
-    "angebote.a2.name": "Допомога з уроками / ABC",
+    "angebote.a2.name": "Допомога з уроками /\u00a0ABC",
     "angebote.a2.tag": "Понеділок",
     "angebote.a2.desc": "Підтримка з домашніми завданнями та навчання читання й письма — для дітей і дорослих.",
     "angebote.a3.name": "Вечірні посиденьки",
@@ -363,7 +364,7 @@ window.I18N = {
     "aktuelles.n2.text": "Ти добре говориш німецькою і любиш людей? Стань мовним наставником — навіть 1 година допомагає.",
     "aktuelles.n3.datum": "18 квітня 2026",
     "aktuelles.n3.title": "Огляд: барабанний майстер-клас",
-    "aktuelles.n3.text": "Понад 30 дітей і дорослих барабанили разом. Скоро буде нова дата.",
+    "aktuelles.n3.text": "Діти й дорослі барабанили разом — день, сповнений ритму. Скоро буде нова дата.",
 
     /* 06 Über uns */
     "ueber.kicker": "Про нас",
@@ -424,6 +425,7 @@ window.I18N = {
     "kontakt.email": "Електронна пошта",
     "kontakt.instagramText": "Профіль буде додано",
     "kontakt.route": "Відкрити маршрут в OpenStreetMap",
+    "kontakt.routeShort": "Відкрити маршрут",
     "kontakt.mapCaption": "Без вбудованої карти — ми захищаємо твої дані. Посилання відкриє OpenStreetMap.",
 
     /* 09 Newsletter */

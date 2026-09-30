@@ -61,7 +61,7 @@
     </div>
   </header>
 
-  <main id="main">
+  <main id="main" tabindex="-1">
 
     <!-- 2. Hero (KAPi) – Signature-Element: Aurora-Fläche -->
     <section class="hero" aria-labelledby="hero-title">
@@ -75,7 +75,7 @@
             <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
           <a class="btn btn--ghost" href="#mitmachen" data-i18n="hero.cta2">Mitmachen</a>
         </div>
-        <div class="hero__facts meta up" style="--i:4">
+        <div class="hero__facts up" style="--i:4">
           <span data-i18n="hero.fact1">Kostenlos</span>
           <span data-i18n="hero.fact2">Ohne Anmeldung</span>
           <span data-i18n="hero.fact3">Für alle</span>
@@ -207,12 +207,12 @@
             <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V4h12v5M6 18H4a1 1 0 0 1-1-1v-6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6a1 1 0 0 1-1 1h-2M6 14h12v6H6z"/></svg>
             <span data-i18n="programm.print">Programm drucken</span>
           </button>
-          <!-- TODO: prüfen – Link zum aktuellen Monatsprogramm (PDF) -->
-          <button class="btn btn--ghost" type="button" disabled title="PDF folgt">
+          <!-- TODO: prüfen – Link zum aktuellen Monatsprogramm (PDF) einsetzen; bis dahin Platzhalter „#“ -->
+          <a class="btn btn--ghost btn--disabled" href="#" aria-disabled="true">
             <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11m0 0-4-4m4 4 4-4M4 19h16"/></svg>
             <span data-i18n="programm.pdf">Monatsprogramm als PDF (folgt)</span>
-          </button>
-          <p class="meta prog__hint" data-i18n="programm.extra">Der Feierabendtreff findet einmal im Monat statt – den Termin findest du unter Aktuelles. Dazu: Sommerfest am Marktplatz, Workshops und Sonderaktionen.</p>
+          </a>
+          <p class="prog__hint" data-i18n="programm.extra">Der Feierabendtreff findet einmal im Monat statt – der Termin steht im Monatsprogramm. Dazu: Sommerfest am Marktplatz, Workshops und Sonderaktionen.</p>
         </div>
       </div>
     </section>
@@ -270,59 +270,96 @@
         <ul class="offers">
           <li class="offer reveal" style="--c:#6aa12f">
             <span class="offer__stroke" aria-hidden="true"></span>
-            <h3 data-i18n="angebot.deutsch.title">Wir sprechen Deutsch</h3>
-            <p class="meta"><span data-i18n="days.long.1">Montag</span> · 15:00–16:30 · <span data-i18n="programm.woechentlich">jede Woche</span></p>
-            <p data-i18n="angebot.deutsch.text">Deutsch üben in lockerer Runde – für alle Niveaus, mit Sprachpaten aus dem Ort.</p>
-            <span class="offer__free" data-i18n="angebote.free">kostenlos · ohne Anmeldung</span>
+            <div class="offer__head">
+              <h3 data-i18n="angebot.deutsch.title">Wir sprechen Deutsch</h3>
+              <p class="offer__when"><span data-i18n="days.long.1">Montag</span> · 15:00–16:30 · <span data-i18n="programm.woechentlich">jede Woche</span></p>
+            </div>
+            <div class="offer__body">
+              <p data-i18n="angebot.deutsch.text">Wir reden über Alltag, Arbeit und Familie – ohne Lehrbuch, ohne Druck. Sprachpaten aus dem Ort helfen beim Verstehen.</p>
+              <p class="offer__for"><span class="offer__label" data-i18n="angebote.for">Für wen</span><span data-i18n="angebot.deutsch.for">Alle, die Deutsch üben wollen – vom ersten Wort bis zum flüssigen Gespräch.</span></p>
+            </div>
+            <span class="badge offer__badge" data-i18n="angebote.free">kostenlos</span>
           </li>
           <li class="offer reveal" style="--c:#0a93d6; --d:.05s">
             <span class="offer__stroke" aria-hidden="true"></span>
-            <h3 data-i18n="angebot.abc.title">Hausaufgabenhilfe / ABC</h3>
-            <p class="meta"><span data-i18n="days.long.1">Montag</span> · 16:30–18:00 · <span data-i18n="programm.woechentlich">jede Woche</span></p>
-            <p data-i18n="angebot.abc.text">Hilfe bei den Hausaufgaben, Lesen und Schreiben lernen – für Kinder und Erwachsene.</p>
-            <span class="offer__free" data-i18n="angebote.free">kostenlos · ohne Anmeldung</span>
+            <div class="offer__head">
+              <h3 data-i18n="angebot.abc.title">Hausaufgabenhilfe / ABC</h3>
+              <p class="offer__when"><span data-i18n="days.long.1">Montag</span> · 16:30–18:00 · <span data-i18n="programm.woechentlich">jede Woche</span></p>
+            </div>
+            <div class="offer__body">
+              <p data-i18n="angebot.abc.text">Ehrenamtliche helfen bei den Hausaufgaben und beim Lesen und Schreiben – Schritt für Schritt, in Ruhe.</p>
+              <p class="offer__for"><span class="offer__label" data-i18n="angebote.for">Für wen</span><span data-i18n="angebot.abc.for">Schüler:innen aller Klassen und Erwachsene, die Lesen und Schreiben lernen.</span></p>
+            </div>
+            <span class="badge offer__badge" data-i18n="angebote.free">kostenlos</span>
           </li>
-          <li class="offer reveal" style="--c:#e2231a; --d:.1s">
+          <li class="offer reveal" style="--c:#e2231a; --d:.10s">
             <span class="offer__stroke" aria-hidden="true"></span>
-            <h3 data-i18n="angebot.feierabend.title">Feierabendtreff</h3>
-            <p class="meta"><span data-i18n="days.long.3">Mittwoch</span> · 18:00–22:00 · <span data-i18n="programm.monatlich">einmal im Monat</span></p>
-            <p data-i18n="angebot.feierabend.text">Beisammensein für Einheimische und Zugezogene. Reden, lachen, den Abend teilen.</p>
-            <span class="offer__free" data-i18n="angebote.free">kostenlos · ohne Anmeldung</span>
+            <div class="offer__head">
+              <h3 data-i18n="angebot.feierabend.title">Feierabendtreff</h3>
+              <p class="offer__when"><span data-i18n="days.long.3">Mittwoch</span> · 18:00–22:00 · <span data-i18n="programm.monatlich">einmal im Monat</span></p>
+            </div>
+            <div class="offer__body">
+              <p data-i18n="angebot.feierabend.text">Ein Abend ohne Programm: reden, lachen, etwas trinken. Einheimische und Zugezogene lernen sich kennen.</p>
+              <p class="offer__for"><span class="offer__label" data-i18n="angebote.for">Für wen</span><span data-i18n="angebot.feierabend.for">Alle, die nach der Arbeit Gesellschaft suchen.</span></p>
+            </div>
+            <span class="badge offer__badge" data-i18n="angebote.free">kostenlos</span>
           </li>
           <li class="offer reveal" style="--c:#c52866; --d:.15s">
             <span class="offer__stroke" aria-hidden="true"></span>
-            <h3 data-i18n="angebot.nadel.title">Nadelspielereien</h3>
-            <p class="meta"><span data-i18n="days.long.4">Donnerstag</span> · 15:00–17:00 · <span data-i18n="programm.woechentlich">jede Woche</span></p>
-            <p data-i18n="angebot.nadel.text">Nähen, Stricken, Häkeln – Material ist da. Anfänger:innen sind genauso willkommen wie Profis.</p>
-            <span class="offer__free" data-i18n="angebote.free">kostenlos · ohne Anmeldung</span>
+            <div class="offer__head">
+              <h3 data-i18n="angebot.nadel.title">Nadelspielereien</h3>
+              <p class="offer__when"><span data-i18n="days.long.4">Donnerstag</span> · 15:00–17:00 · <span data-i18n="programm.woechentlich">jede Woche</span></p>
+            </div>
+            <div class="offer__body">
+              <p data-i18n="angebot.nadel.text">Nähen, Stricken und Häkeln in Gesellschaft. Stoff, Wolle und Nadeln liegen bereit – bring gern dein eigenes Projekt mit.</p>
+              <p class="offer__for"><span class="offer__label" data-i18n="angebote.for">Für wen</span><span data-i18n="angebot.nadel.for">Anfänger:innen und Profis, jedes Alter.</span></p>
+            </div>
+            <span class="badge offer__badge" data-i18n="angebote.free">kostenlos</span>
           </li>
-          <li class="offer reveal" style="--c:#ef8f1e; --d:.2s">
+          <li class="offer reveal" style="--c:#ef8f1e; --d:.20s">
             <span class="offer__stroke" aria-hidden="true"></span>
-            <h3 data-i18n="angebot.spiele.title">Spieletreff</h3>
-            <p class="meta"><span data-i18n="days.long.5">Freitag</span> · 15:00–17:00 · <span data-i18n="programm.woechentlich">jede Woche</span></p>
-            <p data-i18n="angebot.spiele.text">Karten- und Brettspiele für alle. Spielen braucht keine gemeinsame Sprache.</p>
-            <span class="offer__free" data-i18n="angebote.free">kostenlos · ohne Anmeldung</span>
+            <div class="offer__head">
+              <h3 data-i18n="angebot.spiele.title">Spieletreff</h3>
+              <p class="offer__when"><span data-i18n="days.long.5">Freitag</span> · 15:00–17:00 · <span data-i18n="programm.woechentlich">jede Woche</span></p>
+            </div>
+            <div class="offer__body">
+              <p data-i18n="angebot.spiele.text">Karten- und Brettspiele aus aller Welt. Spielen braucht keine gemeinsame Sprache – die Regeln erklären wir.</p>
+              <p class="offer__for"><span class="offer__label" data-i18n="angebote.for">Für wen</span><span data-i18n="angebot.spiele.for">Familien, Kinder, Senior:innen – alle, die gern spielen.</span></p>
+            </div>
+            <span class="badge offer__badge" data-i18n="angebote.free">kostenlos</span>
           </li>
           <li class="offer reveal" style="--c:#f4b400; --d:.25s">
             <span class="offer__stroke" aria-hidden="true"></span>
-            <h3 data-i18n="angebot.musik.title">Offene Musikwerkstatt</h3>
-            <p class="meta"><span data-i18n="days.long.6">Samstag</span> · <span data-i18n="programm.vereinbarung">nach Vereinbarung</span></p>
-            <p data-i18n="angebot.musik.text">Gemeinsam Musik machen – mit Instrumenten aus aller Welt oder einfach mit der Stimme.</p>
-            <span class="offer__free" data-i18n="angebote.free">kostenlos · ohne Anmeldung</span>
+            <div class="offer__head">
+              <h3 data-i18n="angebot.musik.title">Offene Musikwerkstatt</h3>
+              <p class="offer__when"><span data-i18n="days.long.6">Samstag</span> · <span data-i18n="programm.vereinbarung">nach Vereinbarung</span></p>
+            </div>
+            <div class="offer__body">
+              <p data-i18n="angebot.musik.text">Gemeinsam Musik machen – mit Instrumenten aus aller Welt oder einfach mit der Stimme. Sag kurz Bescheid, dann finden wir einen Termin.</p>
+              <p class="offer__for"><span class="offer__label" data-i18n="angebote.for">Für wen</span><span data-i18n="angebot.musik.for">Alle, die Musik mögen. Können ist keine Voraussetzung.</span></p>
+            </div>
+            <span class="badge offer__badge" data-i18n="angebote.free">kostenlos</span>
           </li>
-          <li class="offer offer--wide reveal" style="--c:#f4b400; --c2:#ef8f1e; --d:.3s">
+          <li class="offer reveal" style="--c:#f4b400; --c2:#ef8f1e; --d:.30s">
             <span class="offer__stroke offer__stroke--duo" aria-hidden="true"></span>
-            <h3 data-i18n="angebot.trommeln.title">Afrikanisches Trommeln</h3>
-            <p class="meta"><span data-i18n="programm.ankuendigung">nach Ankündigung</span></p>
-            <p data-i18n="angebot.trommeln.text">Workshop für Kinder und Erwachsene. Rhythmus, Energie und ganz viel Freude.</p>
-            <span class="offer__free" data-i18n="angebote.free">kostenlos · ohne Anmeldung</span>
+            <div class="offer__head">
+              <h3 data-i18n="angebot.trommeln.title">Afrikanisches Trommeln</h3>
+              <p class="offer__when"><span data-i18n="programm.ankuendigung">nach Ankündigung</span></p>
+            </div>
+            <div class="offer__body">
+              <p data-i18n="angebot.trommeln.text">Ein Workshop mit Trommeln aus Westafrika: Rhythmus, Energie und ganz viel Freude. Die Termine stehen im Monatsprogramm und im Newsletter.</p>
+              <p class="offer__for"><span class="offer__label" data-i18n="angebote.for">Für wen</span><span data-i18n="angebot.trommeln.for">Kinder und Erwachsene – auch ohne Vorerfahrung.</span></p>
+            </div>
+            <span class="badge offer__badge" data-i18n="angebote.free">kostenlos</span>
           </li>
         </ul>
       </div>
     </section>
 
+    <div class="aurora-line" aria-hidden="true"></div>
+
     <!-- 7. Aktuelles -->
-    <section class="section section--soft" id="aktuelles" aria-labelledby="aktuelles-title">
+    <section class="section" id="aktuelles" aria-labelledby="aktuelles-title">
       <div class="container">
         <div class="section__head reveal">
           <p class="kicker" data-i18n="aktuelles.kicker">Aktuelles</p>
@@ -372,7 +409,7 @@
         <div class="about">
           <div class="about__head reveal">
             <p class="kicker" data-i18n="ueberuns.kicker">Über uns</p>
-            <h2 id="ueberuns-title">KAPi – Kappelrodeck International</h2>
+            <h2 id="ueberuns-title">KAPi<br>Kappelrodeck International</h2>
           </div>
           <div class="about__body">
             <p class="lead reveal" data-i18n="ueberuns.lead">KAPi ist das Netzwerk für Integration, Begegnung und Vielfalt in Kappelrodeck. Menschen, Vereine und die Gemeinde arbeiten zusammen, damit sich alle im Ort willkommen fühlen – egal, woher sie kommen.</p>

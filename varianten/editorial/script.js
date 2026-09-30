@@ -116,7 +116,7 @@
     toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
     toggle.setAttribute('aria-label', open ? t('nav.menuClose', 'Menü schließen') : t('nav.menuOpen', 'Menü öffnen'));
   }
-  const mobileQuery = window.matchMedia('(max-width: 1099px)');
+  const mobileQuery = window.matchMedia('(max-width: 1199px)'); // muss zum Breakpoint in style.css passen
   // Eingeklapptes Mobilmenü für Hilfstechnik verbergen; auf Desktop ist die Navigation immer da
   function syncNavHidden() {
     const collapsed = mobileQuery.matches && toggle.getAttribute('aria-expanded') !== 'true';
@@ -206,7 +206,8 @@
     const link = e.target.closest('a[href^="#"]');
     if (!link || link.classList.contains('skip-link')) return;
     const id = link.getAttribute('href').slice(1);
-    const target = id ? document.getElementById(id) : null;
+    if (!id) { e.preventDefault(); return; } // Platzhalter „#“ (PDF-Link, TODO) springt nicht nach oben
+    const target = document.getElementById(id);
     if (!target) return;
     e.preventDefault();
     target.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'start' });
@@ -247,7 +248,8 @@
   }
 
   /* ---------- Start ------------------------------------------------------- */
-  applyLang(storedLang && LANGS.includes(storedLang) ? storedLang : 'de');
+  // Sprache zuerst – ein Fehler hier darf die Hero-Headline nicht unsichtbar lassen
+  try { applyLang(storedLang && LANGS.includes(storedLang) ? storedLang : 'de'); } catch (e) { /* Deutsch bleibt stehen */ }
   if (heroTitle) {
     try { if (!reducedMotion) maskWords(heroTitle); }
     finally { heroTitle.classList.add('is-ready'); }

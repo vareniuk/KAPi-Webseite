@@ -1,35 +1,54 @@
 /* ==========================================================================
-   KAPi · KaM·in – Variante „Studio“
-   Monochrom, typografisch, präzise. Nur Inter. Hairlines statt Kästen.
+   KAPi · KaM·in – Variante „Studio“ (Branding 2026)
+   Typografisch, präzise, nur Inter, Hairlines statt Kästen –
+   Wärme durch ruhige Pastellflächen, warmes Papier und die Handschrift im Claim.
    ========================================================================== */
 
 /* ---------- Design-Tokens ---------- */
 :root {
   color-scheme: light;
-  --text: #1d1d1b;
+
+  /* Neutrale (palette.json) */
+  --ink: #1d1d1b;
+  --ink-soft: #4a4a47;
+  --text: var(--ink);
   --text-2: #5f5f5c;
   --text-3: #8a8a86;
-  --bg: #ffffff;
-  --bg-alt: #f5f5f7;
+  --paper: #ffffff;
+  --paper-warm: #fbf9f6;
+  --paper-grey: #f5f5f7;
+  --bg: var(--paper);
   --line: rgba(29, 29, 27, .08);
   --line-mid: rgba(29, 29, 27, .16);
   --line-strong: rgba(29, 29, 27, .22);
+
+  /* Logofarben (Basis) – nur für Punkte, Balken, Ring */
   --green: #6aa12f;
   --blue: #0a93d6;
   --orange: #ef8f1e;
   --yellow: #f4b400;
   --red: #e2231a;
   --pink: #c52866;
+
+  /* Pastell-Welt (palette.json): pastel · pastel_soft · tint · deep_on_pastel */
+  --gruen-pastel: #e1ecd5;  --gruen-soft: #f0f6ea;  --gruen-tint: #bcd5a1;  --gruen-deep: #4a7121;
+  --blau-pastel: #cee9f7;   --blau-soft: #e6f4fb;   --blau-tint: #91ceed;   --blau-deep: #076d9e;
+  --orange-pastel: #fce9d2; --orange-soft: #fdf4e8; --orange-tint: #f8cd9a; --orange-deep: #995c13;
+  --gelb-pastel: #fdf0cc;   --gelb-soft: #fef8e6;   --gelb-tint: #fadd8c;   --gelb-deep: #896500;
+
   --font: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --ease: cubic-bezier(.2, .8, .2, 1);
   --container: 1240px;
   --gutter: 20px;
   --nav-h: 64px;
+  --tone-inset: 8px;
+  --tone-radius: 28px;
 }
 
 /* ---------- Reset & Basis ---------- */
 *, *::before, *::after { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-h) + 24px); }
+/* Sanftes Scrollen zu Ankern übernimmt script.js (respektiert reduced-motion); programmatische Sprünge bleiben sofort */
+html { -webkit-text-size-adjust: 100%; scroll-behavior: auto; scroll-padding-top: calc(var(--nav-h) + 24px); }
 body {
   margin: 0;
   font-family: var(--font);
@@ -48,9 +67,10 @@ li { list-style: none; }
 dd { margin: 0; }
 h1, h2, h3, h4 { margin: 0; font-weight: 600; letter-spacing: -0.04em; line-height: 1.05; }
 button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
-input, textarea { font: inherit; color: inherit; }
+input, textarea, select { font: inherit; color: inherit; }
 svg { flex: none; }
 :focus-visible { outline: 2px solid var(--text); outline-offset: 3px; border-radius: 4px; }
+.motif-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
 
 .container { max-width: var(--container); margin: 0 auto; padding: 0 var(--gutter); }
 @media (min-width: 720px) { :root { --gutter: 40px; } }
@@ -77,7 +97,13 @@ svg { flex: none; }
 .text-secondary { color: var(--text-2); }
 .text-secondary a { text-decoration: underline; text-underline-offset: 3px; }
 /* Zeilenlänge 45–70 Zeichen für Fließtext in der breiten Spalte */
-.split-main > p:not(.lead), .prog-foot, .form-hint { max-width: 66ch; }
+.split-main > p:not(.lead), .prog-foot, .form-hint, .section-intro { max-width: 66ch; }
+.section-intro { margin: 0; }
+
+/* Handschrift-Akzent: der vektorisierte Claim, sparsam (Hero + Unterschrift unter dem Zitat) */
+.claim { height: 30px; width: auto; }
+.claim-lg { height: 36px; }
+@media (min-width: 720px) { .claim { height: 34px; } .claim-lg { height: 40px; } }
 
 /* ---------- Buttons ---------- */
 .btn {
@@ -102,7 +128,6 @@ svg { flex: none; }
 .link-arrow { display: inline-flex; align-items: center; gap: 8px; font-weight: 500; padding: 8px 0; margin: -8px 0; }
 .link-arrow svg { transition: transform .3s var(--ease); }
 .link-arrow:hover svg { transform: translateX(4px); }
-.link-tap { display: inline-flex; align-items: center; min-height: 44px; }
 
 /* ---------- Farbpunkt ---------- */
 .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: var(--c, var(--text)); flex: none; }
@@ -203,9 +228,26 @@ svg { flex: none; }
 
 /* ---------- Sektionen ---------- */
 .section { padding: 96px 0; }
-.section-alt { background: var(--bg-alt); }
 .section-short { padding: 72px 0; }
-@media (min-width: 1024px) { .section { padding: 136px 0; } .section-short { padding: 96px 0; } }
+@media (min-width: 1024px) { .section { padding: 136px 0; } .section-short { padding: 104px 0; } }
+
+/* Warmes Papier: randlos, Hairlines oben und unten */
+.section-paper { background: var(--paper-warm); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+
+/* Pastellflächen: sehr helle Fläche (pastel_soft) mit großem Radius, leicht vom Rand eingerückt.
+   Die Fläche liegt als ::before hinter dem Inhalt, damit die Textkanten mit allen anderen Sektionen fluchten. */
+.section-tone { position: relative; isolation: isolate; background: transparent; }
+.section-tone::before {
+  content: ""; position: absolute; top: 0; bottom: 0; z-index: -1;
+  left: var(--tone-inset); right: var(--tone-inset);
+  background: var(--tone); border-radius: var(--tone-radius);
+}
+@media (min-width: 1024px) { :root { --tone-inset: max(24px, calc((100% - 1680px) / 2)); --tone-radius: 48px; } }
+.tone-orange { --tone: var(--orange-soft); --tone-deep: var(--orange-deep); }
+.tone-gelb   { --tone: var(--gelb-soft);   --tone-deep: var(--gelb-deep); }
+.tone-gruen  { --tone: var(--gruen-soft);  --tone-deep: var(--gruen-deep); }
+.tone-blau   { --tone: var(--blau-soft);   --tone-deep: var(--blau-deep); }
+.section-tone .kicker { color: var(--tone-deep); }
 
 .split { display: grid; gap: 40px; }
 .split + .split, .split-tight { margin-top: 72px; }
@@ -217,16 +259,15 @@ svg { flex: none; }
 .section-head { margin-bottom: 48px; max-width: 720px; }
 
 /* ---------- Hero ---------- */
-.hero { padding: 64px 0 48px; overflow: hidden; }
-@media (min-width: 1024px) { .hero { padding: 112px 0 64px; } }
+.hero { padding: 56px 0 56px; overflow: hidden; }
+@media (min-width: 1024px) { .hero { padding: 104px 0 80px; } }
 .hero-grid { display: grid; gap: 32px; align-items: center; }
 @media (min-width: 1024px) { .hero-grid { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); column-gap: 48px; gap: 40px 48px; } }
+.hero-kicker { margin-bottom: 22px; }
 .hero-title {
-  font-size: clamp(46px, 8vw, 96px); font-weight: 700; letter-spacing: -0.045em; line-height: 1;
+  font-size: clamp(50px, 8.4vw, 104px); font-weight: 700; letter-spacing: -0.045em; line-height: 1;
   margin-bottom: 28px;
 }
-/* Längere Wörter in EN/UK („Strong through“, „різноманіттю.“) passen bei 96px nicht in die 7/12-Spalte: nur dort kleiner */
-@media (min-width: 1024px) { html:not([lang="de"]) .hero-title { font-size: clamp(56px, 7vw, 84px); } }
 .hero-line { display: block; overflow: hidden; padding-bottom: .08em; margin-bottom: -.08em; }
 .hero-word { display: inline-block; }
 /* Verlaufswort: Grün (abgedunkelt), Blau, Pink, Rot – jede Phase ≥ 3:1 auf Weiß; Orange nur als schmaler, abgedunkelter Übergang */
@@ -239,6 +280,9 @@ svg { flex: none; }
 }
 .hero-lead { font-size: 22px; line-height: 1.45; letter-spacing: -0.012em; color: var(--text-2); max-width: 560px; margin-bottom: 32px; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+/* Unterschrift: Handschrift-Claim + Absender */
+.hero-signature { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 20px; margin-top: 40px; }
+.hero-signature-text { font-size: 16px; color: var(--text-2); }
 
 /* Signature-Element: zwei Hairline-Ringe mit je sechs Punkten in den Logofarben,
    sehr langsam gegenläufig rotierend – Anspielung auf den Figurenring im Logo.
@@ -260,17 +304,16 @@ svg { flex: none; }
 .ring-inner .ring-dot { transform: rotate(calc(var(--i) * 60deg + 30deg)) translateX(var(--r)); }
 @media (min-width: 1024px) { .hero-ring { display: flex; } }
 
-/* Faktenzeile */
+/* Faktenzeile: vier Kernaussagen, nur Hairlines */
 .facts {
   display: grid; grid-template-columns: repeat(2, 1fr);
-  margin-top: 64px; border-top: 1px solid var(--line);
+  margin-top: 56px; border-top: 1px solid var(--line);
 }
-.fact { padding: 20px 0; border-bottom: 1px solid var(--line); }
-.fact .label { margin-bottom: 6px; }
-.fact dd { font-size: 18px; font-weight: 500; letter-spacing: -0.01em; }
+.fact { padding: 18px 12px 18px 0; border-bottom: 1px solid var(--line); font-size: 18px; font-weight: 500; letter-spacing: -0.01em; line-height: 1.35; }
+.fact:nth-child(2n) { padding-left: 16px; border-left: 1px solid var(--line); }
 @media (min-width: 720px) {
   .facts { grid-template-columns: repeat(4, 1fr); margin-top: 72px; }
-  .fact { padding: 24px 24px 24px 0; border-bottom: 0; }
+  .fact { padding: 22px 24px 22px 0; border-bottom: 0; font-size: 20px; }
   .fact + .fact { padding-left: 24px; border-left: 1px solid var(--line); }
 }
 
@@ -279,7 +322,7 @@ svg { flex: none; }
 .answers { border-top: 1px solid var(--line); margin-bottom: 56px; }
 .answer { display: grid; gap: 4px; padding: 22px 0; border-bottom: 1px solid var(--line); }
 .answer .label { margin: 0; }
-.answer dd { font-size: 26px; font-weight: 600; letter-spacing: -0.03em; line-height: 1.2; }
+.answer dd { font-size: 24px; font-weight: 600; letter-spacing: -0.03em; line-height: 1.2; }
 @media (min-width: 720px) {
   .answers { display: grid; grid-template-columns: repeat(3, 1fr); }
   .answer { padding: 24px 24px 24px 0; }
@@ -288,14 +331,20 @@ svg { flex: none; }
 .kamin-bottom { display: grid; gap: 32px; align-items: start; }
 @media (min-width: 720px) { .kamin-bottom { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 48px; } }
 
-/* Bildfelder – klein, ruhig, proportioniert */
+/* Bildfelder – klein, ruhig, proportioniert: flache Pastellfläche mit einem leisen Ringmotiv (Bildsprache, Übergang bis Fotos) */
 .foto { margin: 0; }
-.foto-field { aspect-ratio: 4 / 3; border-radius: 12px; background: linear-gradient(135deg, #f5f5f7, #eceef0); }
+.foto-field {
+  position: relative; overflow: hidden;
+  aspect-ratio: 4 / 3; border-radius: 12px;
+  background: var(--f-bg, var(--paper-grey)); color: var(--f-tint, var(--line-mid));
+}
 .foto-wide .foto-field { aspect-ratio: 16 / 10; }
-.foto-warm { background: linear-gradient(135deg, #f7f5f2 0%, #eeece8 60%, #f1e6da 100%); }
-.foto-orange { background: linear-gradient(135deg, #f7f6f4 0%, #efeceb 55%, #f6e4d4 100%); }
-.foto-yellow { background: linear-gradient(135deg, #f7f7f4 0%, #efeee9 55%, #f6ecce 100%); }
-.foto-blue { background: linear-gradient(135deg, #f5f6f7 0%, #ebeef0 55%, #dbeaf3 100%); }
+.foto-gelb   { --f-bg: var(--gelb-pastel);   --f-tint: var(--gelb-tint); }
+.foto-orange { --f-bg: var(--orange-pastel); --f-tint: var(--orange-tint); }
+.foto-blau   { --f-bg: var(--blau-pastel);   --f-tint: var(--blau-tint); }
+.foto-gruen  { --f-bg: var(--gruen-pastel);  --f-tint: var(--gruen-tint); }
+.foto-motif { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.foto-motif-flip { transform: scaleX(-1); }
 .foto figcaption { font-size: 13px; color: var(--text-2); margin-top: 10px; }
 
 /* ---------- Programm ---------- */
@@ -314,7 +363,7 @@ svg { flex: none; }
 .prog-row .dot { margin-top: 9px; }
 .prog-title { font-size: 20px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.3; }
 .prog-head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-.prog-desc { color: var(--text-2); margin: 4px 0 0; font-size: 18px; line-height: 1.5; }
+.prog-desc { color: var(--text-2); margin: 4px 0 0; font-size: 18px; line-height: 1.5; max-width: 52ch; }
 .prog-time { font-variant-numeric: tabular-nums; font-size: 18px; font-weight: 500; white-space: nowrap; grid-column: 2; margin-top: 6px; color: var(--text); }
 .prog-time-text { font-weight: 400; color: var(--text-2); white-space: normal; }
 @media (min-width: 720px) {
@@ -391,7 +440,13 @@ svg { flex: none; }
   .news .date { grid-column: auto; margin: 4px 0 0; }
 }
 
-/* ---------- Über uns: Zahlen, Werte, Zitat, Team, Partner ---------- */
+/* ---------- Haltung: großes Zitat mit Handschrift-Unterschrift ---------- */
+.quote { margin: 0; padding: 0; max-width: 980px; }
+.quote .kicker { margin-bottom: 28px; }
+.quote-text { font-size: clamp(28px, 4vw, 48px); font-weight: 600; letter-spacing: -0.035em; line-height: 1.12; margin-bottom: 28px; }
+.quote-sign { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; font-size: 18px; }
+
+/* ---------- Über uns: Zahlen, Werte, Team, Partner ---------- */
 .numbers { display: grid; grid-template-columns: 1fr 1fr; margin-top: 72px; border-top: 1px solid var(--line); }
 .number { padding: 28px 0; border-bottom: 1px solid var(--line); }
 .number .num { display: block; font-size: clamp(56px, 7vw, 96px); font-weight: 600; letter-spacing: -0.05em; line-height: 1; font-variant-numeric: tabular-nums; margin-bottom: 14px; }
@@ -406,6 +461,7 @@ svg { flex: none; }
 .values, .ways { border-top: 1px solid var(--line); }
 .values li, .ways li { padding: 24px 0; border-bottom: 1px solid var(--line); }
 .value-index { display: block; font-size: 13px; font-weight: 500; letter-spacing: .08em; color: var(--text-2); font-variant-numeric: tabular-nums; margin-bottom: 12px; }
+.section-tone .value-index { color: var(--tone-deep); }
 .values .h3, .ways .h3 { margin-bottom: 8px; }
 .values p, .ways p { margin: 0; font-size: 18px; line-height: 1.5; max-width: 40ch; }
 /* Dreispalter erst ab 1024px – auf Tablet blieben sonst nur ~200px pro Spalte */
@@ -415,14 +471,9 @@ svg { flex: none; }
   .values li + li, .ways li + li { padding-left: 24px; border-left: 1px solid var(--line); }
 }
 
-.quote { margin: 96px 0 0; padding: 0; max-width: 980px; }
-.quote p { font-size: clamp(28px, 4vw, 48px); font-weight: 600; letter-spacing: -0.035em; line-height: 1.12; margin-bottom: 20px; }
-.quote footer { font-size: 18px; }
-@media (min-width: 1024px) { .quote { margin-top: 128px; } }
-
 .team { display: grid; gap: 0; margin-top: 8px; border-top: 1px solid var(--line); }
 .team li { display: grid; grid-template-columns: 44px 1fr; column-gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--line); align-items: center; }
-.team-avatar { width: 44px; height: 44px; border-radius: 50%; background: #e9e9ec; grid-row: span 2; }
+.team-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--blau-pastel); grid-row: span 2; }
 .team-role { font-weight: 500; font-size: 18px; }
 .team-todo { font-size: 15px; }
 @media (min-width: 1024px) {
@@ -432,7 +483,7 @@ svg { flex: none; }
 .partners { display: flex; flex-wrap: wrap; gap: 12px; }
 .partner-badge {
   display: inline-flex; align-items: center; min-height: 64px; padding: 12px 22px;
-  border: 1px solid var(--line); border-radius: 12px; background: var(--bg-alt);
+  border: 1px solid var(--line); border-radius: 12px; background: var(--paper-warm);
   font-size: 18px; font-weight: 500; color: var(--text-2);
 }
 
@@ -441,20 +492,33 @@ svg { flex: none; }
 .form .h3 { margin-bottom: 24px; }
 .form-grid { display: grid; gap: 20px; }
 @media (min-width: 720px) { .form-grid { grid-template-columns: 1fr 1fr; } .field-full { grid-column: 1 / -1; } }
-.field { display: grid; gap: 8px; }
+.field { display: grid; gap: 8px; align-content: start; }
+/* Zweispaltig: Labels unten ausrichten, damit die Eingabefelder nebeneinander auf einer Linie sitzen */
+@media (min-width: 720px) { .form-grid .field { grid-template-rows: 1fr auto; } .form-grid .field-label { align-self: end; } }
 .field .label { margin: 0; }
-.field input, .field textarea {
+.field-label { display: block; font-size: 18px; font-weight: 500; line-height: 1.4; letter-spacing: -0.01em; }
+.field input, .field textarea, .field select {
   width: 100%; min-height: 52px; padding: 12px 16px;
   font-size: 18px; background: #fff; border: 1px solid var(--line-strong); border-radius: 12px;
   transition: border-color .2s var(--ease);
 }
 .field textarea { resize: vertical; min-height: 120px; }
-.field input:focus, .field textarea:focus { border-color: var(--text); outline: none; box-shadow: 0 0 0 3px rgba(29, 29, 27, .14); }
+.field input:focus, .field textarea:focus, .field select:focus { border-color: var(--text); outline: none; box-shadow: 0 0 0 3px rgba(29, 29, 27, .14); }
+/* Auswahlfeld: eigener Pfeil (Hairline-Winkel), kein Browser-Standard */
+.select-wrap { position: relative; display: block; }
+.select-wrap select { -webkit-appearance: none; appearance: none; padding-right: 44px; cursor: pointer; }
+.select-wrap::after {
+  content: ""; position: absolute; right: 18px; top: 50%; width: 9px; height: 9px;
+  border-right: 1.5px solid var(--text); border-bottom: 1.5px solid var(--text);
+  transform: translateY(-70%) rotate(45deg); pointer-events: none;
+}
 .form-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; margin-top: 24px; }
 .form-hint { margin: 0; font-size: 18px; }
+.form-privacy { margin: 20px 0 0; font-size: 18px; max-width: 66ch; }
 .form-inline { margin-top: 8px; padding-top: 0; border-top: 0; display: grid; gap: 16px; align-items: end; }
 @media (min-width: 720px) { .form-inline { grid-template-columns: minmax(0, 1fr) auto; } }
 .form-inline + .form-hint { margin-top: 16px; }
+.form-inline .btn { white-space: normal; }
 
 /* ---------- Kontakt ---------- */
 .contact-grid { display: grid; gap: 40px; align-items: start; }
@@ -467,20 +531,23 @@ svg { flex: none; }
 .contact-row dd a { text-decoration: underline; text-underline-offset: 3px; display: inline-flex; align-items: center; padding: 10px 0; margin: -10px 0; }
 @media (min-width: 720px) { .contact-row { grid-template-columns: 172px 1fr; gap: 20px; } .contact-row .label { padding-top: 5px; } }
 
-.place { padding: 28px; border: 1px solid var(--line); border-radius: 16px; background: var(--bg-alt); }
-.place svg { margin-bottom: 20px; }
+/* „Karten-Karte“: die einzige kleine Farbfläche außerhalb der Sektionen – Orange-Pastell wie der Treffpunkt */
+.place { padding: 28px; border-radius: 20px; background: var(--orange-soft); }
+.place svg { margin-bottom: 20px; color: var(--orange-deep); }
+.place-kicker { font-size: 18px; font-weight: 500; color: var(--orange-deep); margin-bottom: 12px; }
 .place-name { font-size: 22px; font-weight: 600; letter-spacing: -0.025em; line-height: 1.25; margin-bottom: 4px; }
 .place-hint { font-size: 18px; margin-bottom: 24px; }
 .place .btn { width: 100%; }
 .place-note { margin: 12px 0 0; font-size: 18px; }
 
 /* ---------- Footer ---------- */
-.site-footer { border-top: 1px solid var(--line); padding: 64px 0 32px; font-size: 15px; }
+.site-footer { border-top: 1px solid var(--line); background: var(--paper-warm); padding: 64px 0 32px; font-size: 15px; }
 .footer-grid { display: grid; gap: 40px; }
 @media (min-width: 900px) { .footer-grid { grid-template-columns: minmax(0, 5fr) minmax(0, 3fr) minmax(0, 4fr); gap: 48px; } }
 .footer-logos { display: flex; align-items: center; gap: 28px; margin-bottom: 20px; }
 .footer-logos img { height: 40px; width: auto; }
 .footer-claim { color: var(--text-2); max-width: 44ch; line-height: 1.55; }
+.footer-claim strong { color: var(--text); font-weight: 500; }
 .footer-nav ul { display: grid; gap: 0; }
 .footer-nav a, .footer-legal a { display: inline-flex; align-items: center; min-height: 44px; color: var(--text-2); }
 .footer-nav a:hover, .footer-legal a:hover { color: var(--text); }
@@ -502,12 +569,12 @@ svg { flex: none; }
 @keyframes panel-in { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
 
 html.js .hero-word { transform: translateY(110%); animation: rise .9s var(--ease) forwards; }
-/* Das Verlaufswort trägt beide Animationen: Aufstieg aus der Maske + langsam wandernder Verlauf */
-html.js .hero-word.hero-gradient { animation: rise .9s var(--ease) .1s forwards, shimmer 14s linear 1s infinite alternate; }
-html.js .hero-lead, html.js .hero-actions, html.js .facts { opacity: 0; animation: fade-in .8s var(--ease) forwards; }
+html.js .hero-kicker, html.js .hero-lead, html.js .hero-actions, html.js .hero-signature, html.js .facts { opacity: 0; animation: fade-in .8s var(--ease) forwards; }
+html.js .hero-kicker { animation-delay: .05s; }
 html.js .hero-lead { animation-delay: .35s; }
 html.js .hero-actions { animation-delay: .45s; }
-html.js .facts { animation-delay: .6s; }
+html.js .hero-signature { animation-delay: .6s; animation-duration: 1s; }
+html.js .facts { animation-delay: .7s; }
 html.js .hero-ring { opacity: 0; animation: fade-in 1.2s var(--ease) .5s forwards; }
 .hero-gradient { animation: shimmer 14s linear infinite alternate; }
 .ring { animation: spin 60s linear infinite; }
@@ -523,12 +590,15 @@ html.js .offers > li.reveal:nth-child(4) { transition-delay: .18s; }
 html.js .offers > li.reveal:nth-child(5) { transition-delay: .24s; }
 html.js .offers > li.reveal:nth-child(6) { transition-delay: .30s; }
 html.js .offers > li.reveal:nth-child(7) { transition-delay: .36s; }
+/* Pastellflächen blenden beim Scrollen sehr sanft ein (nur die Fläche, nie der Text) */
+html.js .section-tone::before { opacity: 0; transition: opacity 1.4s var(--ease); }
+html.js .section-tone.is-in::before { opacity: 1; }
 
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  html.js .hero-word, html.js .hero-word.hero-gradient, html.js .hero-lead, html.js .hero-actions, html.js .facts, html.js .hero-ring { animation: none; opacity: 1; transform: none; }
+  html.js .hero-word, html.js .hero-kicker, html.js .hero-lead, html.js .hero-actions, html.js .hero-signature, html.js .facts, html.js .hero-ring { animation: none; opacity: 1; transform: none; }
   .hero-gradient, .ring, .ring-inner, .site-header.is-open .nav-panel { animation: none; }
   html.js .reveal { opacity: 1; transform: none; transition: none; }
+  html.js .section-tone::before { opacity: 1; transition: none; }
   .btn-arrow, .offer-arrow, .news-arrow, .link-arrow svg, .card .foto-field { transition: none; }
 }
 
@@ -538,7 +608,7 @@ html.js .offers > li.reveal:nth-child(7) { transition-delay: .36s; }
 @media print {
   @page { margin: 18mm; }
   body { font-size: 12pt; color: #000; background: #fff; }
-  .site-header, .site-footer, .skip-link, main > section:not(#programm), .btn-row, .prog-note, .hero-ring { display: none !important; }
+  .site-header, .site-footer, .skip-link, main > section:not(#programm), .btn-row, .prog-note, .hero-ring, .motif-defs { display: none !important; }
   #programm { padding: 0; }
   .split { display: block; }
   .split-aside { position: static; }

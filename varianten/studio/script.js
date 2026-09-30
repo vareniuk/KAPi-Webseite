@@ -63,7 +63,14 @@
     });
     try { localStorage.setItem('kapi-lang', lang); } catch (e) { /* privater Modus */ }
     markToday(); // „Heute“-Texte in der neuen Sprache
+    // Antwortsprache im Formular vorbelegen (nur, solange niemand selbst gewählt hat)
+    var langSelect = document.getElementById('f-lang');
+    if (langSelect && !langSelect.dataset.touched) {
+      langSelect.value = { de: 'Deutsch', uk: 'Українська', en: 'English' }[lang];
+    }
   }
+  var fLang = document.getElementById('f-lang');
+  if (fLang) fLang.addEventListener('change', function () { fLang.dataset.touched = '1'; });
 
   document.querySelectorAll('[data-lang]').forEach(function (b) {
     b.addEventListener('click', function () { applyLang(b.getAttribute('data-lang')); });
@@ -89,6 +96,20 @@
     header.querySelectorAll('.nav-panel a').forEach(function (a) { a.addEventListener('click', function () { setMenu(false); }); });
     window.matchMedia('(min-width: 1024px)').addEventListener('change', function (e) { if (e.matches) setMenu(false); });
   }
+
+  /* ---------- Sanftes Scrollen zu Ankern (Navigation, Buttons, Textlinks) ---------- */
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('a[href^="#"]');
+    if (!a || a.classList.contains('skip-link')) return;
+    var id = a.getAttribute('href').slice(1);
+    var target = id ? document.getElementById(id) : null;
+    if (!target) return;
+    e.preventDefault();
+    target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+    if (history.pushState) history.pushState(null, '', '#' + id);
+    if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1');
+    target.focus({ preventScroll: true });
+  });
 
   /* ---------- Programm: heutigen Tag hervorheben ---------- */
   function markToday() {
@@ -145,8 +166,8 @@
   var printBtn = document.getElementById('print-btn');
   if (printBtn) printBtn.addEventListener('click', function () { window.print(); });
 
-  /* ---------- Scroll-Reveal ---------- */
-  var reveals = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
+  /* ---------- Scroll-Reveal (Inhalte + Pastellflächen der Sektionen) ---------- */
+  var reveals = Array.prototype.slice.call(document.querySelectorAll('.reveal, .section-tone'));
   function showAll() { reveals.forEach(function (el) { el.classList.add('is-in'); }); }
   if (reduceMotion || !('IntersectionObserver' in window)) {
     showAll();
@@ -191,8 +212,12 @@
     var name = helpForm.querySelector('#f-name').value.trim();
     var email = helpForm.querySelector('#f-email').value.trim();
     var msg = helpForm.querySelector('#f-msg').value.trim();
-    var body = t('form.mailName', 'Name') + ': ' + name + '\n' + t('form.mailEmail', 'E-Mail') + ': ' + email + '\n\n' + t('form.mailMessage', 'Nachricht') + ':\n' + msg;
-    window.location.href = 'mailto:info@kam-in.de?subject=' + encodeURIComponent(t('form.mailSubject', 'Ich möchte helfen')) + '&body=' + encodeURIComponent(body);
+    var langField = helpForm.querySelector('#f-lang');
+    var lang = langField ? langField.value : '';
+    var body = t('form.mailName', 'Name') + ': ' + name + '\n' + t('form.mailEmail', 'E-Mail') + ': ' + email
+      + (lang ? '\n' + t('form.mailLang', 'Antwort bitte auf') + ': ' + lang : '')
+      + '\n\n' + t('form.mailMessage', 'Nachricht') + ':\n' + msg;
+    window.location.href = 'mailto:info@kam-in.de?subject=' + encodeURIComponent(t('form.mailSubject', 'Ich möchte mitmachen')) + '&body=' + encodeURIComponent(body);
   });
   var newsForm = document.getElementById('news-form');
   if (newsForm) newsForm.addEventListener('submit', function (e) {

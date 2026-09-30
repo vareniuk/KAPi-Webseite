@@ -168,7 +168,7 @@
     rows.forEach(function (row) {
       const isToday = parseInt(row.getAttribute('data-day'), 10) === today;
       // Monatliche Angebote (Feierabendtreff) finden nicht an jedem Wochentag statt:
-      // kein „Heute“, sondern ein neutraler Hinweis auf den Termin unter Aktuelles.
+      // kein „Heute“, sondern ein neutraler Hinweis auf das Monatsprogramm.
       const monthly = row.getAttribute('data-freq') === 'monthly';
       row.classList.toggle('is-today', isToday && !monthly);
       const old = row.querySelector('.badge');
@@ -178,7 +178,7 @@
         const title = row.querySelector('.prog__title');
         if (monthly) {
           badge.className = 'badge badge--note';
-          badge.textContent = t('programm.monatlich.badge', 'Termin siehe Aktuelles');
+          badge.textContent = t('programm.monatlich.badge', 'Termin im Monatsprogramm');
         } else {
           found = true;
           badge.className = 'badge badge--today';
@@ -228,16 +228,23 @@
     onScroll();
   }
 
-  /* ---------- Sanftes Scrollen zu Ankern (per JS, damit reduced-motion respektiert wird) ---------- */
-  document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+  /* ---------- Sanftes Scrollen zu Ankern (per JS, damit reduced-motion respektiert wird) ----------
+     Der Skip-Link bleibt beim Browser-Standard (springt sofort und fokussiert <main tabindex="-1">).
+     Bei allen anderen Ankern folgt der Fokus dem Sprung, damit Tastatur und Screenreader im Ziel weiterlesen. */
+  function focusTarget(target) {
+    if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1');
+    try { target.focus({ preventScroll: true }); } catch (err) { target.focus(); }
+  }
+  document.querySelectorAll('a[href^="#"]:not(.skip-link)').forEach(function (a) {
     a.addEventListener('click', function (e) {
       const id = a.getAttribute('href').slice(1);
-      if (!id) { e.preventDefault(); return; } // leerer Anker (Platzhalter) springt nicht nach oben
+      if (!id) { e.preventDefault(); return; } // leerer Anker (Platzhalter, z. B. PDF folgt) springt nicht nach oben
       const target = document.getElementById(id);
       if (!target) return;
       e.preventDefault();
       target.scrollIntoView({ behavior: reducedMotion.matches ? 'auto' : 'smooth', block: 'start' });
       if (history.pushState) history.pushState(null, '', '#' + id);
+      focusTarget(target);
     });
   });
 
