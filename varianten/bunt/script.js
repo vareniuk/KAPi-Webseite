@@ -160,6 +160,20 @@
     if (notice && !found && day === 0) notice.hidden = false;
   })();
 
+  /* ---------- Sanftes Scrollen zu Ankern (nicht bei reduced-motion) ---------- */
+  document.addEventListener('click', function (e) {
+    var link = e.target.closest('a[href^="#"]');
+    if (!link) return;
+    var id = link.getAttribute('href').slice(1);
+    var target = id ? document.getElementById(id) : null;
+    if (id === 'top') target = document.body;
+    if (!target) return;
+    e.preventDefault();
+    target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+    if (history.replaceState) history.replaceState(null, '', '#' + id);
+    if (id !== 'top') target.setAttribute('tabindex', '-1'), target.focus({ preventScroll: true });
+  });
+
   /* ---------- Drucken ---------- */
   var printBtn = document.getElementById('btn-print');
   if (printBtn) printBtn.addEventListener('click', function () { window.print(); });

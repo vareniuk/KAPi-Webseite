@@ -58,11 +58,10 @@
 *, *::before, *::after { box-sizing: border-box; }
 
 html {
-  scroll-behavior: smooth;
+  /* Sanftes Scrollen zu Ankern übernimmt script.js (scrollIntoView), damit es ohne Motion-Wunsch nicht stört */
   scroll-padding-top: calc(var(--header-h) + 12px);
   -webkit-text-size-adjust: 100%;
 }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
 body {
   margin: 0;
@@ -139,6 +138,7 @@ strong { font-weight: 800; }
   border-radius: 12px; font-weight: 800; text-decoration: none;
 }
 .skip-link:focus { top: 16px; }
+[tabindex="-1"]:focus { outline: none; }
 
 .print-only { display: none; }
 
@@ -393,7 +393,9 @@ html.js .hero-visual { animation-delay: 300ms; }
 @keyframes fade-up { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
 
 /* Hero-Bild mit „Stickern“ */
-.hero-visual { position: relative; padding: 18px 12px 26px; }
+.hero-visual { position: relative; padding: 18px 12px 0; max-width: 640px; margin-inline: auto; width: 100%; }
+/* Auf kleinen Bildschirmen sitzt der Zeit-Sticker unter dem Bild statt darauf (sonst verdeckt er die Bildunterschrift) */
+.sticker--time { position: relative; margin: -14px 8px 0 auto; width: fit-content; }
 .foto--hero {
   aspect-ratio: 4 / 3;
   border-radius: var(--r-lg);
@@ -416,7 +418,7 @@ html.js .hero-visual { animation-delay: 300ms; }
 .sticker img { width: 52px; height: 52px; border-radius: 12px; }
 .sticker > svg { width: 28px; height: 28px; color: var(--blau); flex-shrink: 0; margin-left: 4px; }
 .sticker--logo { top: 0; left: 0; transform: rotate(3deg); }
-.sticker--time { bottom: 0; right: 0; transform: rotate(-2deg); }
+.sticker--time { transform: rotate(-2deg); }
 html.js .sticker { animation: sticker-in 1s var(--ease) both; }
 html.js .sticker--logo { animation-delay: 800ms; }
 html.js .sticker--time { animation-delay: 1000ms; }
@@ -463,6 +465,9 @@ html.js .sticker--time { animation-delay: 1000ms; }
   background: rgba(255, 255, 255, .85);
   font-size: 14px; font-weight: 700; color: var(--text-2);
 }
+/* Hero-Bild: Bildunterschrift zentriert unter dem Icon, damit die Sticker frei bleiben */
+figure.foto--hero figcaption { position: static; margin-top: 14px; }
+figure.foto--hero { align-content: center; }
 
 /* Laufband */
 .marquee {
@@ -626,7 +631,7 @@ html.js .sticker--time { animation-delay: 1000ms; }
 
 /* ---------- Angebote ---------- */
 .angebote { background: #fff; }
-.offer-grid { display: grid; gap: 20px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 270px), 1fr)); }
+.offer-grid { display: grid; gap: 20px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr)); }
 .offer {
   position: relative;
   display: flex; flex-direction: column;
@@ -871,19 +876,20 @@ html.js .sticker--time { animation-delay: 1000ms; }
 
 .kontakt-list { display: grid; gap: 14px; align-content: start; }
 .kontakt-list li {
-  display: flex; gap: 16px; align-items: flex-start;
-  padding: 20px 22px;
+  display: flex; gap: 12px; align-items: flex-start;
+  padding: 18px 16px;
   border-radius: var(--r-md);
   background: var(--bg);
   border: 1px solid var(--line);
 }
-.kontakt-list p { margin: 0; }
+.kontakt-list li > div { min-width: 0; }
+.kontakt-list p { margin: 0; overflow-wrap: anywhere; }
 .k-label { font-size: 15px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--text-2); }
 .k-value { font-weight: 700; }
 .k-value a { text-decoration-thickness: 2px; text-underline-offset: 3px; }
 .k-icon {
   flex-shrink: 0;
-  width: 48px; height: 48px; border-radius: 14px;
+  width: 44px; height: 44px; border-radius: 14px;
   display: grid; place-items: center;
   background: #fff; color: var(--c); box-shadow: var(--shadow-sm);
 }
@@ -937,6 +943,7 @@ html.js .sticker--time { animation-delay: 1000ms; }
 .footer-nav a, .footer-legal a { display: inline-flex; align-items: center; min-height: 36px; text-decoration: none; font-weight: 700; color: var(--text-2); }
 .footer-nav a:hover, .footer-legal a:hover { color: var(--text); text-decoration: underline; }
 .footer-kontakt p { margin-bottom: 6px; }
+.footer-kontakt a { display: inline-flex; align-items: center; min-height: 36px; font-weight: 700; overflow-wrap: anywhere; }
 .footer-kontakt .footer-title { margin-top: 18px; }
 .lang--footer { margin-top: 6px; }
 .footer-bottom {
@@ -957,21 +964,22 @@ html.js .sticker--time { animation-delay: 1000ms; }
   }
   html.js .reveal.is-visible { opacity: 1; transform: none; }
   /* Gestaffelte Verzögerung innerhalb von Rastern */
-  html.js .reveal:nth-child(2) { --d: 90ms; }
-  html.js .reveal:nth-child(3) { --d: 180ms; }
-  html.js .reveal:nth-child(4) { --d: 270ms; }
-  html.js .reveal:nth-child(5) { --d: 360ms; }
-  html.js .reveal:nth-child(6) { --d: 450ms; }
-  html.js .reveal:nth-child(7) { --d: 540ms; }
-  html.js .reveal:nth-child(8) { --d: 630ms; }
+  html.js .reveal:nth-child(2) { --d: 70ms; }
+  html.js .reveal:nth-child(3) { --d: 140ms; }
+  html.js .reveal:nth-child(4) { --d: 210ms; }
+  html.js .reveal:nth-child(5) { --d: 260ms; }
+  html.js .reveal:nth-child(6) { --d: 300ms; }
+  html.js .reveal:nth-child(7) { --d: 300ms; }
 }
 
 /* ---------- Reduced Motion: alle Animationen aus ---------- */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: .01ms !important;
+    animation-delay: 0s !important;
     animation-iteration-count: 1 !important;
     transition-duration: .01ms !important;
+    transition-delay: 0s !important;
   }
   .blob, .marquee-track, .map-pulse, .sticker, .hero-title .w > span { animation: none !important; }
   .marquee-track { width: auto; flex-wrap: wrap; }
@@ -1000,10 +1008,10 @@ html.js .sticker--time { animation-delay: 1000ms; }
 /* ---------- Layout: Desktop ---------- */
 @media (min-width: 900px) {
   .hero-grid { grid-template-columns: 1.15fr 1fr; }
-  .hero-visual { padding: 24px 20px 32px; }
+  .hero-visual { padding: 24px 20px 32px; max-width: none; }
   .foto--hero { aspect-ratio: 4 / 4.4; }
   .sticker--logo { left: -8px; }
-  .sticker--time { right: -8px; }
+  .sticker--time { position: absolute; margin: 0; bottom: 0; right: -8px; }
   .kamin-grid { grid-template-columns: 1fr 1fr; }
   .bento { grid-template-columns: repeat(6, 1fr); gap: 22px; }
   .tile--w3 { grid-column: span 3; }
@@ -1012,6 +1020,8 @@ html.js .sticker--time { animation-delay: 1000ms; }
   .hl-grid { grid-template-columns: 1fr 1fr; }
   .ueber-grid { grid-template-columns: 1.2fr 1fr; }
   .kontakt-grid { grid-template-columns: 1fr 1fr; align-items: start; }
+  .kontakt-list li { gap: 16px; padding: 20px 22px; }
+  .k-icon { width: 48px; height: 48px; }
   .nl-card { grid-template-columns: 1.1fr 1fr; align-items: center; }
   .form-card { grid-template-columns: 1fr 1.6fr; align-items: start; }
 }
