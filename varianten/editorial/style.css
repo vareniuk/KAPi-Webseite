@@ -339,9 +339,9 @@ html.js .section-head.is-in .kicker { opacity: 1; transform: none; }
 /* Schmale Handys: Zahl links, Label rechts – lange Wörter („Migrationsgeschichte“) brechen sonst mitten im Wort */
 @media (max-width: 479px) {
   .stats { grid-template-columns: minmax(0, 1fr); }
-  .stats .stat { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 16px; align-items: baseline; padding: 14px 0; border-left: 0; }
+  .stats .stat { display: grid; grid-template-columns: 124px minmax(0, 1fr); gap: 16px; align-items: baseline; padding: 14px 0; border-left: 0; }
   .stats .stat + .stat { border-top: 1px solid var(--line); }
-  .stats .stat__num { font-size: 48px; margin: 0; min-width: 3.2ch; }
+  .stats .stat__num { font-size: 48px; margin: 0; }
   .stats .stat__label { max-width: none; }
 }
 .grid--values { align-items: start; margin-bottom: clamp(64px, 8vw, 112px); }

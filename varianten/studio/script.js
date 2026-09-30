@@ -87,7 +87,7 @@
     toggle.addEventListener('click', function () { setMenu(toggle.getAttribute('aria-expanded') !== 'true'); });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && header.classList.contains('is-open')) { setMenu(false); toggle.focus(); } });
     header.querySelectorAll('.nav-panel a').forEach(function (a) { a.addEventListener('click', function () { setMenu(false); }); });
-    window.matchMedia('(min-width: 1200px)').addEventListener('change', function (e) { if (e.matches) setMenu(false); });
+    window.matchMedia('(min-width: 1024px)').addEventListener('change', function (e) { if (e.matches) setMenu(false); });
   }
 
   /* ---------- Programm: heutigen Tag hervorheben ---------- */
@@ -115,18 +115,27 @@
       if (note) note.hidden = true;
       return;
     }
-    // Kein Angebot heute (Sonntag/Dienstag): nächsten Termin nennen
-    var next = null;
+    // Kein Angebot heute (Sonntag/Dienstag): nächsten wöchentlichen Termin nennen.
+    // Monatliche Angebote (Badge) werden übersprungen – sie finden an drei von vier Wochen nicht statt.
+    var next = null, row = null;
     for (var i = 1; i <= 7 && !next; i++) {
       var d = (today + i) % 7;
-      next = groups.filter(function (g) { return Number(g.getAttribute('data-day')) === d; })[0] || null;
+      if (d === 0) continue; // data-day="0" ist die Workshop-Gruppe ohne festen Wochentag
+      var group = groups.filter(function (g) { return Number(g.getAttribute('data-day')) === d; })[0];
+      if (!group) continue;
+      var weekly = Array.prototype.filter.call(group.querySelectorAll('.prog-row'), function (r) { return !r.querySelector('.badge'); })[0];
+      if (weekly) { next = group; row = weekly; }
     }
-    if (next && note) {
+    if (!next) { // Fallback: erster Termin überhaupt, Badge-Text wird angehängt
+      next = groups.filter(function (g) { return Number(g.getAttribute('data-day')) !== 0; })[0] || null;
+      row = next ? next.querySelector('.prog-row') : null;
+    }
+    if (next && row && note) {
       var dayName = next.querySelector('.prog-day span').textContent.trim();
-      var row = next.querySelector('.prog-row');
       var title = row.querySelector('.prog-title').firstChild.textContent.trim();
       var time = row.querySelector('.prog-time').textContent.trim();
-      note.textContent = t('programm.naechster', 'Nächster Termin') + ': ' + dayName + ', ' + time + ' – ' + title;
+      var badge = row.querySelector('.badge');
+      note.textContent = t('programm.naechster', 'Nächster Termin') + ': ' + dayName + ', ' + time + ' – ' + title + (badge ? ' (' + badge.textContent.trim() + ')' : '');
       note.hidden = false;
     }
   }
