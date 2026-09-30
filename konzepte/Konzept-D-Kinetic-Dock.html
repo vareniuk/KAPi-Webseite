@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Konzept D · Kinetic — KaM·in</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Mulish:wght@400;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  :root{--green:#6aa12f;--blue:#0a93d6;--orange:#ef8f1e;--yellow:#f4b400;--red:#e2231a;--pink:#c52866;--ink:#241a26;}
+  body{font-family:'Mulish',sans-serif;background:#fff7fb;color:var(--ink);overflow-x:hidden;min-height:100vh;}
+  h1,h2,h3,.disp{font-family:'Fredoka',sans-serif;font-weight:600;}
+  /* floating confetti dots */
+  .dots{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
+  .dots i{position:absolute;border-radius:50%;animation:float 9s ease-in-out infinite;}
+  @keyframes float{0%,100%{transform:translateY(0) rotate(0);}50%{transform:translateY(-26px) rotate(120deg);}}
+  /* morphing blobs */
+  .blob{position:fixed;z-index:0;filter:blur(2px);opacity:.5;animation:morph 12s ease-in-out infinite;}
+  @keyframes morph{0%,100%{border-radius:42% 58% 63% 37%/41% 44% 56% 59%;transform:rotate(0);}50%{border-radius:62% 38% 35% 65%/58% 62% 38% 42%;transform:rotate(40deg);}}
+  main{position:relative;z-index:2;max-width:1150px;margin:0 auto;padding:80px 24px 160px;text-align:center;}
+  .pill{display:inline-flex;align-items:center;gap:9px;background:#fff;border:3px solid var(--ink);border-radius:999px;padding:9px 20px;font-weight:800;box-shadow:4px 4px 0 var(--ink);margin-bottom:10px;}
+  .pill img{width:26px;}
+  /* kinetic headline */
+  .kin{font-size:clamp(3.6rem,16vw,11rem);line-height:.92;margin:18px 0;font-weight:700;}
+  .kin span{display:inline-block;animation:bob 2.6s ease-in-out infinite;transform-origin:bottom;}
+  .kin span:nth-child(6n+1){color:var(--red);}.kin span:nth-child(6n+2){color:var(--orange);}
+  .kin span:nth-child(6n+3){color:var(--yellow);}.kin span:nth-child(6n+4){color:var(--green);}
+  .kin span:nth-child(6n+5){color:var(--blue);}.kin span:nth-child(6n){color:var(--pink);}
+  @keyframes bob{50%{transform:translateY(-14px) rotate(-4deg);}}
+  .sub{font-size:clamp(1.15rem,2.6vw,1.5rem);font-weight:700;max-width:34ch;margin:0 auto;color:#5a4d5c;}
+  .cta{display:inline-flex;gap:14px;margin-top:30px;flex-wrap:wrap;justify-content:center;}
+  .b{font-family:'Fredoka';font-weight:600;font-size:1.15rem;border:3px solid var(--ink);border-radius:999px;padding:14px 30px;cursor:pointer;text-decoration:none;color:var(--ink);box-shadow:5px 5px 0 var(--ink);transition:transform .15s cubic-bezier(.3,1.5,.5,1),box-shadow .15s;}
+  .b:hover{transform:translate(-3px,-3px) scale(1.03);box-shadow:8px 8px 0 var(--ink);}
+  .b--y{background:var(--yellow);}.b--p{background:#fff;}
+  /* sticker cards */
+  .cards{display:flex;gap:22px;justify-content:center;flex-wrap:wrap;margin-top:70px;}
+  .card{width:230px;background:#fff;border:3px solid var(--ink);border-radius:26px;padding:26px;box-shadow:6px 6px 0 var(--ink);text-align:left;transition:transform .18s cubic-bezier(.3,1.4,.5,1);}
+  .card:hover{transform:rotate(-2deg) translateY(-6px);}
+  .card:nth-child(2):hover{transform:rotate(2deg) translateY(-6px);}
+  .emoji{font-size:2.6rem;display:block;margin-bottom:10px;}
+  .card h3{font-size:1.5rem;}
+  .card p{font-weight:600;color:#6a5d6c;margin-top:4px;}
+  .tagk{display:inline-block;margin-top:12px;font-weight:800;font-size:.82rem;padding:5px 12px;border-radius:999px;border:2px solid var(--ink);}
+  /* dock */
+  .dock{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);z-index:50;display:flex;align-items:flex-end;gap:8px;
+    background:rgba(255,255,255,.8);backdrop-filter:blur(16px);border:3px solid var(--ink);border-radius:26px;padding:10px 14px;box-shadow:0 14px 30px -10px rgba(0,0,0,.4);}
+  .dock a{width:50px;height:50px;border-radius:16px;display:grid;place-items:center;font-size:22px;text-decoration:none;background:#fff;border:2px solid var(--ink);transition:transform .2s cubic-bezier(.3,1.6,.4,1);position:relative;}
+  .dock a:hover{transform:translateY(-16px) scale(1.35);}
+  .dock a span{position:absolute;top:-34px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;font-family:'Mulish';font-weight:700;font-size:.74rem;padding:4px 9px;border-radius:8px;white-space:nowrap;opacity:0;transition:.2s;pointer-events:none;}
+  .dock a:hover span{opacity:1;}
+  .dock a:nth-child(1){background:var(--green);}.dock a:nth-child(2){background:var(--blue);}
+  .dock a:nth-child(3){background:var(--orange);}.dock a:nth-child(4){background:var(--pink);}
+  .dock a:nth-child(5){background:var(--red);}
+  .back{position:fixed;left:16px;top:16px;z-index:50;background:#fff;border:3px solid var(--ink);border-radius:999px;padding:9px 16px;font-weight:800;text-decoration:none;color:var(--ink);box-shadow:3px 3px 0 var(--ink);}
+  @media(max-width:560px){.dock a{width:42px;height:42px;font-size:18px;}}
+</style>
+</head>
+<body>
+<div class="dots" id="dots"></div>
+<div class="blob" style="width:300px;height:300px;background:var(--yellow);top:8%;left:-60px;"></div>
+<div class="blob" style="width:260px;height:260px;background:var(--blue);bottom:10%;right:-40px;animation-delay:-5s;"></div>
+<div class="blob" style="width:200px;height:200px;background:var(--pink);top:40%;right:14%;animation-delay:-8s;opacity:.35;"></div>
+
+<main>
+  <div class="pill"><img src="../assets/kamin-mark.png" alt="" /> KaM·in · alles kostenlos</div>
+  <h1 class="kin" id="kin">Komm herein!</h1>
+  <p class="sub">Ein bunter Treffpunkt für Alt &amp; Jung, für alle Kulturen. Schön, dass du da bist!</p>
+  <div class="cta"><a href="#" class="b b--y">Alle Termine →</a><a href="#" class="b b--p">Mitmachen</a></div>
+
+  <section class="cards">
+    <div class="card"><span class="emoji">💬</span><h3>Deutsch-Treff</h3><p>Locker üben, alle Niveaus.</p><span class="tagk" style="background:var(--green);color:#fff">Mo 15:00</span></div>
+    <div class="card"><span class="emoji">🎲</span><h3>Spieletreff</h3><p>Karten &amp; Brettspiele.</p><span class="tagk" style="background:var(--orange);color:#fff">Fr 15:00</span></div>
+    <div class="card"><span class="emoji">🥁</span><h3>Trommeln</h3><p>Für Kinder &amp; Erwachsene.</p><span class="tagk" style="background:var(--pink);color:#fff">Workshop</span></div>
+  </section>
+</main>
+
+<nav class="dock">
+  <a href="#">🏠<span>Start</span></a>
+  <a href="#">📅<span>Termine</span></a>
+  <a href="#">✨<span>Projekte</span></a>
+  <a href="#">🌍<span>KAPi</span></a>
+  <a href="#">✉️<span>Kontakt</span></a>
+</nav>
+
+<a href="../KaM-in Konzepte.html" class="back">← Konzepte</a>
+<script>
+  // split headline into animated letters
+  const kin=document.getElementById('kin');const txt=kin.textContent;kin.textContent='';
+  [...txt].forEach((ch,i)=>{const s=document.createElement('span');s.textContent=ch===' '?'\u00A0':ch;s.style.animationDelay=(i*.06)+'s';kin.appendChild(s);});
+  // confetti dots
+  const cols=['#6aa12f','#0a93d6','#ef8f1e','#f4b400','#e2231a','#c52866'];const d=document.getElementById('dots');
+  for(let i=0;i<26;i++){const e=document.createElement('i');const s=6+Math.random()*16;e.style.width=e.style.height=s+'px';
+    e.style.left=Math.random()*100+'vw';e.style.top=Math.random()*100+'vh';e.style.background=cols[i%6];
+    e.style.opacity=.25+Math.random()*.4;e.style.animationDelay=(-Math.random()*9)+'s';e.style.animationDuration=(7+Math.random()*6)+'s';d.appendChild(e);}
+</script>
+</body>
+</html>

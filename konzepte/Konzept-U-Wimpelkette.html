@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Konzept U · Wimpelkette / Fest — KaM·in</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  :root{--green:#6aa12f;--blue:#0a93d6;--orange:#ef8f1e;--yellow:#f4b400;--red:#e2231a;--pink:#c52866;--ink:#2e2a3a;}
+  body{font-family:'Nunito',sans-serif;color:var(--ink);min-height:100vh;
+    background:linear-gradient(#fff6ea,#ffe9d4);overflow-x:hidden;}
+  .script{font-family:'Pacifico',cursive;}
+  /* bunting */
+  .bunting{display:flex;justify-content:center;gap:0;padding-top:0;position:sticky;top:0;z-index:30;}
+  .bunting i{width:0;height:0;border-left:26px solid transparent;border-right:26px solid transparent;border-top:40px solid var(--c);filter:drop-shadow(0 4px 3px #0002);animation:flutter 3s ease-in-out infinite;transform-origin:top;}
+  .bunting i:nth-child(odd){animation-delay:-1.5s;}
+  @keyframes flutter{50%{transform:rotate(3deg) scaleY(1.04);}}
+  /* nav */
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 26px;flex-wrap:wrap;gap:12px;}
+  .nav .brand{display:flex;align-items:center;gap:11px;}
+  .nav .brand img{height:42px;}
+  .nav .brand b{font-family:'Pacifico';font-size:1.6rem;color:var(--red);}
+  .nav nav{display:flex;gap:6px;flex-wrap:wrap;}
+  .nav nav a{text-decoration:none;font-weight:800;color:var(--ink);padding:8px 16px;border-radius:999px;transition:.15s;}
+  .nav nav a:hover,.nav nav a.on{color:#fff;}
+  .nav nav a:nth-child(1).on,.nav nav a:nth-child(1):hover{background:var(--red);}
+  .nav nav a:nth-child(2):hover{background:var(--orange);}
+  .nav nav a:nth-child(3):hover{background:var(--green);}
+  .nav nav a:nth-child(4):hover{background:var(--blue);}
+  .nav nav a:nth-child(5):hover{background:var(--pink);}
+  .lang{display:flex;gap:5px;}
+  .lang button{font-family:'Nunito';font-weight:800;background:#fff;border:2px solid var(--ink);border-radius:999px;padding:5px 12px;cursor:pointer;color:var(--ink);}
+  .lang button.on{background:var(--ink);color:#fff;}
+  /* hero */
+  .hero{text-align:center;padding:36px 24px 20px;position:relative;}
+  .hero .script{font-size:clamp(3.2rem,10vw,6.5rem);color:var(--red);line-height:.95;}
+  .hero p{font-size:clamp(1.15rem,2.6vw,1.5rem);font-weight:700;max-width:36ch;margin:14px auto 0;color:#5a5366;}
+  .confetti{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden;}
+  .confetti i{position:absolute;width:10px;height:14px;border-radius:2px;animation:fall linear infinite;opacity:.8;}
+  @keyframes fall{to{transform:translateY(105vh) rotate(540deg);}}
+  /* festzelt cards */
+  .stalls{max-width:1080px;margin:20px auto 0;padding:0 24px 90px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;position:relative;z-index:2;}
+  .stall{background:#fff;border-radius:20px 20px 16px 16px;overflow:hidden;box-shadow:0 16px 32px -16px #0004;transition:.2s;cursor:pointer;}
+  .stall:hover{transform:translateY(-6px);}
+  .stall .roof{height:34px;background:repeating-linear-gradient(90deg,var(--c) 0 28px,#fff 28px 56px);position:relative;}
+  .stall .roof::after{content:'';position:absolute;left:0;right:0;bottom:-1px;height:14px;background:repeating-radial-gradient(circle at 14px -2px,var(--c) 0 14px,transparent 14px 28px) 0 0/28px 14px;}
+  .stall .body{padding:22px 20px 22px;text-align:center;}
+  .stall .ic{font-size:2.4rem;}
+  .stall h3{font-size:1.4rem;font-weight:900;margin:4px 0;}
+  .stall .when{display:inline-block;font-weight:800;color:#fff;background:var(--c);padding:5px 14px;border-radius:999px;font-size:.9rem;margin-bottom:8px;}
+  .stall p{font-weight:600;color:#6a6275;font-size:.96rem;}
+  .c-red{--c:var(--red);}.c-blue{--c:var(--blue);}.c-green{--c:var(--green);}.c-orange{--c:var(--orange);}.c-pink{--c:var(--pink);}.c-yellow{--c:var(--yellow);}
+  .foot{text-align:center;font-weight:700;color:#6a6275;padding:0 24px 40px;position:relative;z-index:2;}
+  .back{position:fixed;left:14px;bottom:14px;z-index:50;background:#fff;color:var(--ink);font-weight:800;padding:8px 15px;border-radius:999px;text-decoration:none;border:2px solid var(--ink);}
+  @media(max-width:760px){.stalls{grid-template-columns:1fr;}.nav nav{display:none;}}
+</style>
+</head>
+<body>
+<div class="bunting" id="bunting"></div>
+<div class="confetti" id="confetti"></div>
+
+<header class="nav">
+  <div class="brand"><img src="../assets/kamin-mark.png" alt="" /><b>KaM·in</b></div>
+  <nav><a class="on">Start</a><a>Termine</a><a>Projekte</a><a>KAPi</a><a>Kontakt</a></nav>
+  <div class="lang"><button class="on">DE</button><button>UA</button><button>EN</button></div>
+</header>
+
+<section class="hero">
+  <div class="script">Komm herein!</div>
+  <p>Bei uns ist immer ein bisschen Fest — für Alt &amp; Jung, für alle Kulturen. Alles kostenlos.</p>
+</section>
+
+<main class="stalls">
+  <div class="stall c-green"><div class="roof"></div><div class="body"><div class="ic">💬</div><h3>Deutsch-Treff</h3><div class="when">Mo · 15:00</div><p>Locker üben, alle Niveaus.</p></div></div>
+  <div class="stall c-orange"><div class="roof"></div><div class="body"><div class="ic">🎲</div><h3>Spieletreff</h3><div class="when">Fr · 15:00</div><p>Karten &amp; Brettspiele für alle.</p></div></div>
+  <div class="stall c-pink"><div class="roof"></div><div class="body"><div class="ic">🧵</div><h3>Nadelspielereien</h3><div class="when">Do · 15:00</div><p>Nähen, stricken, häkeln.</p></div></div>
+  <div class="stall c-blue"><div class="roof"></div><div class="body"><div class="ic">🎵</div><h3>Musikwerkstatt</h3><div class="when">Sa/So</div><p>Gemeinsam Musik machen.</p></div></div>
+  <div class="stall c-yellow"><div class="roof"></div><div class="body"><div class="ic">🥁</div><h3>Trommeln</h3><div class="when">bald</div><p>Für Kinder &amp; Erwachsene.</p></div></div>
+  <div class="stall c-red"><div class="roof"></div><div class="body"><div class="ic">🎉</div><h3>Feierabendtreff</h3><div class="when">Mi · 18:00</div><p>Fröhlich beisammen, 1×/Monat.</p></div></div>
+</main>
+
+<footer class="foot">🎪 KaM·in · Marktplatz 108 · Kappelrodeck · komm einfach vorbei!</footer>
+<a href="../KaM-in Konzepte.html" class="back">← Konzepte</a>
+<script>
+  const cols=['#6aa12f','#0a93d6','#ef8f1e','#f4b400','#e2231a','#c52866'];
+  const b=document.getElementById('bunting');
+  for(let i=0;i<26;i++){const f=document.createElement('i');f.style.setProperty('--c',cols[i%6]);f.style.animationDelay=(-i*0.2)+'s';b.appendChild(f);}
+  const c=document.getElementById('confetti');
+  for(let i=0;i<30;i++){const e=document.createElement('i');e.style.left=Math.random()*100+'vw';e.style.background=cols[i%6];
+    e.style.animationDuration=(5+Math.random()*5)+'s';e.style.animationDelay=(-Math.random()*8)+'s';e.style.top=(-20-Math.random()*40)+'px';c.appendChild(e);}
+</script>
+</body>
+</html>

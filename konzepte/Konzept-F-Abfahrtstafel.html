@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Konzept F · Abfahrtstafel — KaM·in</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  :root{--bg:#0a0d0a;--panel:#0f150f;--amber:#ffb01f;--green:#36e07a;--dim:#5d6b5d;--line:rgba(255,255,255,.08);}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:#e7efe7;min-height:100vh;}
+  .mono{font-family:'DM Mono',monospace;}
+  .board{max-width:1180px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column;}
+  /* header */
+  .bh{display:flex;align-items:center;justify-content:space-between;padding:22px 26px;border-bottom:2px solid var(--line);}
+  .bh__l{display:flex;align-items:center;gap:14px;}
+  .bh__l img{height:38px;}
+  .bh__t{font-family:'DM Mono';font-size:1.3rem;font-weight:500;letter-spacing:.05em;color:var(--amber);text-transform:uppercase;}
+  .clock{font-family:'DM Mono';font-size:1.6rem;color:var(--green);letter-spacing:.04em;}
+  .bh__nav{display:flex;gap:6px;}
+  .bh__nav a{font-family:'DM Mono';font-size:.82rem;text-transform:uppercase;letter-spacing:.08em;color:var(--dim);text-decoration:none;padding:7px 12px;border:1px solid var(--line);border-radius:4px;transition:.15s;}
+  .bh__nav a:hover,.bh__nav a.on{color:var(--bg);background:var(--amber);border-color:var(--amber);}
+  /* column titles */
+  .cols{display:grid;grid-template-columns:130px 1fr 120px 150px 90px;gap:18px;padding:12px 26px;font-family:'DM Mono';font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);border-bottom:1px solid var(--line);}
+  /* rows */
+  .rows{flex:1;}
+  .brow{display:grid;grid-template-columns:130px 1fr 120px 150px 90px;gap:18px;align-items:center;padding:20px 26px;border-bottom:1px solid var(--line);transition:.15s;cursor:pointer;}
+  .brow:hover{background:var(--panel);}
+  .time{font-family:'DM Mono';font-size:1.7rem;color:var(--amber);letter-spacing:.02em;}
+  .dest{font-size:1.45rem;font-weight:700;}
+  .dest small{display:block;font-weight:400;font-size:.86rem;color:var(--dim);margin-top:2px;}
+  .platf{font-family:'DM Mono';font-size:1.5rem;text-align:center;color:#e7efe7;}
+  .flip{display:inline-flex;gap:2px;}
+  .flip b{font-family:'DM Mono';font-weight:500;background:#1a221a;border-radius:3px;padding:3px 5px;font-size:.92rem;animation:flip .5s ease;display:inline-block;}
+  @keyframes flip{from{transform:rotateX(-90deg);opacity:0;}}
+  .status{font-family:'DM Mono';font-size:.92rem;padding:5px 12px;border-radius:4px;text-align:center;letter-spacing:.04em;}
+  .s-go{background:rgba(54,224,122,.15);color:var(--green);}
+  .s-soon{background:rgba(255,176,31,.15);color:var(--amber);}
+  .s-week{background:rgba(255,255,255,.06);color:var(--dim);}
+  .free{font-family:'DM Mono';color:var(--green);text-align:center;font-size:.84rem;}
+  .bf{padding:20px 26px;display:flex;justify-content:space-between;align-items:center;border-top:2px solid var(--line);font-family:'DM Mono';font-size:.82rem;color:var(--dim);letter-spacing:.06em;}
+  .bf .lang{display:flex;gap:6px;}
+  .bf .lang button{font-family:'DM Mono';background:none;border:1px solid var(--line);color:var(--dim);padding:6px 12px;border-radius:4px;cursor:pointer;}
+  .bf .lang button.on{color:var(--bg);background:var(--green);border-color:var(--green);}
+  .back{position:fixed;left:16px;bottom:16px;z-index:50;font-family:'DM Mono';font-size:.8rem;color:var(--dim);text-decoration:none;border:1px solid var(--line);padding:7px 13px;border-radius:4px;background:var(--bg);}
+  .back:hover{color:var(--amber);}
+  @media(max-width:780px){
+    .cols{display:none;}
+    .brow{grid-template-columns:80px 1fr;grid-template-areas:'time dest' 'plat stat';gap:8px 14px;}
+    .time{grid-area:time;font-size:1.3rem;}.dest{grid-area:dest;font-size:1.15rem;}
+    .platf{grid-area:plat;text-align:left;}.status{grid-area:stat;}.free{display:none;}
+  }
+</style>
+</head>
+<body>
+<div class="board">
+  <header class="bh">
+    <div class="bh__l"><img src="../assets/kamin-mark.png" alt="" /><span class="bh__t">KaM·in Abfahrten</span></div>
+    <nav class="bh__nav"><a class="on">Heute</a><a>Woche</a><a>Projekte</a><a>KAPi</a><a>Info</a></nav>
+    <div class="clock" id="clock">--:--:--</div>
+  </header>
+  <div class="cols"><span>Zeit</span><span>Angebot · Ziel</span><span>Raum</span><span>Status</span><span>Preis</span></div>
+  <div class="rows" id="rows"></div>
+  <footer class="bf">
+    <span>● KaM·in · Marktplatz 108 · Kappelrodeck — willkommen sind alle</span>
+    <div class="lang"><button class="on">DE</button><button>UA</button><button>EN</button></div>
+  </footer>
+</div>
+<a href="../KaM-in Konzepte.html" class="back">← Konzepte</a>
+<script>
+  const DATA=[
+    {t:'15:00',d:'Wir sprechen Deutsch',s:'Sprachtreff · alle Niveaus',p:'A1',st:'go',stx:'BOARDING'},
+    {t:'16:30',d:'Hausaufgabenhilfe / ABC',s:'Lernen · lesen & schreiben',p:'A2',st:'soon',stx:'IN 15 MIN'},
+    {t:'15:00',d:'Nadelspielereien',s:'Handarbeitstreff · Do',p:'B1',st:'week',stx:'DO'},
+    {t:'15:00',d:'Spieletreff',s:'Karten & Brettspiele · Fr',p:'A1',st:'week',stx:'FR'},
+    {t:'18:00',d:'Feierabendtreff',s:'1× im Monat · für alle',p:'SAAL',st:'week',stx:'MI'},
+    {t:'—',d:'Offene Musikwerkstatt',s:'nach Vereinbarung · Sa/So',p:'B2',st:'week',stx:'WE'},
+    {t:'—',d:'Afrikanisches Trommeln',s:'Workshop · Kinder & Erwachsene',p:'SAAL',st:'soon',stx:'BALD'},
+  ];
+  function flipText(str){return '<span class="flip">'+[...str].map(c=>`<b>${c===' '?'&nbsp;':c}</b>`).join('')+'</span>';}
+  const rows=document.getElementById('rows');
+  DATA.forEach(r=>{
+    const div=document.createElement('div');div.className='brow';
+    div.innerHTML=`<div class="time">${r.t}</div>
+      <div class="dest">${r.d}<small>${r.s}</small></div>
+      <div class="platf">${r.p}</div>
+      <div class="status s-${r.st}">${flipText(r.stx)}</div>
+      <div class="free">GRATIS</div>`;
+    rows.appendChild(div);
+  });
+  function tick(){const d=new Date();document.getElementById('clock').textContent=d.toLocaleTimeString('de-DE');}
+  tick();setInterval(tick,1000);
+  // periodic flip re-animation on a random status
+  setInterval(()=>{const fs=document.querySelectorAll('.status');const el=fs[Math.floor(Math.random()*fs.length)];const txt=el.textContent;el.innerHTML=flipText(txt);},3200);
+</script>
+</body>
+</html>

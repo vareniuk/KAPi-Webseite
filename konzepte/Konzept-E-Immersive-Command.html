@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Konzept E · Immersive — KaM·in</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  :root{--green:#7cc242;--blue:#22a7e6;--orange:#ff9a2e;--red:#ff5a4d;--pink:#e4458a;--ink:#0a0a0f;}
+  html,body{height:100%;}
+  body{font-family:'Sora',sans-serif;background:var(--ink);color:#fff;overflow:hidden;}
+  .scroller{height:100vh;overflow-y:scroll;scroll-snap-type:y mandatory;scroll-behavior:smooth;}
+  .scroller::-webkit-scrollbar{display:none;}
+  section{height:100vh;scroll-snap-align:start;display:flex;flex-direction:column;justify-content:center;padding:0 8vw;position:relative;overflow:hidden;}
+  .bg{position:absolute;inset:0;z-index:0;opacity:.9;}
+  .bg::after{content:'';position:absolute;inset:0;background:radial-gradient(120% 80% at 50% 120%,transparent,var(--ink) 78%);}
+  .glowblob{position:absolute;width:60vw;height:60vw;border-radius:50%;filter:blur(90px);opacity:.4;}
+  .inner{position:relative;z-index:2;max-width:1000px;}
+  .tag{display:inline-flex;align-items:center;gap:9px;font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.2);padding:7px 15px;border-radius:999px;margin-bottom:26px;}
+  h1{font-size:clamp(3rem,11vw,8.5rem);font-weight:800;line-height:.92;letter-spacing:-.03em;}
+  h2{font-size:clamp(2.4rem,7vw,5.5rem);font-weight:700;line-height:.96;letter-spacing:-.02em;}
+  .lead{font-size:clamp(1.1rem,2.4vw,1.5rem);color:rgba(255,255,255,.78);max-width:46ch;margin-top:22px;}
+  .when{display:inline-block;margin-top:24px;font-weight:600;font-size:1.05rem;background:rgba(255,255,255,.12);backdrop-filter:blur(8px);padding:11px 22px;border-radius:999px;border:1px solid rgba(255,255,255,.2);}
+  .brandtop{position:fixed;top:24px;left:30px;z-index:40;display:flex;align-items:center;gap:11px;font-weight:700;font-size:1.1rem;}
+  .brandtop img{width:34px;}
+  /* dot nav */
+  .dots{position:fixed;right:26px;top:50%;transform:translateY(-50%);z-index:40;display:flex;flex-direction:column;gap:14px;}
+  .dots button{width:12px;height:12px;border-radius:50%;border:2px solid rgba(255,255,255,.45);background:transparent;cursor:pointer;padding:0;transition:.25s;position:relative;}
+  .dots button.on{background:#fff;border-color:#fff;transform:scale(1.25);}
+  .dots button span{position:absolute;right:22px;top:50%;transform:translateY(-50%);font-size:.78rem;white-space:nowrap;color:rgba(255,255,255,.8);opacity:0;transition:.2s;pointer-events:none;}
+  .dots button:hover span{opacity:1;}
+  /* command bar */
+  .cmd{position:fixed;bottom:26px;left:50%;transform:translateX(-50%);z-index:45;width:min(620px,90vw);}
+  .cmd__bar{display:flex;align-items:center;gap:12px;background:rgba(22,22,30,.7);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.16);border-radius:18px;padding:15px 18px;box-shadow:0 24px 60px -20px rgba(0,0,0,.8);cursor:text;transition:.2s;}
+  .cmd__bar:hover{border-color:rgba(255,255,255,.32);}
+  .cmd__bar svg{flex:none;opacity:.7;}
+  .cmd__bar input{flex:1;background:none;border:none;outline:none;color:#fff;font-family:'Sora';font-size:1.02rem;}
+  .cmd__bar input::placeholder{color:rgba(255,255,255,.5);}
+  .cmd__bar kbd{font-family:'Sora';font-size:.74rem;color:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.2);border-radius:6px;padding:3px 8px;}
+  .cmd__panel{margin-bottom:10px;background:rgba(22,22,30,.86);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.16);border-radius:18px;padding:14px;display:none;animation:pop .25s ease;}
+  .cmd__panel.open{display:block;}
+  @keyframes pop{from{opacity:0;transform:translateY(8px);}}
+  .cmd__panel .h{font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5);padding:4px 8px 10px;}
+  .cmd__panel .q{display:flex;align-items:center;gap:12px;padding:12px 12px;border-radius:12px;cursor:pointer;transition:.15s;}
+  .cmd__panel .q:hover{background:rgba(255,255,255,.08);}
+  .cmd__panel .q b{font-weight:600;}.cmd__panel .q small{display:block;color:rgba(255,255,255,.6);font-size:.84rem;margin-top:2px;}
+  .cmd__panel .q .ic{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;flex:none;}
+  .back{position:fixed;left:30px;bottom:30px;z-index:46;color:rgba(255,255,255,.7);text-decoration:none;font-size:.9rem;background:rgba(22,22,30,.6);border:1px solid rgba(255,255,255,.16);padding:8px 14px;border-radius:999px;backdrop-filter:blur(10px);}
+  .back:hover{color:#fff;}
+  .scrollhint{position:absolute;bottom:90px;left:8vw;font-size:.82rem;color:rgba(255,255,255,.5);animation:nudge 1.8s ease-in-out infinite;}
+  @keyframes nudge{50%{transform:translateY(6px);}}
+  @media(max-width:600px){.brandtop{left:16px;}.dots{right:12px;}.back{display:none;}}
+</style>
+</head>
+<body>
+<div class="brandtop"><img src="../assets/kamin-mark.png" alt="" /> KaM·in</div>
+
+<div class="dots" id="dots">
+  <button data-i="0" class="on"><span>Start</span></button>
+  <button data-i="1"><span>Deutsch-Treff</span></button>
+  <button data-i="2"><span>Spieletreff</span></button>
+  <button data-i="3"><span>Feierabendtreff</span></button>
+  <button data-i="4"><span>Kontakt</span></button>
+</div>
+
+<div class="scroller" id="sc">
+  <section>
+    <div class="bg"><div class="glowblob" style="background:var(--blue);left:-10vw;top:0;"></div><div class="glowblob" style="background:var(--pink);right:-12vw;bottom:-10vw;"></div></div>
+    <div class="inner">
+      <div class="tag">● Offen für alle · Marktplatz 108</div>
+      <h1>Komm<br>herein.</h1>
+      <p class="lead">Ein offener Treffpunkt für Alt und Jung, für alle Kulturen. Alle Angebote sind kostenlos.</p>
+    </div>
+    <div class="scrollhint">↓ scrollen oder unten fragen</div>
+  </section>
+  <section>
+    <div class="bg"><div class="glowblob" style="background:var(--green);left:20vw;top:-10vw;opacity:.5"></div></div>
+    <div class="inner"><div class="tag">Jeden Montag</div><h2>Wir sprechen<br>Deutsch.</h2><p class="lead">Deutsch üben in lockerer Runde — für alle Sprach-Niveaus. Komm einfach vorbei.</p><div class="when">🕒 Mo 15:00–16:30 Uhr</div></div>
+  </section>
+  <section>
+    <div class="bg"><div class="glowblob" style="background:var(--orange);right:10vw;top:-6vw;opacity:.5"></div></div>
+    <div class="inner"><div class="tag">Jeden Freitag</div><h2>Spieletreff<br>für alle.</h2><p class="lead">Karten- und Brettspiele für Jung und Alt. Material ist da — gute Laune auch.</p><div class="when">🕒 Fr 15:00–17:00 Uhr</div></div>
+  </section>
+  <section>
+    <div class="bg"><div class="glowblob" style="background:var(--pink);left:5vw;bottom:-10vw;opacity:.5"></div></div>
+    <div class="inner"><div class="tag">1× im Monat</div><h2>Feierabend-<br>treff.</h2><p class="lead">Fröhliches Beisammensein für Einheimische und Zugezogene aus aller Welt.</p><div class="when">🕒 Mi 18:00–22:00 Uhr</div></div>
+  </section>
+  <section>
+    <div class="bg"><div class="glowblob" style="background:var(--blue);right:-8vw;top:8vw;opacity:.5"></div></div>
+    <div class="inner"><div class="tag">Schön, dass du da bist</div><h2>Bis bald<br>im KaM·in.</h2><p class="lead">Marktplatz 108, 77876 Kappelrodeck · @kamin.kappelrodeck · alles kostenlos.</p></div>
+  </section>
+</div>
+
+<div class="cmd">
+  <div class="cmd__panel" id="panel">
+    <div class="h">Häufige Fragen</div>
+    <div class="q" data-go="0"><div class="ic" style="background:rgba(34,167,230,.25)">🕒</div><div><b>Wann habt ihr offen?</b><small>Mo–Sa am Nachmittag — sieh dir die Termine an.</small></div></div>
+    <div class="q" data-go="4"><div class="ic" style="background:rgba(255,154,46,.25)">📍</div><div><b>Wo seid ihr?</b><small>Marktplatz 108, 77876 Kappelrodeck.</small></div></div>
+    <div class="q" data-go="1"><div class="ic" style="background:rgba(228,69,138,.25)">♥</div><div><b>Bin ich willkommen?</b><small>Ja! Jede und jeder — und alles ist kostenlos.</small></div></div>
+  </div>
+  <div class="cmd__bar" id="bar">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+    <input id="ask" placeholder="Frag KaM·in: Wann? Wo? Bin ich willkommen?" readonly />
+    <kbd>⌘K</kbd>
+  </div>
+</div>
+
+<a href="../KaM-in Konzepte.html" class="back">← Konzepte</a>
+<script>
+  const sc=document.getElementById('sc');const secs=[...sc.querySelectorAll('section')];const dots=[...document.querySelectorAll('.dots button')];
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){const i=secs.indexOf(e.target);dots.forEach(d=>d.classList.toggle('on',+d.dataset.i===i));}}),{root:sc,threshold:.6});
+  secs.forEach(s=>io.observe(s));
+  dots.forEach(d=>d.onclick=()=>secs[+d.dataset.i].scrollIntoView());
+  // command bar
+  const bar=document.getElementById('bar'),panel=document.getElementById('panel');
+  bar.onclick=()=>panel.classList.toggle('open');
+  panel.querySelectorAll('.q').forEach(q=>q.onclick=()=>{secs[+q.dataset.go].scrollIntoView();panel.classList.remove('open');});
+  addEventListener('keydown',e=>{if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){e.preventDefault();panel.classList.toggle('open');}});
+  addEventListener('click',e=>{if(!e.target.closest('.cmd'))panel.classList.remove('open');});
+</script>
+</body>
+</html>

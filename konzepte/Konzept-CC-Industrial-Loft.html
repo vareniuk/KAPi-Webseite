@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Konzept CC · Industrial Loft — KaM·in</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  :root{--concrete:#d9d6cf;--concrete-dk:#c4c0b6;--ink:#23211d;--steel:#4a4f55;--dim:#6e6a61;
+    --safety:#e8801a;--rust:#a8492a;--blueprint:#2c3e50;--line:#b6b1a5;}
+  body{font-family:'Archivo',sans-serif;background:var(--concrete);color:var(--ink);
+    background-image:radial-gradient(rgba(0,0,0,.025) 1px,transparent 1px);background-size:4px 4px;-webkit-font-smoothing:antialiased;}
+  .mono{font-family:'Space Mono',monospace;}
+  h1,h2,h3{font-weight:900;letter-spacing:-.03em;line-height:.95;text-transform:uppercase;}
+  a{color:inherit;text-decoration:none;}
+  .ml{font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--rust);}
+
+  /* layout: fixed left steel rail */
+  .rail{position:fixed;top:0;left:0;bottom:0;width:90px;background:var(--ink);
+    background-image:linear-gradient(180deg,#2a2824,#1c1a17);z-index:50;
+    display:flex;flex-direction:column;align-items:center;padding:18px 0;border-right:3px solid #000;}
+  .rail__logo{width:46px;height:46px;border-radius:8px;background:#fff;display:grid;place-items:center;padding:5px;margin-bottom:30px;}
+  .rail__logo img{width:100%;}
+  .rail__nav{display:flex;flex-direction:column;gap:6px;flex:1;}
+  .rail__nav a{writing-mode:vertical-rl;transform:rotate(180deg);font-family:'Space Mono';font-weight:700;font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;color:#8a857a;padding:14px 8px;border-radius:6px;transition:.16s;}
+  .rail__nav a:hover{color:#fff;background:rgba(255,255,255,.07);}
+  .rail__nav a.on{color:var(--ink);background:var(--safety);}
+  .rivet{width:8px;height:8px;border-radius:50%;background:#000;box-shadow:inset 0 1px 1px rgba(255,255,255,.2);margin:10px 0;}
+  .rail__lang{display:flex;flex-direction:column;gap:5px;}
+  .rail__lang button{font-family:'Space Mono';font-weight:700;font-size:.68rem;background:rgba(255,255,255,.08);border:none;color:#cdc8bc;width:40px;padding:6px 0;border-radius:5px;cursor:pointer;}
+  .rail__lang button.on{background:var(--safety);color:var(--ink);}
+
+  main{margin-left:90px;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 clamp(24px,4vw,56px);}
+
+  /* hero with blueprint grid */
+  .hero{position:relative;padding:clamp(56px,8vw,110px) 0;overflow:hidden;border-bottom:3px solid var(--ink);}
+  .hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:48px 48px;opacity:.4;mask-image:linear-gradient(120deg,#000,transparent 70%);}
+  .hero__tag{display:flex;gap:18px;flex-wrap:wrap;margin-bottom:24px;position:relative;}
+  .hero__tag span{font-family:'Space Mono';font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--steel);border:1px solid var(--line);padding:6px 12px;background:rgba(255,255,255,.4);}
+  .hero h1{font-size:clamp(3.2rem,11vw,8.5rem);position:relative;}
+  .hero h1 .out{-webkit-text-stroke:2.5px var(--ink);color:transparent;}
+  .hero h1 .saf{color:var(--safety);}
+  .hero p{font-family:'Archivo';font-weight:500;text-transform:none;letter-spacing:0;font-size:clamp(1.1rem,2.3vw,1.5rem);color:var(--dim);max-width:42ch;margin-top:26px;position:relative;}
+  .hero__btns{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px;position:relative;}
+  .btn{font-family:'Space Mono';font-weight:700;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;padding:15px 26px;cursor:pointer;transition:.14s;display:inline-flex;gap:9px;align-items:center;border:2px solid var(--ink);}
+  .btn--s{background:var(--ink);color:var(--concrete);}.btn--s:hover{background:var(--safety);color:var(--ink);border-color:var(--safety);}
+  .btn--o{background:none;}.btn--o:hover{background:var(--ink);color:var(--concrete);}
+
+  /* units grid (lockers) */
+  .units{padding:clamp(48px,7vw,90px) 0;}
+  .units__head{display:flex;align-items:baseline;gap:18px;margin-bottom:30px;}
+  .units__head h2{font-size:clamp(1.8rem,4vw,2.8rem);}
+  .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;}
+  .unit{border:2.5px solid var(--ink);background:rgba(255,255,255,.45);padding:22px;transition:.16s;cursor:pointer;position:relative;display:flex;flex-direction:column;min-height:200px;}
+  .unit:hover{background:#fff;transform:translate(-3px,-3px);box-shadow:6px 6px 0 var(--ink);}
+  .unit__no{font-family:'Space Mono';font-weight:700;font-size:.78rem;color:var(--rust);letter-spacing:.1em;}
+  .unit__bolt{position:absolute;top:10px;right:10px;width:9px;height:9px;border-radius:50%;background:var(--ink);}
+  .unit h3{font-size:1.45rem;margin-top:auto;text-transform:none;letter-spacing:-.01em;}
+  .unit p{font-family:'Archivo';font-weight:500;font-size:.92rem;color:var(--dim);margin-top:6px;}
+  .unit__time{font-family:'Space Mono';font-weight:700;font-size:.82rem;margin-top:14px;display:inline-block;background:var(--ink);color:var(--concrete);padding:5px 10px;align-self:flex-start;}
+  .c6{grid-column:span 6;}.c4{grid-column:span 4;}.c3{grid-column:span 3;}.c8{grid-column:span 8;}
+  .unit--big h3{font-size:2rem;}
+  .unit--saf{background:var(--safety);border-color:var(--ink);}.unit--saf:hover{background:#f08e28;}
+  .unit--saf .unit__no{color:var(--ink);}
+  .stat{font-size:clamp(3rem,7vw,5rem);font-weight:900;line-height:.9;}
+
+  /* spec strip */
+  .spec{background:var(--ink);color:var(--concrete);padding:clamp(46px,7vw,86px) 0;}
+  .spec h2{font-size:clamp(2rem,5vw,3.4rem);}
+  .spec h2 .saf{color:var(--safety);}
+  .spec p{font-family:'Archivo';font-weight:500;text-transform:none;letter-spacing:0;color:#b3aea2;font-size:1.12rem;margin-top:16px;max-width:50ch;}
+  .spec__row{display:flex;gap:40px;flex-wrap:wrap;margin-top:30px;}
+  .spec__row div .mono{color:var(--safety);font-size:.74rem;letter-spacing:.14em;}
+  .spec__row div b{display:block;font-size:1.3rem;margin-top:4px;}
+
+  footer{padding:40px 0 60px;}
+  .copy{font-family:'Space Mono';font-size:.78rem;color:var(--dim);border-top:2px solid var(--ink);padding-top:18px;}
+
+  .back{position:fixed;left:106px;bottom:16px;z-index:60;background:var(--ink);color:var(--concrete);font-family:'Space Mono';font-size:.76rem;padding:9px 14px;border:2px solid var(--ink);}
+  .back:hover{background:var(--safety);color:var(--ink);}
+  @media(max-width:820px){
+    .rail{flex-direction:row;width:100%;height:62px;bottom:auto;top:0;padding:0 12px;border-right:none;border-bottom:3px solid #000;}
+    .rail__logo{margin:0 14px 0 0;width:40px;height:40px;}
+    .rail__nav{flex-direction:row;gap:2px;overflow-x:auto;}.rail__nav a{writing-mode:horizontal-tb;transform:none;padding:8px 10px;font-size:.72rem;}
+    .rivet{display:none;}.rail__lang{flex-direction:row;}
+    main{margin-left:0;margin-top:62px;}
+    .c6,.c4,.c3,.c8{grid-column:span 6;}
+    .back{left:16px;}
+  }
+  @media(max-width:560px){.c6,.c4,.c3,.c8{grid-column:span 12;}}
+</style>
+</head>
+<body>
+<aside class="rail">
+  <div class="rail__logo"><img src="../assets/kamin-mark.png" alt="" /></div>
+  <nav class="rail__nav">
+    <a href="#" class="on">Start</a><span class="rivet"></span>
+    <a href="#units">Units</a>
+    <a href="#">Projekte</a><span class="rivet"></span>
+    <a href="#">KAPi</a>
+    <a href="#">Kontakt</a>
+  </nav>
+  <div class="rail__lang"><button class="on">DE</button><button>UA</button><button>EN</button></div>
+</aside>
+
+<main>
+  <section class="hero"><div class="wrap">
+    <div class="hero__tag"><span>EST. 2024</span><span>Marktplatz 108</span><span>Eintritt 0,00 €</span></div>
+    <h1><span class="out">Komm</span><br>her<span class="saf">ein.</span></h1>
+    <p>Roher Beton, warmes Licht, offene Türen. Ein Treffpunkt für Alt und Jung, für alle Kulturen — mitten in Kappelrodeck.</p>
+    <div class="hero__btns"><a href="#units" class="btn btn--s">Units ansehen →</a><a href="#" class="btn btn--o">Mitmachen</a></div>
+  </div></section>
+
+  <section class="units" id="units"><div class="wrap">
+    <div class="units__head"><span class="ml">Belegungsplan</span><h2>Diese Woche im Loft</h2></div>
+    <div class="grid">
+      <div class="unit c8 unit--big"><span class="unit__no">UNIT 01</span><span class="unit__bolt"></span><h3>Wir sprechen Deutsch</h3><p>Deutsch üben in lockerer Runde — für alle Niveaus.</p><span class="unit__time">MO 15:00–16:30</span></div>
+      <div class="unit c4 unit--saf"><span class="unit__no">KAPAZITÄT</span><span class="unit__bolt"></span><div class="stat" style="margin-top:auto">50+</div><h3 style="font-size:1.2rem">Nationen</h3></div>
+      <div class="unit c4"><span class="unit__no">UNIT 02</span><span class="unit__bolt"></span><h3>Spieletreff</h3><p>Karten &amp; Brettspiele für alle.</p><span class="unit__time">FR 15:00</span></div>
+      <div class="unit c4"><span class="unit__no">UNIT 03</span><span class="unit__bolt"></span><h3>Nadelspielereien</h3><p>Handarbeitstreff.</p><span class="unit__time">DO 15:00</span></div>
+      <div class="unit c4"><span class="unit__no">UNIT 04</span><span class="unit__bolt"></span><h3>Feierabendtreff</h3><p>1× im Monat, für alle.</p><span class="unit__time">MI 18:00</span></div>
+    </div>
+  </div></section>
+
+  <section class="spec"><div class="wrap">
+    <span class="ml" style="color:var(--safety)">Technische Daten</span>
+    <h2>Offen. Roh. <span class="saf">Ehrlich.</span></h2>
+    <p>Kein Schnickschnack, keine Hürden, keine Kosten. „Come In“ — egal woher du kommst, welche Sprache du sprichst oder wie alt du bist.</p>
+    <div class="spec__row">
+      <div><span class="mono">ANGEBOTE/WOCHE</span><b>7 Units</b></div>
+      <div><span class="mono">SPRACHEN</span><b>DE · UA · EN</b></div>
+      <div><span class="mono">EINTRITT</span><b>0,00 € immer</b></div>
+      <div><span class="mono">STANDORT</span><b>Marktplatz 108</b></div>
+    </div>
+  </div></section>
+
+  <footer><div class="wrap"><div class="copy">© 2026 BÜRGERTREFF KaM·in // KAPPELRODECK // BUILT FOR EVERYONE</div></div></footer>
+</main>
+
+<a href="../KaM-in Konzepte.html" class="back">← Konzepte</a>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Konzept L · Arcade — KaM·in</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet" />
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  :root{--green:#39ff7a;--blue:#33d4ff;--orange:#ffae33;--red:#ff4d6a;--pink:#ff5cf0;--yellow:#ffe24a;--bg:#0d0221;}
+  body{font-family:'VT323',monospace;background:var(--bg);color:#fff;min-height:100vh;
+    background-image:radial-gradient(circle at 50% 0,#2a0a4d,transparent 60%),
+      linear-gradient(transparent 0,transparent calc(100% - 2px),#ffffff14 100%);
+    background-size:100% 100%,100% 4px;overflow-x:hidden;}
+  .px{font-family:'Press Start 2P',monospace;}
+  /* scanlines */
+  body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:99;background:repeating-linear-gradient(transparent 0 2px,rgba(0,0,0,.18) 2px 4px);mix-blend-mode:multiply;}
+  .cab{max-width:920px;margin:0 auto;padding:26px 18px 80px;}
+  /* hud nav */
+  .hud{display:flex;justify-content:space-between;align-items:center;border:3px solid var(--green);border-radius:8px;padding:12px 16px;box-shadow:0 0 0 3px var(--bg),0 0 18px var(--green);}
+  .hud__l{display:flex;align-items:center;gap:12px;}
+  .hud__l img{width:34px;image-rendering:pixelated;}
+  .hud__l .px{font-size:.85rem;color:var(--green);text-shadow:0 0 8px var(--green);}
+  .hud__coins{font-size:1.4rem;color:var(--yellow);}
+  .hud nav{display:flex;gap:4px;}
+  .hud nav a{font-family:'VT323';font-size:1.25rem;color:#fff;text-decoration:none;padding:4px 10px;border:2px solid transparent;}
+  .hud nav a:hover,.hud nav a.on{color:var(--bg);background:var(--blue);box-shadow:0 0 12px var(--blue);}
+  /* title */
+  .title{text-align:center;margin:44px 0 10px;}
+  .title h1{font-size:clamp(1.4rem,5vw,3rem);line-height:1.5;text-shadow:4px 4px 0 var(--pink),8px 8px 0 var(--blue);animation:hue 6s linear infinite;}
+  @keyframes hue{50%{text-shadow:4px 4px 0 var(--blue),8px 8px 0 var(--pink);}}
+  .blink{font-size:1.4rem;color:var(--yellow);text-align:center;animation:bl 1s steps(2) infinite;margin-bottom:30px;}
+  @keyframes bl{50%{opacity:0;}}
+  .sub{text-align:center;font-size:1.5rem;color:var(--blue);margin-top:-4px;}
+  /* level select */
+  .lvls{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px;}
+  .lvl{border:3px solid var(--c);border-radius:8px;padding:20px 16px;background:#160a33;cursor:pointer;transition:.12s;position:relative;box-shadow:0 0 0 3px var(--bg),4px 4px 0 var(--c);}
+  .lvl:hover{transform:translate(-3px,-3px);box-shadow:0 0 0 3px var(--bg),7px 7px 0 var(--c),0 0 22px var(--c);}
+  .lvl .ico{font-size:2.6rem;}
+  .lvl .num{position:absolute;top:10px;right:14px;font-family:'Press Start 2P';font-size:.7rem;color:var(--c);}
+  .lvl h3{font-size:1.7rem;margin-top:8px;line-height:1;}
+  .lvl .when{font-size:1.25rem;color:var(--yellow);margin-top:6px;}
+  .lvl .stars{color:var(--yellow);font-size:1.3rem;margin-top:8px;}
+  .lvl .free{font-family:'Press Start 2P';font-size:.6rem;color:var(--green);margin-top:10px;display:inline-block;}
+  /* footer hud */
+  .ftr{margin-top:40px;border:3px solid var(--pink);border-radius:8px;padding:16px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 0 0 3px var(--bg),0 0 18px var(--pink);}
+  .ftr .px{font-size:.72rem;color:var(--pink);}
+  .lang{display:flex;gap:6px;}
+  .lang button{font-family:'VT323';font-size:1.25rem;background:#160a33;border:2px solid var(--green);color:var(--green);padding:3px 12px;cursor:pointer;}
+  .lang button.on{background:var(--green);color:var(--bg);}
+  .back{position:fixed;left:14px;bottom:14px;z-index:100;font-family:'VT323';font-size:1.2rem;color:var(--yellow);text-decoration:none;border:2px solid var(--yellow);padding:4px 12px;background:var(--bg);}
+  @media(max-width:680px){.lvls{grid-template-columns:1fr;}.hud nav{display:none;}}
+</style>
+</head>
+<body>
+<div class="cab">
+  <div class="hud">
+    <div class="hud__l"><img src="../assets/kamin-mark.png" alt="" /><span class="px">KAM·IN</span></div>
+    <nav><a class="on">START</a><a>TERMINE</a><a>PROJEKTE</a><a>KAPi</a><a>INFO</a></nav>
+    <div class="hud__coins">♥×∞</div>
+  </div>
+
+  <div class="title">
+    <h1 class="px">KOMM HEREIN!</h1>
+    <div class="sub">★ PLAYER 1 — WILLKOMMEN ★</div>
+  </div>
+  <div class="blink">▶ WÄHLE EIN ANGEBOT — ALLES KOSTENLOS ◀</div>
+
+  <div class="lvls">
+    <div class="lvl" style="--c:var(--green)"><span class="num">LV.1</span><div class="ico">💬</div><h3>Deutsch-Treff</h3><div class="when">MO · 15:00</div><div class="stars">★★★☆☆</div><span class="free">FREE PLAY</span></div>
+    <div class="lvl" style="--c:var(--blue)"><span class="num">LV.2</span><div class="ico">📚</div><h3>ABC-Hilfe</h3><div class="when">MO · 16:30</div><div class="stars">★★☆☆☆</div><span class="free">FREE PLAY</span></div>
+    <div class="lvl" style="--c:var(--pink)"><span class="num">LV.3</span><div class="ico">🧵</div><h3>Nadelspiel</h3><div class="when">DO · 15:00</div><div class="stars">★★★★☆</div><span class="free">FREE PLAY</span></div>
+    <div class="lvl" style="--c:var(--orange)"><span class="num">LV.4</span><div class="ico">🎲</div><h3>Spieletreff</h3><div class="when">FR · 15:00</div><div class="stars">★★★★★</div><span class="free">FREE PLAY</span></div>
+    <div class="lvl" style="--c:var(--yellow)"><span class="num">LV.5</span><div class="ico">🥁</div><h3>Trommeln</h3><div class="when">BOSS · BALD</div><div class="stars">★★★★★</div><span class="free">FREE PLAY</span></div>
+    <div class="lvl" style="--c:var(--red)"><span class="num">LV.6</span><div class="ico">🎉</div><h3>Feierabend</h3><div class="when">MI · 18:00</div><div class="stars">★★★★☆</div><span class="free">FREE PLAY</span></div>
+  </div>
+
+  <div class="ftr">
+    <span class="px">MARKTPLATZ 108 · KAPPELRODECK</span>
+    <div class="lang"><button class="on">DE</button><button>UA</button><button>EN</button></div>
+  </div>
+</div>
+<a href="../KaM-in Konzepte.html" class="back">← KONZEPTE</a>
+</body>
+</html>

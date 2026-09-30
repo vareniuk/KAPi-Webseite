@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Bürgertreff KaM·in – Kappelrodeck</title>
+<link rel="icon" href="assets/kamin-mark.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700;800&family=Archivo+Black&family=Baloo+2:wght@500;600;700;800&family=Figtree:wght@400;500;600;700;800&family=Lora:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&family=Mulish:wght@400;500;600;700;800&family=Nunito:wght@400;600;700;800;900&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles/styles.css" />
+<style>
+  /* accent palette from the logo — constant across all themes */
+  :root {
+    --c-green: #6aa12f; --c-blue: #0a93d6; --c-orange: #ef8f1e;
+    --c-yellow: #e3a200; --c-red: #e2231a; --c-pink: #c52866;
+    /* default (warm) theme vars to avoid first-paint flash */
+    --bg: #fbf5ec; --bg2: #f3e9d9; --surface: #fffdf8;
+    --ink: #2c2722; --muted: #7c7264; --line: #ece0cd;
+    --brand: #d98326; --brand-ink: #fff;
+    --radius: 16px; --radius-lg: 24px; --radius-pill: 999px;
+    --shadow: 0 10px 30px -16px rgba(80,60,30,.30);
+    --shadow-sm: 0 4px 14px -8px rgba(80,60,30,.30);
+    --font-head: 'Nunito', sans-serif; --font-body: 'Nunito Sans', sans-serif;
+  }
+  body { opacity: 0; transition: opacity .3s ease; }
+  body.ready { opacity: 1; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script src="js/i18n.js"></script>
+<script src="js/content.js"></script>
+<script type="text/babel" src="js/ui.jsx"></script>
+<script type="text/babel" src="js/screens-main.jsx"></script>
+<script type="text/babel" src="js/screens-more.jsx"></script>
+<script type="text/babel" src="js/app.jsx"></script>
+<script>
+  // reveal once fonts/first render settle
+  window.addEventListener('load', () => setTimeout(() => document.body.classList.add('ready'), 120));
+  setTimeout(() => document.body.classList.add('ready'), 1200);
+</script>
+</body>
+</html>

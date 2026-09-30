@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Konzept P · Swiss Grid — KaM·in</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  :root{--paper:#f2f0eb;--ink:#111;--red:#e2231a;--blue:#0a93d6;--green:#6aa12f;--yellow:#f4b400;--pink:#c52866;--orange:#ef8f1e;}
+  body{font-family:'Archivo',sans-serif;background:var(--paper);color:var(--ink);-webkit-font-smoothing:antialiased;}
+  .grid{max-width:1280px;margin:0 auto;min-height:100vh;display:grid;grid-template-columns:repeat(12,1fr);gap:1px;background:var(--ink);border-left:1px solid var(--ink);border-right:1px solid var(--ink);}
+  .cell{background:var(--paper);padding:22px;}
+  .c12{grid-column:span 12;}.c8{grid-column:span 8;}.c6{grid-column:span 6;}.c4{grid-column:span 4;}.c3{grid-column:span 3;}.c2{grid-column:span 2;}
+  /* nav row */
+  .nav{display:flex;align-items:center;justify-content:space-between;gap:20px;}
+  .nav__brand{display:flex;align-items:center;gap:12px;font-weight:900;font-size:1.3rem;letter-spacing:-.02em;}
+  .nav__brand img{height:34px;}
+  .nav__links{display:flex;gap:2px;}
+  .nav__links a{font-weight:600;font-size:.92rem;text-decoration:none;color:var(--ink);padding:7px 13px;transition:.13s;}
+  .nav__links a:hover{background:var(--ink);color:var(--paper);}
+  .nav__links a.on{background:var(--red);color:#fff;}
+  .lang{display:flex;gap:0;border:1.5px solid var(--ink);}
+  .lang button{font-family:'Archivo';font-weight:700;font-size:.8rem;background:none;border:none;border-right:1.5px solid var(--ink);padding:6px 11px;cursor:pointer;}
+  .lang button:last-child{border-right:none;}
+  .lang button.on{background:var(--ink);color:var(--paper);}
+  /* type hero */
+  .hero{display:flex;flex-direction:column;justify-content:space-between;min-height:340px;}
+  .hero .idx{font-weight:600;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;}
+  .hero h1{font-weight:900;font-size:clamp(3.5rem,11vw,9rem);line-height:.86;letter-spacing:-.04em;text-transform:uppercase;}
+  .hero h1 em{font-style:normal;color:var(--red);}
+  .hero .meta{display:flex;justify-content:space-between;font-size:.92rem;font-weight:500;border-top:2px solid var(--ink);padding-top:10px;flex-wrap:wrap;gap:8px;}
+  /* color block cells */
+  .blk{color:#fff;display:flex;flex-direction:column;justify-content:space-between;min-height:200px;}
+  .blk .no{font-weight:700;font-size:.8rem;letter-spacing:.06em;}
+  .blk h3{font-weight:800;font-size:1.6rem;line-height:1;letter-spacing:-.02em;}
+  .blk .t{font-weight:600;font-size:.96rem;margin-top:4px;opacity:.92;}
+  .blk .arr{font-size:1.6rem;align-self:flex-end;}
+  .b-red{background:var(--red);}.b-blue{background:var(--blue);}.b-green{background:var(--green);}
+  .b-yellow{background:var(--yellow);color:var(--ink);}.b-pink{background:var(--pink);}.b-orange{background:var(--orange);}.b-ink{background:var(--ink);}
+  /* big number */
+  .big{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;}
+  .big .n{font-weight:900;font-size:clamp(4rem,12vw,8rem);line-height:.8;letter-spacing:-.04em;}
+  .big .l{font-weight:600;font-size:.9rem;text-transform:uppercase;letter-spacing:.08em;margin-top:8px;}
+  /* photo */
+  .photo{background:repeating-linear-gradient(45deg,#0000000d 0 12px,transparent 12px 24px);display:grid;place-items:center;font-family:ui-monospace,monospace;font-size:.78rem;color:#777;min-height:200px;text-transform:uppercase;letter-spacing:.08em;}
+  /* foot */
+  .foot{display:flex;justify-content:space-between;align-items:center;font-size:.84rem;font-weight:500;flex-wrap:wrap;gap:10px;}
+  .back{position:fixed;left:14px;bottom:14px;z-index:50;font-weight:700;font-size:.82rem;background:var(--ink);color:var(--paper);padding:8px 14px;text-decoration:none;}
+  @media(max-width:860px){.c8,.c6{grid-column:span 12;}.c4,.c3{grid-column:span 6;}.nav__links{display:none;}}
+  @media(max-width:520px){.c4,.c3,.c2{grid-column:span 12;}}
+</style>
+</head>
+<body>
+<div class="grid">
+  <div class="cell c12 nav">
+    <div class="nav__brand"><img src="../assets/kamin-mark.png" alt="" /> KaM·in</div>
+    <div class="nav__links"><a class="on">Start</a><a>Termine</a><a>Projekte</a><a>KAPi</a><a>Über uns</a><a>Kontakt</a></div>
+    <div class="lang"><button class="on">DE</button><button>UA</button><button>EN</button></div>
+  </div>
+
+  <div class="cell c8 hero">
+    <div class="idx">01 — Bürgertreff / Marktplatz 108 / Kappelrodeck</div>
+    <h1>Komm<br><em>her­ein.</em></h1>
+    <div class="meta"><span>Offen für Alt &amp; Jung</span><span>Für alle Kulturen</span><span>Alles kostenlos</span></div>
+  </div>
+  <div class="cell c4 big b-red" style="color:#fff"><div class="n">50+</div><div class="l">Nationen unter<br>einem Dach</div></div>
+
+  <div class="cell c3 blk b-green"><div class="no">A — MO 15:00</div><div><h3>Wir sprechen Deutsch</h3><div class="t">Sprachtreff, alle Niveaus</div></div><div class="arr">→</div></div>
+  <div class="cell c3 blk b-blue"><div class="no">B — FR 15:00</div><div><h3>Spiele­treff</h3><div class="t">Karten &amp; Brettspiele</div></div><div class="arr">→</div></div>
+  <div class="cell c3 blk b-pink"><div class="no">C — DO 15:00</div><div><h3>Nadel­spielereien</h3><div class="t">Handarbeitstreff</div></div><div class="arr">→</div></div>
+  <div class="cell c3 blk b-yellow"><div class="no">D — MI 18:00</div><div><h3>Feierabend­treff</h3><div class="t">1× im Monat, für alle</div></div><div class="arr">→</div></div>
+
+  <div class="cell c6 photo">[ Foto: Menschen im KaM·in ]</div>
+  <div class="cell c6 blk b-ink"><div class="no">E — DIE IDEE</div><div><h3 style="font-size:2rem">„Come In“ — komm herein.</h3><div class="t" style="font-size:1.05rem;margin-top:10px">Ein niederschwelliger Ort, an dem sich Einheimische und Zugezogene aus aller Welt begegnen. Ohne Anmeldung. Ohne Kosten.</div></div><div class="arr">↘</div></div>
+
+  <div class="cell c12 foot">
+    <span>KaM·in · Marktplatz 108 · 77876 Kappelrodeck</span>
+    <span>@kamin.kappelrodeck</span>
+    <span>© 2026 — willkommen sind alle</span>
+  </div>
+</div>
+<a href="../KaM-in Konzepte.html" class="back">← Konzepte</a>
+</body>
+</html>
