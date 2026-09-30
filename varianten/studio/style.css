@@ -68,8 +68,10 @@ svg { flex: none; }
   color: var(--text-2); margin: 0 0 14px;
 }
 .h2 { font-size: clamp(34px, 3.5vw, 44px); line-height: 1.04; margin-bottom: 18px; }
-/* Aside-Headlines (4/12-Spalte): deutsche Komposita brechen an &shy;-Stellen, nie über die Spalte hinaus */
-.split-aside .h2 { hyphens: manual; overflow-wrap: anywhere; }
+/* Aside-Headlines: mobil volle Breite, keine Trennung; in der 4/12-Spalte (ab 1024px) dürfen deutsche Komposita
+   an ihren &shy;-Stellen brechen und laufen nie über die Spalte hinaus */
+.split-aside .h2 { hyphens: none; }
+@media (min-width: 1024px) { .split-aside .h2 { hyphens: manual; overflow-wrap: anywhere; } }
 .h3 { font-size: 22px; letter-spacing: -0.02em; line-height: 1.25; }
 .lead { font-size: 22px; line-height: 1.45; letter-spacing: -0.012em; margin-bottom: 28px; max-width: 32em; }
 .text-secondary { color: var(--text-2); }
