@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="de">
+<!--
+  PLATZHALTER – bitte ersetzen:
+  - Ansprechpartner:in, Telefon, E-Mail (info@kam-in.de), Instagram im Abschnitt „Kontakt“ und „Über uns“ (Team)
+  - Beiträge in „Aktuelles“ (Titel, Daten, Teaser sind Beispiele)
+  - Link „Monatsprogramm als PDF“ (derzeit #)
+  - Newsletter: mailto-Lösung, später Brevo/CleverReach o. ä.
+  - Formular „Ich möchte helfen“: mailto-Lösung, später Backend/Formular-Dienst
+  - Fotos: alle <figure class="foto"> durch echte Bilder ersetzen (KaM·in, Sommerfest, drei Beiträge)
+  - Partner-Logos (Gemeinde Kappelrodeck, Baden-Württemberg Stiftung) – derzeit Text-Platzhalter
+  - Zahlen in „Über uns“ (Stand Förderantrag 2021) prüfen
+  - Rechtstexte: ../../impressum.html, ../../datenschutz.html
+-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-i18n="meta.title">KAPi – Kappelrodeck International · Bürgertreff KaM·in</title>
+  <meta name="description" data-i18n="meta.description" data-i18n-attr="content:meta.description" content="KAPi ist das Netzwerk für Integration, Begegnung und Vielfalt in Kappelrodeck. Unser Treffpunkt: der Bürgertreff KaM·in am Marktplatz 108 – kostenlos, ohne Anmeldung, für alle.">
+  <meta name="color-scheme" content="light">
+  <link rel="icon" href="../../assets/logo/kapi-logo-quadrat.png">
+  <link rel="stylesheet" href="../../assets/fonts/fonts.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main" data-i18n="a11y.skip">Zum Inhalt springen</a>
+
+  <!-- 1. Header -->
+  <header class="site-header" id="top">
+    <div class="container header__inner">
+      <a class="brand" href="#top" aria-label="KAPi – zum Seitenanfang" data-i18n-attr="aria-label:nav.home">
+        <img class="brand__wide" src="../../assets/logo/kapi-logo-quer.png" alt="KAPi – Kappelrodeck International" width="944" height="354">
+        <img class="brand__square" src="../../assets/logo/kapi-logo-quadrat.png" alt="KAPi – Kappelrodeck International" width="413" height="413">
+      </a>
+
+      <nav class="nav" id="nav" aria-label="Hauptnavigation" data-i18n-attr="aria-label:nav.label">
+        <ul class="nav__list">
+          <li><a href="#kamin">KaM·in</a></li>
+          <li><a href="#programm" data-i18n="nav.programm">Programm</a></li>
+          <li><a href="#angebote" data-i18n="nav.angebote">Angebote</a></li>
+          <li><a href="#aktuelles" data-i18n="nav.aktuelles">Aktuelles</a></li>
+          <li><a href="#ueber-uns" data-i18n="nav.ueberuns">Über uns</a></li>
+          <li><a href="#mitmachen" data-i18n="nav.mitmachen">Mitmachen</a></li>
+          <li><a href="#kontakt" data-i18n="nav.kontakt">Kontakt</a></li>
+        </ul>
+        <a class="btn btn--dark btn--sm nav__cta" href="#kamin" data-i18n="nav.cta">Komm vorbei</a>
+      </nav>
+
+      <div class="header__tools">
+        <div class="lang" role="group" aria-label="Sprache wählen" data-i18n-attr="aria-label:nav.lang">
+          <button type="button" data-lang="de" aria-pressed="true" aria-label="Deutsch">DE</button>
+          <button type="button" data-lang="uk" aria-pressed="false" aria-label="Українська">UA</button>
+          <button type="button" data-lang="en" aria-pressed="false" aria-label="English">EN</button>
+        </div>
+        <a class="btn btn--dark btn--sm header__cta" href="#kamin" data-i18n="nav.cta">Komm vorbei</a>
+        <button class="burger" type="button" aria-expanded="false" aria-controls="nav" aria-label="Menü öffnen" data-i18n-attr="aria-label:nav.menu">
+          <span class="burger__bar"></span>
+          <span class="burger__bar"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- 2. Hero (KAPi) – Signature-Element: Aurora-Fläche -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="aurora" aria-hidden="true"><div class="aurora__b"></div></div>
+      <div class="container hero__inner">
+        <p class="kicker kicker--brand up" style="--i:0">KAPi · Kappelrodeck International</p>
+        <h1 class="hero__title up" id="hero-title" style="--i:1" data-i18n="hero.title">Stark durch Vielfalt.</h1>
+        <p class="hero__lead up" style="--i:2" data-i18n="hero.lead">KAPi ist das Netzwerk für Integration, Begegnung und Vielfalt in Kappelrodeck. Unser Treffpunkt: der Bürgertreff KaM·in am Marktplatz.</p>
+        <div class="hero__actions up" style="--i:3">
+          <a class="btn btn--primary" href="#kamin"><span data-i18n="hero.cta1">Zum Bürgertreff KaM·in</span>
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="btn btn--ghost" href="#mitmachen" data-i18n="hero.cta2">Mitmachen</a>
+        </div>
+        <div class="hero__facts meta up" style="--i:4">
+          <span data-i18n="hero.fact1">Kostenlos</span>
+          <span data-i18n="hero.fact2">Ohne Anmeldung</span>
+          <span data-i18n="hero.fact3">Für alle</span>
+          <span data-i18n="hero.fact4">Mo–Sa nachmittags</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Bürgertreff KaM·in – „Komm herein!“ -->
+    <section class="section section--kamin" id="kamin" aria-labelledby="kamin-title">
+      <div class="container">
+        <div class="kamin">
+          <figure class="foto foto--43 reveal">
+            <!-- TODO: echtes Foto -->
+            <div class="foto__field"></div>
+            <figcaption data-i18n="kamin.foto">Foto folgt: Der Bürgertreff am Marktplatz</figcaption>
+          </figure>
+          <div class="kamin__text">
+            <img class="kamin__logo reveal" src="../../assets/logo/kamin-logo.png" alt="Bürgertreff KaM·in – Kappler Marktplatz" width="826" height="413">
+            <p class="kicker kicker--brand reveal" data-i18n="kamin.kicker">Der Bürgertreff von KAPi</p>
+            <h2 class="reveal" id="kamin-title" data-i18n="kamin.title">Komm herein!</h2>
+            <p class="lead reveal" data-i18n="kamin.name">KaM·in spricht man wie das englische „Come in“ – schön, dass du da bist. Der offene Bürgertreff am Kappler Marktplatz.</p>
+            <p class="reveal" data-i18n="kamin.text">Ein offener Treffpunkt für Alt und Jung, für Einheimische und Zugezogene, für alle Kulturen. Alle Angebote sind kostenlos, ohne Anmeldung.</p>
+          </div>
+        </div>
+
+        <dl class="answers reveal">
+          <div class="answers__item">
+            <dt data-i18n="kamin.q1">Wann?</dt>
+            <dd data-i18n="kamin.a1">Mo–Sa, am Nachmittag</dd>
+          </div>
+          <div class="answers__item">
+            <dt data-i18n="kamin.q2">Wo?</dt>
+            <dd>Marktplatz 108, Kappelrodeck</dd>
+          </div>
+          <div class="answers__item">
+            <dt data-i18n="kamin.q3">Bin ich willkommen?</dt>
+            <dd data-i18n="kamin.a3">Ja! Jede und jeder.</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <div class="aurora-line" aria-hidden="true"></div>
+
+    <!-- 4. Programm – Diese Woche bei KaM·in -->
+    <section class="section" id="programm" aria-labelledby="programm-title">
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="kicker" data-i18n="programm.kicker">Programm</p>
+          <h2 id="programm-title" data-i18n="programm.title">Diese Woche bei KaM·in</h2>
+          <p class="lead" data-i18n="programm.lead">Alles kostenlos, ohne Anmeldung. Komm einfach vorbei – auch ohne Deutschkenntnisse.</p>
+          <p class="prog__next" hidden><span data-i18n="programm.next">Nächster Termin:</span> <strong class="prog__next-text"></strong></p>
+        </div>
+
+        <!-- nur im Druck sichtbar -->
+        <div class="print-only">
+          <p><strong data-i18n="print.name">Bürgertreff KaM·in</strong> · Marktplatz 108, 77876 Kappelrodeck · <span data-i18n="print.open">Offen Mo–Sa nachmittags</span> · <span data-i18n="print.free">Alle Angebote kostenlos, ohne Anmeldung</span></p>
+        </div>
+
+        <ul class="prog reveal" aria-label="Wochenprogramm" data-i18n-attr="aria-label:programm.listlabel">
+          <li class="prog__row" data-day="1" style="--c:#6aa12f">
+            <span class="prog__dot" aria-hidden="true"></span>
+            <span class="prog__day"><span class="prog__day-short" data-i18n="days.short.1">Mo</span></span>
+            <span class="prog__main">
+              <span class="prog__title" data-i18n="angebot.deutsch.title">Wir sprechen Deutsch</span>
+              <span class="prog__desc" data-i18n="angebot.deutsch.desc">Deutsch üben in lockerer Runde, alle Niveaus</span>
+            </span>
+            <span class="prog__time">15:00–16:30</span>
+          </li>
+          <li class="prog__row" data-day="1" style="--c:#0a93d6">
+            <span class="prog__dot" aria-hidden="true"></span>
+            <span class="prog__day"><span class="prog__day-short" data-i18n="days.short.1">Mo</span></span>
+            <span class="prog__main">
+              <span class="prog__title" data-i18n="angebot.abc.title">Hausaufgabenhilfe / ABC</span>
+              <span class="prog__desc" data-i18n="angebot.abc.desc">Hausaufgaben, Lesen &amp; Schreiben lernen</span>
+            </span>
+            <span class="prog__time">16:30–18:00</span>
+          </li>
+          <li class="prog__row" data-day="3" data-freq="monthly" style="--c:#e2231a">
+            <span class="prog__dot" aria-hidden="true"></span>
+            <span class="prog__day"><span class="prog__day-short" data-i18n="days.short.3">Mi</span></span>
+            <span class="prog__main">
+              <span class="prog__title" data-i18n="angebot.feierabend.title">Feierabendtreff</span>
+              <span class="prog__desc" data-i18n="angebot.feierabend.desc">Beisammensein für Einheimische und Zugezogene</span>
+            </span>
+            <span class="prog__time">18:00–22:00 <span class="prog__note" data-i18n="programm.monatlich">einmal im Monat</span></span>
+          </li>
+          <li class="prog__row" data-day="4" style="--c:#c52866">
+            <span class="prog__dot" aria-hidden="true"></span>
+            <span class="prog__day"><span class="prog__day-short" data-i18n="days.short.4">Do</span></span>
+            <span class="prog__main">
+              <span class="prog__title" data-i18n="angebot.nadel.title">Nadelspielereien</span>
+              <span class="prog__desc" data-i18n="angebot.nadel.desc">Nähen, Stricken, Häkeln – Material ist da</span>
+            </span>
+            <span class="prog__time">15:00–17:00</span>
+          </li>
+          <li class="prog__row" data-day="5" style="--c:#ef8f1e">
+            <span class="prog__dot" aria-hidden="true"></span>
+            <span class="prog__day"><span class="prog__day-short" data-i18n="days.short.5">Fr</span></span>
+            <span class="prog__main">
+              <span class="prog__title" data-i18n="angebot.spiele.title">Spieletreff</span>
+              <span class="prog__desc" data-i18n="angebot.spiele.desc">Karten- und Brettspiele für alle</span>
+            </span>
+            <span class="prog__time">15:00–17:00</span>
+          </li>
+          <li class="prog__row" data-day="6" style="--c:#f4b400">
+            <span class="prog__dot" aria-hidden="true"></span>
+            <span class="prog__day"><span class="prog__day-short" data-i18n="days.short.6">Sa</span></span>
+            <span class="prog__main">
+              <span class="prog__title" data-i18n="angebot.musik.title">Offene Musikwerkstatt</span>
+              <span class="prog__desc" data-i18n="angebot.musik.desc">Gemeinsam Musik machen</span>
+            </span>
+            <span class="prog__time" data-i18n="programm.vereinbarung">nach Vereinbarung</span>
+          </li>
+          <li class="prog__row prog__row--open" style="--c:#f4b400; --c2:#ef8f1e">
+            <span class="prog__dot prog__dot--duo" aria-hidden="true"></span>
+            <span class="prog__day"><span class="prog__day-short" aria-hidden="true">–</span></span>
+            <span class="prog__main">
+              <span class="prog__title" data-i18n="angebot.trommeln.title">Afrikanisches Trommeln</span>
+              <span class="prog__desc" data-i18n="angebot.trommeln.desc">Workshop für Kinder und Erwachsene</span>
+            </span>
+            <span class="prog__time" data-i18n="programm.ankuendigung">nach Ankündigung</span>
+          </li>
+        </ul>
+
+        <div class="prog__actions reveal">
+          <button class="btn btn--ghost" type="button" id="print-btn">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V4h12v5M6 18H4a1 1 0 0 1-1-1v-6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6a1 1 0 0 1-1 1h-2M6 14h12v6H6z"/></svg>
+            <span data-i18n="programm.print">Programm drucken</span>
+          </button>
+          <!-- TODO: prüfen – Link zum aktuellen Monatsprogramm (PDF) -->
+          <button class="btn btn--ghost" type="button" disabled title="PDF folgt">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11m0 0-4-4m4 4 4-4M4 19h16"/></svg>
+            <span data-i18n="programm.pdf">Monatsprogramm als PDF (folgt)</span>
+          </button>
+          <p class="meta prog__hint" data-i18n="programm.extra">Der Feierabendtreff findet einmal im Monat statt – den Termin findest du unter Aktuelles. Dazu: Sommerfest am Marktplatz, Workshops und Sonderaktionen.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Highlights -->
+    <section class="section section--tight" id="highlights" aria-labelledby="highlights-title">
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="kicker" data-i18n="highlights.kicker">Im Blick</p>
+          <h2 id="highlights-title" data-i18n="highlights.title">Drei Dinge, die du wissen solltest</h2>
+        </div>
+        <div class="highlights">
+          <article class="hl hl--big reveal">
+            <figure class="foto foto--1610">
+              <!-- TODO: echtes Foto -->
+              <div class="foto__field foto__field--warm"></div>
+              <figcaption data-i18n="highlights.1.foto">Foto folgt: Sommerfest am Marktplatz</figcaption>
+            </figure>
+            <div class="hl__body">
+              <p class="kicker" data-i18n="highlights.1.kicker">Großes Fest</p>
+              <h3 data-i18n="highlights.1.title">Sommerfest am Marktplatz</h3>
+              <p data-i18n="highlights.1.text">Musik, Essen aus aller Welt und Spiele für Kinder. Direkt vor der Tür von KaM·in – alle sind eingeladen.</p>
+              <a class="link" href="#aktuelles"><span data-i18n="highlights.1.link">Mehr dazu</span>
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            </div>
+          </article>
+          <article class="hl reveal" style="--d:.1s">
+            <p class="kicker" data-i18n="highlights.2.kicker">Workshop</p>
+            <h3 data-i18n="highlights.2.title">Afrikanisches Trommeln</h3>
+            <p data-i18n="highlights.2.text">Für Kinder und Erwachsene. Termine nach Ankündigung – der Newsletter sagt Bescheid.</p>
+            <a class="link" href="#angebote"><span data-i18n="highlights.2.link">Zu den Angeboten</span>
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          </article>
+          <article class="hl reveal" style="--d:.2s">
+            <p class="kicker" data-i18n="highlights.3.kicker">Netzwerk</p>
+            <h3 data-i18n="highlights.3.title">KAPi – Wer steht dahinter</h3>
+            <p data-i18n="highlights.3.text">Menschen, Vereine und die Gemeinde arbeiten zusammen, damit sich alle in Kappelrodeck willkommen fühlen.</p>
+            <a class="link" href="#ueber-uns"><span data-i18n="highlights.3.link">Über KAPi</span>
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <div class="aurora-line" aria-hidden="true"></div>
+
+    <!-- 6. Angebote -->
+    <section class="section" id="angebote" aria-labelledby="angebote-title">
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="kicker" data-i18n="angebote.kicker">Angebote</p>
+          <h2 id="angebote-title" data-i18n="angebote.title">Sieben Gründe, vorbeizukommen</h2>
+          <p class="lead" data-i18n="angebote.lead">Jedes Angebot ist kostenlos und offen für alle. Du brauchst nichts mitzubringen – nur dich.</p>
+        </div>
+        <ul class="offers">
+          <li class="offer reveal" style="--c:#6aa12f">
+            <span class="offer__stroke" aria-hidden="true"></span>
+            <h3 data-i18n="angebot.deutsch.title">Wir sprechen Deutsch</h3>
+            <p class="meta"><span data-i18n="days.long.1">Montag</span> · 15:00–16:30 · <span data-i18n="programm.woechentlich">jede Woche</span></p>
+            <p data-i18n="angebot.deutsch.text">Deutsch üben in lockerer Runde – für alle Niveaus, mit Sprachpaten aus dem Ort.</p>
+            <span class="offer__free" data-i18n="angebote.free">kostenlos · ohne Anmeldung</span>
+          </li>
+          <li class="offer reveal" style="--c:#0a93d6; --d:.05s">
+            <span class="offer__stroke" aria-hidden="true"></span>
+            <h3 data-i18n="angebot.abc.title">Hausaufgabenhilfe / ABC</h3>
+            <p class="meta"><span data-i18n="days.long.1">Montag</span> · 16:30–18:00 · <span data-i18n="programm.woechentlich">jede Woche</span></p>
+            <p data-i18n="angebot.abc.text">Hilfe bei den Hausaufgaben, Lesen und Schreiben lernen – für Kinder und Erwachsene.</p>
+            <span class="offer__free" data-i18n="angebote.free">kostenlos · ohne Anmeldung</span>
+          </li>
+          <li class="offer reveal" style="--c:#e2231a; --d:.1s">
+            <span class="offer__stroke" aria-hidden="true"></span>
+            <h3 data-i18n="angebot.feierabend.title">Feierabendtreff</h3>
+            <p class="meta"><span data-i18n="days.long.3">Mittwoch</span> · 18:00–22:00 · <span data-i18n="programm.monatlich">einmal im Monat</span></p>
+            <p data-i18n="angebot.feierabend.text">Beisammensein für Einheimische und Zugezogene. Reden, lachen, den Abend teilen.</p>
+            <span class="offer__free" data-i18n="angebote.free">kostenlos · ohne Anmeldung</span>
+          </li>
+          <li class="offer reveal" style="--c:#c52866; --d:.15s">
+            <span class="offer__stroke" aria-hidden="true"></span>
+            <h3 data-i18n="angebot.nadel.title">Nadelspielereien</h3>
+            <p class="meta"><span data-i18n="days.long.4">Donnerstag</span> · 15:00–17:00 · <span data-i18n="programm.woechentlich">jede Woche</span></p>
+            <p data-i18n="angebot.nadel.text">Nähen, Stricken, Häkeln – Material ist da. Anfänger:innen sind genauso willkommen wie Profis.</p>
+            <span class="offer__free" data-i18n="angebote.free">kostenlos · ohne Anmeldung</span>
+          </li>
+          <li class="offer reveal" style="--c:#ef8f1e; --d:.2s">
+            <span class="offer__stroke" aria-hidden="true"></span>
+            <h3 data-i18n="angebot.spiele.title">Spieletreff</h3>
+            <p class="meta"><span data-i18n="days.long.5">Freitag</span> · 15:00–17:00 · <span data-i18n="programm.woechentlich">jede Woche</span></p>
+            <p data-i18n="angebot.spiele.text">Karten- und Brettspiele für alle. Spielen braucht keine gemeinsame Sprache.</p>
+            <span class="offer__free" data-i18n="angebote.free">kostenlos · ohne Anmeldung</span>
+          </li>
+          <li class="offer reveal" style="--c:#f4b400; --d:.25s">
+            <span class="offer__stroke" aria-hidden="true"></span>
+            <h3 data-i18n="angebot.musik.title">Offene Musikwerkstatt</h3>
+            <p class="meta"><span data-i18n="days.long.6">Samstag</span> · <span data-i18n="programm.vereinbarung">nach Vereinbarung</span></p>
+            <p data-i18n="angebot.musik.text">Gemeinsam Musik machen – mit Instrumenten aus aller Welt oder einfach mit der Stimme.</p>
+            <span class="offer__free" data-i18n="angebote.free">kostenlos · ohne Anmeldung</span>
+          </li>
+          <li class="offer offer--wide reveal" style="--c:#f4b400; --c2:#ef8f1e; --d:.3s">
+            <span class="offer__stroke offer__stroke--duo" aria-hidden="true"></span>
+            <h3 data-i18n="angebot.trommeln.title">Afrikanisches Trommeln</h3>
+            <p class="meta"><span data-i18n="programm.ankuendigung">nach Ankündigung</span></p>
+            <p data-i18n="angebot.trommeln.text">Workshop für Kinder und Erwachsene. Rhythmus, Energie und ganz viel Freude.</p>
+            <span class="offer__free" data-i18n="angebote.free">kostenlos · ohne Anmeldung</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 7. Aktuelles -->
+    <section class="section section--soft" id="aktuelles" aria-labelledby="aktuelles-title">
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="kicker" data-i18n="aktuelles.kicker">Aktuelles</p>
+          <h2 id="aktuelles-title" data-i18n="aktuelles.title">Neues aus dem Bürgertreff</h2>
+        </div>
+        <!-- TODO: prüfen – Beispielbeiträge, Daten und Texte ersetzen -->
+        <div class="news">
+          <article class="post reveal">
+            <figure class="foto foto--1610">
+              <!-- TODO: echtes Foto -->
+              <div class="foto__field foto__field--warm"></div>
+              <figcaption data-i18n="aktuelles.1.foto">Foto folgt: Trommel-Workshop</figcaption>
+            </figure>
+            <p class="date"><time datetime="2026-06-12" data-i18n="aktuelles.1.date">12. Juni 2026</time></p>
+            <h3 data-i18n="aktuelles.1.title">Rückblick: Trommel-Workshop</h3>
+            <p data-i18n="aktuelles.1.text">Über 30 Kinder und Erwachsene trommelten gemeinsam. Bald gibt es einen neuen Termin.</p>
+          </article>
+          <article class="post reveal" style="--d:.1s">
+            <figure class="foto foto--1610">
+              <!-- TODO: echtes Foto -->
+              <div class="foto__field foto__field--cool"></div>
+              <figcaption data-i18n="aktuelles.2.foto">Foto folgt: Zwei Menschen im Gespräch</figcaption>
+            </figure>
+            <p class="date"><time datetime="2026-06-02" data-i18n="aktuelles.2.date">2. Juni 2026</time></p>
+            <h3 data-i18n="aktuelles.2.title">Neue Sprachpaten gesucht</h3>
+            <p data-i18n="aktuelles.2.text">Du sprichst gut Deutsch und magst Menschen? Werde Sprachpate – schon eine Stunde pro Woche hilft.</p>
+          </article>
+          <article class="post reveal" style="--d:.2s">
+            <figure class="foto foto--1610">
+              <!-- TODO: echtes Foto -->
+              <div class="foto__field foto__field--green"></div>
+              <figcaption data-i18n="aktuelles.3.foto">Foto folgt: Sommerfest am Marktplatz</figcaption>
+            </figure>
+            <p class="date"><time datetime="2026-05-20" data-i18n="aktuelles.3.date">20. Mai 2026</time></p>
+            <h3 data-i18n="aktuelles.3.title">Sommerfest am Marktplatz</h3>
+            <p data-i18n="aktuelles.3.text">Musik, Essen aus aller Welt und Spiele für Kinder. Alle sind eingeladen – bring gern ein Gericht aus deiner Heimat mit.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <div class="aurora-line" aria-hidden="true"></div>
+
+    <!-- 8. Über uns – KAPi -->
+    <section class="section" id="ueber-uns" aria-labelledby="ueberuns-title">
+      <div class="container">
+        <div class="about">
+          <div class="about__head reveal">
+            <p class="kicker" data-i18n="ueberuns.kicker">Über uns</p>
+            <h2 id="ueberuns-title">KAPi – Kappelrodeck International</h2>
+          </div>
+          <div class="about__body">
+            <p class="lead reveal" data-i18n="ueberuns.lead">KAPi ist das Netzwerk für Integration, Begegnung und Vielfalt in Kappelrodeck. Menschen, Vereine und die Gemeinde arbeiten zusammen, damit sich alle im Ort willkommen fühlen – egal, woher sie kommen.</p>
+            <p class="reveal" data-i18n="ueberuns.text">Die Ideen kommen aus den Communities selbst: Eine Steuerungsgruppe aus Zugezogenen und Einheimischen entwickelt, was KaM·in anbietet. Der Bürgertreff am Marktplatz ist der Ort, an dem KAPi lebendig wird.</p>
+          </div>
+        </div>
+
+        <!-- TODO: prüfen (Stand 2021, Förderantrag) -->
+        <ul class="stats reveal">
+          <li class="stat">
+            <span class="stat__value"><span class="num" data-count="50">50</span>+</span>
+            <p class="stat__label" data-i18n="ueberuns.stat1">Länder – Menschen aus über 50 Ländern</p>
+          </li>
+          <li class="stat">
+            <span class="stat__value"><span class="num" data-count="560">560</span>+</span>
+            <p class="stat__label" data-i18n="ueberuns.stat2">Einwohner:innen mit Migrationsgeschichte</p>
+          </li>
+          <li class="stat">
+            <span class="stat__value"><span class="num" data-count="6">6</span></span>
+            <p class="stat__label" data-i18n="ueberuns.stat3">Tage die Woche geöffnet</p>
+          </li>
+          <li class="stat">
+            <span class="stat__value"><span class="num" data-count="0">0</span> €</span>
+            <p class="stat__label" data-i18n="ueberuns.stat4">Alle Angebote sind kostenlos</p>
+          </li>
+        </ul>
+
+        <ol class="values">
+          <li class="value reveal">
+            <span class="value__num" aria-hidden="true">01</span>
+            <h3 data-i18n="ueberuns.v1.title">Vielfalt</h3>
+            <p data-i18n="ueberuns.v1.text">Es braucht vielerlei Arten von Menschen, um eine Welt zu bauen. Bei uns sind alle Herkünfte, Sprachen und Generationen willkommen.</p>
+          </li>
+          <li class="value reveal" style="--d:.1s">
+            <span class="value__num" aria-hidden="true">02</span>
+            <h3 data-i18n="ueberuns.v2.title">Begegnung</h3>
+            <p data-i18n="ueberuns.v2.text">Wir teilen Ideen, Hilfe, Sprache und Erlebnisse – zwischen Einheimischen und Zugezogenen, Alt und Jung.</p>
+          </li>
+          <li class="value reveal" style="--d:.2s">
+            <span class="value__num" aria-hidden="true">03</span>
+            <h3 data-i18n="ueberuns.v3.title">Toleranz &amp; Respekt</h3>
+            <p data-i18n="ueberuns.v3.text">Jede und jeder wird so angenommen, wie sie oder er ist. Respekt ist die Grundlage für alles, was wir tun.</p>
+          </li>
+        </ol>
+
+        <blockquote class="quote reveal">
+          <p data-i18n="ueberuns.quote">Begegnung statt Bürokratie. Ein Tee, ein Gespräch, ein Spiel – nicht das Formular.</p>
+          <footer class="meta" data-i18n="ueberuns.quote.by">Die Haltung von KAPi und KaM·in</footer>
+        </blockquote>
+
+        <div class="about__grid">
+          <div class="about__col reveal">
+            <h3 data-i18n="ueberuns.carried.title">Getragen von</h3>
+            <p data-i18n="ueberuns.carried.text">Ehrenamtlichen, Sprachpaten, Nachbarn, Vereinen und der Gemeinde Kappelrodeck. Jede helfende Hand macht KaM·in ein Stück größer.</p>
+          </div>
+          <div class="about__col reveal" style="--d:.1s">
+            <h3 data-i18n="ueberuns.team.title">Ansprechpartner:innen</h3>
+            <!-- TODO: prüfen – Team und Ansprechpartner:innen ergänzen -->
+            <p data-i18n="ueberuns.team.text">Das Team stellt sich hier bald vor. Bis dahin erreichst du uns über den Kontakt weiter unten – oder du kommst einfach vorbei.</p>
+          </div>
+          <div class="about__col reveal" style="--d:.2s">
+            <h3 data-i18n="ueberuns.partner.title">Partner &amp; Förderer</h3>
+            <!-- TODO: prüfen (aktueller Stand) -->
+            <p data-i18n="ueberuns.partner.text">KAPi ist ein Projekt der Gemeinde Kappelrodeck, gefördert von der Baden-Württemberg Stiftung im Programm „Vielfalt gefällt! Orte der Toleranz“.</p>
+            <div class="partners">
+              <!-- TODO: Logos ergänzen (Platzhalter) -->
+              <span class="partner">Gemeinde Kappelrodeck</span>
+              <span class="partner">Baden-Württemberg Stiftung</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="aurora-line" aria-hidden="true"></div>
+
+    <!-- 9. Mitmachen -->
+    <section class="section" id="mitmachen" aria-labelledby="mitmachen-title">
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="kicker" data-i18n="mitmachen.kicker">Mitmachen</p>
+          <h2 id="mitmachen-title" data-i18n="mitmachen.title">Mach mit!</h2>
+          <p class="lead" data-i18n="mitmachen.lead">Drei Wege, Teil von KaM·in zu werden. Der einfachste: einfach vorbeikommen.</p>
+        </div>
+        <ol class="ways">
+          <li class="way reveal">
+            <span class="way__num" aria-hidden="true">01</span>
+            <h3 data-i18n="mitmachen.1.title">Komm vorbei</h3>
+            <p data-i18n="mitmachen.1.text">Tee trinken, schauen, was passt. Ohne Anmeldung, ohne Erwartung – einfach hereinkommen.</p>
+          </li>
+          <li class="way reveal" style="--d:.1s">
+            <span class="way__num" aria-hidden="true">02</span>
+            <h3 data-i18n="mitmachen.2.title">Werde Sprachpate oder Helfer</h3>
+            <p data-i18n="mitmachen.2.text">Schon eine Stunde pro Woche hilft. Du brauchst keine Ausbildung – nur Geduld und Freude am Gespräch.</p>
+          </li>
+          <li class="way reveal" style="--d:.2s">
+            <span class="way__num" aria-hidden="true">03</span>
+            <h3 data-i18n="mitmachen.3.title">Bring deine Idee mit</h3>
+            <p data-i18n="mitmachen.3.text">Kochen, Werken, Musik, ein Spaziergang – das Programm entsteht aus den Ideen der Leute. Auch aus deinen.</p>
+          </li>
+        </ol>
+
+        <!-- TODO: Formular ohne Backend – Absenden öffnet das E-Mail-Programm (mailto). Später Formular-Dienst anbinden. -->
+        <form class="form reveal" id="help-form" novalidate>
+          <h3 data-i18n="form.title">Ich möchte helfen</h3>
+          <p class="form__intro" data-i18n="form.intro">Schreib uns kurz, was du dir vorstellst. Wir melden uns bei dir.</p>
+          <div class="form__grid">
+            <div class="field">
+              <label for="f-name" data-i18n="form.name">Name</label>
+              <input id="f-name" name="name" type="text" autocomplete="name" placeholder="Dein Name" data-i18n-attr="placeholder:form.name.ph">
+            </div>
+            <div class="field">
+              <label for="f-mail" data-i18n="form.email">E-Mail</label>
+              <input id="f-mail" name="email" type="email" autocomplete="email" placeholder="name@beispiel.de" data-i18n-attr="placeholder:form.email.ph">
+            </div>
+            <div class="field field--full">
+              <label for="f-msg" data-i18n="form.message">Nachricht</label>
+              <textarea id="f-msg" name="message" rows="4" placeholder="Was möchtest du tun? Wann hast du Zeit?" data-i18n-attr="placeholder:form.message.ph"></textarea>
+            </div>
+          </div>
+          <div class="form__actions">
+            <button class="btn btn--primary" type="submit"><span data-i18n="form.submit">Nachricht senden</span>
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+            <p class="meta form__note" data-i18n="form.note">Das Formular öffnet dein E-Mail-Programm mit einer vorbereiteten Nachricht.</p>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <div class="aurora-line" aria-hidden="true"></div>
+
+    <!-- 10. Kontakt & Anfahrt -->
+    <section class="section" id="kontakt" aria-labelledby="kontakt-title">
+      <div class="container contact">
+        <div class="contact__text">
+          <p class="kicker reveal" data-i18n="kontakt.kicker">Kontakt &amp; Anfahrt</p>
+          <h2 class="reveal" id="kontakt-title" data-i18n="kontakt.title">Du findest uns am Marktplatz</h2>
+          <address class="contact__list reveal">
+            <div class="contact__row">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+              <div>
+                <p><strong data-i18n="kontakt.address.label">Bürgertreff KaM·in</strong><br>Marktplatz 108<br>77876 Kappelrodeck</p>
+              </div>
+            </div>
+            <div class="contact__row">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+              <div>
+                <p><strong data-i18n="kontakt.open.label">Offen</strong><br><span data-i18n="kontakt.open.text">Montag bis Samstag am Nachmittag – siehe Programm</span></p>
+              </div>
+            </div>
+            <div class="contact__row">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+              <div>
+                <!-- TODO: prüfen – Ansprechpartnerin, Telefon, E-Mail, Instagram -->
+                <p><strong data-i18n="kontakt.person.label">Ansprechpartner:in</strong><br><span data-i18n="kontakt.person.text">Name folgt</span><br>
+                  <span data-i18n="kontakt.phone.label">Telefon:</span> <span data-i18n="kontakt.phone.text">folgt</span><br>
+                  <a href="mailto:info@kam-in.de">info@kam-in.de</a><br>
+                  <span>Instagram:</span> <span data-i18n="kontakt.insta.text">folgt</span></p>
+              </div>
+            </div>
+          </address>
+        </div>
+
+        <!-- Karten-Fläche ohne Einbettung (Datenschutz) -->
+        <div class="mapfield reveal">
+          <div class="mapfield__inner">
+            <svg class="mapfield__pin" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+            <p class="mapfield__addr">Marktplatz 108<br>77876 Kappelrodeck</p>
+            <a class="btn btn--primary" href="https://www.openstreetmap.org/search?query=Marktplatz%20108%2C%2077876%20Kappelrodeck" target="_blank" rel="noopener">
+              <span data-i18n="kontakt.route">Route auf OpenStreetMap öffnen</span>
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+          </div>
+          <p class="meta mapfield__note" data-i18n="kontakt.mapnote">Keine Karteneinbettung – dein Besuch bleibt privat.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11. Newsletter -->
+    <section class="section section--newsletter" id="newsletter" aria-labelledby="newsletter-title">
+      <div class="container"><div class="newsletter">
+        <div class="newsletter__text reveal">
+          <p class="kicker" data-i18n="newsletter.kicker">Newsletter</p>
+          <h2 id="newsletter-title" data-i18n="newsletter.title">Monatsprogramm per E-Mail</h2>
+          <p data-i18n="newsletter.lead">Bleib auf dem Laufenden – einmal im Monat das Programm in dein Postfach. Kein Spam, jederzeit abmeldbar.</p>
+        </div>
+        <!-- TODO: Newsletter ohne Backend – mailto; später Brevo/CleverReach -->
+        <form class="newsletter__form reveal" id="newsletter-form" novalidate>
+          <label for="nl-mail" data-i18n="newsletter.label">Deine E-Mail-Adresse</label>
+          <div class="newsletter__row">
+            <input id="nl-mail" name="email" type="email" autocomplete="email" placeholder="name@beispiel.de" data-i18n-attr="placeholder:form.email.ph">
+            <button class="btn btn--primary" type="submit" data-i18n="newsletter.submit">Anmelden</button>
+          </div>
+          <p class="meta" data-i18n="newsletter.note">Öffnet dein E-Mail-Programm mit dem Betreff „Monatsprogramm abonnieren“.</p>
+        </form>
+      </div></div>
+    </section>
+  </main>
+
+  <!-- 12. Footer -->
+  <footer class="site-footer">
+    <div class="aurora-line aurora-line--full" aria-hidden="true"></div>
+    <div class="container"><div class="footer__grid">
+      <div class="footer__brand">
+        <div class="footer__logos">
+          <img src="../../assets/logo/kapi-logo-quer.png" alt="KAPi – Kappelrodeck International" width="944" height="354">
+          <img src="../../assets/logo/kamin-logo.png" alt="Bürgertreff KaM·in" width="826" height="413">
+        </div>
+        <p class="footer__claim" data-i18n="footer.claim">Stark durch Vielfalt. Der Bürgertreff KaM·in ist der Ort, an dem KAPi lebendig wird – am Marktplatz 108 in Kappelrodeck.</p>
+      </div>
+      <nav class="footer__nav" aria-label="Fußnavigation" data-i18n-attr="aria-label:footer.navlabel">
+        <p class="kicker" data-i18n="footer.nav">Seite</p>
+        <ul>
+          <li><a href="#kamin">KaM·in</a></li>
+          <li><a href="#programm" data-i18n="nav.programm">Programm</a></li>
+          <li><a href="#angebote" data-i18n="nav.angebote">Angebote</a></li>
+          <li><a href="#aktuelles" data-i18n="nav.aktuelles">Aktuelles</a></li>
+          <li><a href="#ueber-uns" data-i18n="nav.ueberuns">Über uns</a></li>
+          <li><a href="#mitmachen" data-i18n="nav.mitmachen">Mitmachen</a></li>
+          <li><a href="#kontakt" data-i18n="nav.kontakt">Kontakt</a></li>
+        </ul>
+      </nav>
+      <div class="footer__meta">
+        <p class="kicker" data-i18n="footer.lang">Sprache</p>
+        <div class="lang lang--footer" role="group" aria-label="Sprache wählen" data-i18n-attr="aria-label:nav.lang">
+          <button type="button" data-lang="de" aria-pressed="true" aria-label="Deutsch">DE</button>
+          <button type="button" data-lang="uk" aria-pressed="false" aria-label="Українська">UA</button>
+          <button type="button" data-lang="en" aria-pressed="false" aria-label="English">EN</button>
+        </div>
+        <p class="kicker" data-i18n="footer.legal">Rechtliches</p>
+        <ul>
+          <li><a href="../../impressum.html" data-i18n="footer.impressum">Impressum</a></li>
+          <li><a href="../../datenschutz.html" data-i18n="footer.datenschutz">Datenschutz</a></li>
+        </ul>
+      </div>
+    </div></div>
+    <div class="container"><div class="footer__bottom">
+      <p>© 2026 KaM·in · KAPi – Kappelrodeck International</p>
+      <a class="footer__top" href="#top" data-i18n="footer.top">Nach oben</a>
+    </div></div>
+  </footer>
+
+  <script src="i18n.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
