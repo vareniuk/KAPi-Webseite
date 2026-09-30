@@ -36,3 +36,18 @@ Einfach `index.html` im Browser öffnen (Doppelklick) – ein Webserver ist nich
 ## Inhalte pflegen
 
 Texte, Termine und Öffnungszeiten stehen direkt in der `index.html` der gewählten Variante. Zum Ändern reicht ein Texteditor (oder direkt auf GitHub über das Stift-Symbol).
+
+## Offene Punkte (bitte bestätigen)
+
+Aus dem Förderantrag „Kappelrodeck International“ (29.01.2021, `uploads/`) geht hervor:
+
+- **Träger:** Gemeinde Kappelrodeck (Körperschaft des öffentlichen Rechts), Hauptstraße 65, 77876 Kappelrodeck. Kein eingetragener Verein. → Impressum ist damit vorausgefüllt; falls inzwischen ein e. V. gegründet wurde, bitte Bescheid geben.
+- **Förderung:** Baden-Württemberg Stiftung, Programm „Vielfalt gefällt! Orte der Toleranz“, Laufzeit 06/2021–05/2024. → Wer fördert aktuell?
+- **Projektleitung laut Antrag:** Integrationsbeauftragte der Gemeinde (Name, Telefon und E-Mail stehen im Antrag). → Darf diese Person öffentlich als Ansprechpartnerin genannt werden? Solange das nicht bestätigt ist, bleibt auf der Seite ein Platzhalter.
+- **Zahlen für „Über uns“:** rund 6.000 Einwohner:innen, über 560 mit Migrationsgeschichte, Menschen aus über 50 Ländern (Stand 2021). → Aktualisieren oder so übernehmen?
+
+Weiterhin offen: Instagram-Link, genaue Öffnungszeiten, echte Fotos, Partner-Logos, Newsletter-Anbieter, Domain.
+
+## Eigene Entwürfe
+
+Die von dir hochgeladenen Prototypen (`KAPi Website.html`, `KaM-in Website.html`, `konzepte/`, `js/`, `styles/`) bleiben unverändert im Repository. Sie laden React und Schriften von externen Servern (unpkg, Google Fonts) und funktionieren deshalb nur online im Browser.
