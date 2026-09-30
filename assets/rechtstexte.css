@@ -1,0 +1,38 @@
+/* Neutrales Stylesheet für Impressum & Datenschutz (unabhängig von der gewählten Design-Variante) */
+:root { color-scheme: light; }
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: #1d1d1b;
+  background: #fff;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+.rechtstext {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 48px 16px 96px;
+}
+.zurueck {
+  display: inline-block;
+  color: #009fe3;
+  text-decoration: none;
+  font-weight: 500;
+  margin-bottom: 32px;
+}
+.zurueck:hover, .zurueck:focus-visible { text-decoration: underline; }
+.logo { display: block; width: 96px; height: 96px; margin-bottom: 16px; }
+h1 { font-size: clamp(2rem, 5vw, 2.75rem); letter-spacing: -0.03em; line-height: 1.1; margin: 0 0 16px; }
+h2 { font-size: 1.25rem; letter-spacing: -0.01em; margin: 40px 0 8px; }
+p { margin: 0 0 12px; }
+a { color: #009fe3; }
+a:focus-visible { outline: 3px solid #009fe3; outline-offset: 3px; border-radius: 4px; }
+.hinweis {
+  background: #fff6d6;
+  border: 1px solid #ffcd00;
+  border-radius: 12px;
+  padding: 12px 16px;
+  font-size: 0.95rem;
+}
+.meta { margin-top: 56px; color: #6b6b69; font-size: 0.9rem; }

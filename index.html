@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>KAPi Webseite – Design-Varianten</title>
+  <meta name="description" content="Drei Design-Varianten für die neue Webseite von KAPi – Kappelrodeck international.">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="assets/logo/kapi-logo-quadrat.png">
+  <link rel="stylesheet" href="assets/fonts/fonts.css">
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #1d1d1b; --muted: #6b6b69; --line: rgba(29,29,27,.08);
+      --blau: #009fe3; --gelb: #ffcd00; --rot: #d50c52; --gruen: #6aa02e;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; background: #fff; color: var(--ink);
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      -webkit-font-smoothing: antialiased; line-height: 1.55;
+    }
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 56px 16px 96px; }
+    header { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 20px; margin-bottom: 56px; }
+    header img { width: min(360px, 80vw); height: auto; }
+    h1 { font-size: clamp(2rem, 5vw, 3.25rem); letter-spacing: -0.035em; line-height: 1.05; margin: 0; }
+    .lead { max-width: 640px; color: var(--muted); font-size: 1.125rem; margin: 0; }
+    .grid { display: grid; gap: 24px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+    .card {
+      position: relative; display: flex; flex-direction: column; overflow: hidden;
+      background: #fff; border: 1px solid var(--line); border-radius: 24px; text-decoration: none; color: inherit;
+      box-shadow: 0 1px 2px rgba(29,29,27,.04), 0 12px 32px -16px rgba(29,29,27,.18);
+      transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s cubic-bezier(.2,.8,.2,1);
+    }
+    .card:hover, .card:focus-visible { transform: translateY(-6px); box-shadow: 0 2px 4px rgba(29,29,27,.05), 0 28px 48px -20px rgba(29,29,27,.28); outline: none; }
+    .card:focus-visible { box-shadow: 0 0 0 4px rgba(0,159,227,.35); }
+    .card .preview { aspect-ratio: 16 / 10; background: #f5f5f7 url("assets/preview/platzhalter.svg") center / cover no-repeat; border-bottom: 1px solid var(--line); }
+    .card .preview img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; }
+    .card .body { padding: 24px 24px 28px; display: grid; gap: 8px; }
+    .tag { display: inline-flex; align-items: center; gap: 8px; font-size: .8125rem; font-weight: 600; color: var(--muted); letter-spacing: .02em; text-transform: uppercase; }
+    .tag i { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+    .card h2 { margin: 0; font-size: 1.5rem; letter-spacing: -0.02em; }
+    .card p { margin: 0; color: var(--muted); }
+    .card .cta { margin-top: 12px; font-weight: 600; color: var(--blau); }
+    .card .cta::after { content: " →"; display: inline-block; transition: transform .3s; }
+    .card:hover .cta::after { transform: translateX(4px); }
+    footer { margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--line); color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: 8px 24px; }
+    footer a { color: var(--blau); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+    @media (prefers-reduced-motion: reduce) { .card, .card .cta::after { transition: none; } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <img src="assets/logo/kapi-logo-quer.png" alt="KAPi – Kappelrodeck international. Stark durch Vielfalt." width="944" height="354">
+      <h1>Drei Entwürfe für die neue Webseite</h1>
+      <p class="lead">Alle drei Varianten nutzen dieselben Inhalte, Logos und Schriften – sie unterscheiden sich in Stimmung, Layout und Animationen. Bitte auf einem Handy <em>und</em> am Computer anschauen.</p>
+    </header>
+
+    <div class="grid">
+      <a class="card" href="varianten/klar/index.html">
+        <div class="preview"><img src="assets/preview/klar.jpg" alt="" loading="lazy" onerror="this.remove()"></div>
+        <div class="body">
+          <span class="tag"><i style="background: var(--blau)"></i> Variante 1</span>
+          <h2>Klar &amp; Leicht</h2>
+          <p>Apple-Ästhetik in Reinform: Weiß, große Typografie, viel Luft. Sanft schwebende Farbflächen im Hero, ruhige Scroll-Animationen.</p>
+          <span class="cta">Variante ansehen</span>
+        </div>
+      </a>
+      <a class="card" href="varianten/vielfalt/index.html">
+        <div class="preview"><img src="assets/preview/vielfalt.jpg" alt="" loading="lazy" onerror="this.remove()"></div>
+        <div class="body">
+          <span class="tag"><i style="background: linear-gradient(90deg, var(--gelb), var(--rot))"></i> Variante 2</span>
+          <h2>Vielfalt</h2>
+          <p>Die vier Logofarben werden zum Prinzip: animierter Farbverlauf im Hero, Bento-Kacheln, Laufband mit Angeboten, magnetischer Button.</p>
+          <span class="cta">Variante ansehen</span>
+        </div>
+      </a>
+      <a class="card" href="varianten/begegnung/index.html">
+        <div class="preview"><img src="assets/preview/begegnung.jpg" alt="" loading="lazy" onerror="this.remove()"></div>
+        <div class="body">
+          <span class="tag"><i style="background: var(--gruen)"></i> Variante 3</span>
+          <h2>Begegnung</h2>
+          <p>Warm und menschlich: Off-White, Handschrift-Akzente wie im Logo, animierter Figurenbogen, Zeitleiste für Termine.</p>
+          <span class="cta">Variante ansehen</span>
+        </div>
+      </a>
+    </div>
+
+    <footer>
+      <span>Interne Vorschau – noch nicht veröffentlicht.</span>
+      <a href="impressum.html">Impressum (Platzhalter)</a>
+      <a href="datenschutz.html">Datenschutz (Platzhalter)</a>
+    </footer>
+  </div>
+</body>
+</html>
