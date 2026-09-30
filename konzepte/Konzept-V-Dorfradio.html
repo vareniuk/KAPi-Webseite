@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Konzept V · Dorfradio — KaM·in</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;600;700;800&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  :root{--bg:#1a1726;--panel:#241f33;--card:#2c2640;--ink:#f3eeff;--dim:#a79dc4;--green:#7ee08a;--blue:#5cc6ff;--orange:#ffb05c;--red:#ff6b6b;--pink:#ff8ad4;--gold:#ffd56b;--line:rgba(255,255,255,.08);}
+  body{font-family:'Nunito Sans',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;
+    background-image:radial-gradient(circle at 80% 0,#352b52,transparent 50%);}
+  .disp{font-family:'Bricolage Grotesque',sans-serif;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px 100px;}
+  /* nav as radio dial */
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:20px 0;flex-wrap:wrap;gap:14px;}
+  .nav .brand{display:flex;align-items:center;gap:11px;font-family:'Bricolage Grotesque';font-weight:800;font-size:1.4rem;}
+  .nav .brand img{height:38px;}
+  .stations{display:flex;gap:4px;flex-wrap:wrap;}
+  .stations a{text-decoration:none;font-weight:700;color:var(--dim);padding:9px 16px;border-radius:999px;border:1px solid var(--line);transition:.15s;font-size:.92rem;}
+  .stations a:hover,.stations a.on{color:var(--bg);background:var(--gold);border-color:var(--gold);}
+  /* on-air hero */
+  .onair{background:linear-gradient(135deg,#322a4d,#241f33);border:1px solid var(--line);border-radius:24px;padding:30px;display:grid;grid-template-columns:auto 1fr auto;gap:24px;align-items:center;margin-top:8px;box-shadow:0 24px 50px -28px #000;}
+  .disc{width:130px;height:130px;border-radius:50%;background:repeating-radial-gradient(circle,#16121f 0 3px,#1c1729 3px 6px);display:grid;place-items:center;animation:spin 5s linear infinite;flex:none;position:relative;box-shadow:0 0 0 6px #0003;}
+  .disc::after{content:'';position:absolute;width:34px;height:34px;border-radius:50%;background:radial-gradient(circle,var(--gold),#c89a2e);}
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .onair__t .live{display:inline-flex;align-items:center;gap:7px;font-weight:800;font-size:.78rem;letter-spacing:.1em;color:var(--red);text-transform:uppercase;}
+  .onair__t .live i{width:9px;height:9px;border-radius:50%;background:var(--red);animation:blink 1.2s infinite;}
+  @keyframes blink{50%{opacity:.3;}}
+  .onair__t h1{font-family:'Bricolage Grotesque';font-weight:800;font-size:clamp(2rem,5vw,3.4rem);line-height:1;margin:8px 0;}
+  .onair__t p{color:var(--dim);font-weight:600;}
+  .eq{display:flex;align-items:flex-end;gap:3px;height:50px;}
+  .eq i{width:5px;background:linear-gradient(var(--gold),var(--pink));border-radius:3px;animation:eq .9s ease-in-out infinite;}
+  .eq i:nth-child(2){animation-delay:.15s;}.eq i:nth-child(3){animation-delay:.3s;}.eq i:nth-child(4){animation-delay:.45s;}.eq i:nth-child(5){animation-delay:.2s;}.eq i:nth-child(6){animation-delay:.35s;}
+  @keyframes eq{0%,100%{height:8px;}50%{height:50px;}}
+  /* schedule */
+  .sched__h{font-family:'Bricolage Grotesque';font-weight:700;font-size:1.4rem;margin:38px 0 14px;display:flex;align-items:center;gap:10px;}
+  .prog{display:grid;grid-template-columns:120px 1fr auto;gap:18px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 20px;margin-bottom:10px;cursor:pointer;transition:.14s;}
+  .prog:hover{background:#332c49;transform:translateX(4px);}
+  .prog .time{font-family:'Bricolage Grotesque';font-weight:700;font-size:1.3rem;color:var(--c);}
+  .prog h3{font-size:1.2rem;font-weight:700;}.prog p{color:var(--dim);font-size:.92rem;}
+  .prog .play{width:44px;height:44px;border-radius:50%;background:var(--c);border:none;display:grid;place-items:center;cursor:pointer;flex:none;}
+  .foot{margin-top:34px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;color:var(--dim);font-weight:600;border-top:1px solid var(--line);padding-top:20px;}
+  .lang{display:flex;gap:6px;}
+  .lang button{font-family:'Nunito Sans';font-weight:700;background:var(--card);border:1px solid var(--line);color:var(--dim);border-radius:999px;padding:7px 14px;cursor:pointer;}
+  .lang button.on{background:var(--gold);color:var(--bg);border-color:var(--gold);}
+  .back{position:fixed;left:14px;bottom:14px;z-index:50;background:var(--card);color:var(--ink);font-weight:700;padding:8px 15px;border-radius:999px;text-decoration:none;border:1px solid var(--line);}
+  @media(max-width:720px){.onair{grid-template-columns:1fr;text-align:center;}.disc,.eq{justify-self:center;}.stations{display:none;}.prog{grid-template-columns:80px 1fr auto;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="nav">
+    <div class="brand"><img src="../assets/kamin-mark.png" alt="" /> KaM·in FM</div>
+    <div class="stations"><a class="on">Live</a><a>Termine</a><a>Projekte</a><a>KAPi</a><a>Kontakt</a></div>
+  </header>
+
+  <section class="onair">
+    <div class="disc"></div>
+    <div class="onair__t">
+      <span class="live"><i></i> ON AIR · jetzt geöffnet</span>
+      <h1 class="disp">Komm herein!</h1>
+      <p>Der Treffpunkt für Alt &amp; Jung, für alle Kulturen — rund um den Marktplatz. Immer kostenlos.</p>
+    </div>
+    <div class="eq"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  </section>
+
+  <h2 class="sched__h disp">📻 Heute im Programm</h2>
+  <div class="prog" style="--c:var(--green)"><div class="time">15:00</div><div><h3>Wir sprechen Deutsch</h3><p>Sprachtreff · locker üben, alle Niveaus</p></div><button class="play"><svg width="16" height="16" viewBox="0 0 24 24" fill="#1a1726"><path d="M8 5v14l11-7z"/></svg></button></div>
+  <div class="prog" style="--c:var(--blue)"><div class="time">16:30</div><div><h3>Hausaufgabenhilfe / ABC</h3><p>Lernen · lesen &amp; schreiben</p></div><button class="play"><svg width="16" height="16" viewBox="0 0 24 24" fill="#1a1726"><path d="M8 5v14l11-7z"/></svg></button></div>
+  <div class="prog" style="--c:var(--orange)"><div class="time">Fr 15:00</div><div><h3>Spieletreff</h3><p>Karten &amp; Brettspiele für alle</p></div><button class="play"><svg width="16" height="16" viewBox="0 0 24 24" fill="#1a1726"><path d="M8 5v14l11-7z"/></svg></button></div>
+  <div class="prog" style="--c:var(--pink)"><div class="time">Mi 18:00</div><div><h3>Feierabendtreff</h3><p>1× im Monat · fröhliches Beisammensein</p></div><button class="play"><svg width="16" height="16" viewBox="0 0 24 24" fill="#1a1726"><path d="M8 5v14l11-7z"/></svg></button></div>
+
+  <footer class="foot">
+    <span>KaM·in FM · Marktplatz 108 · Kappelrodeck · @kamin.kappelrodeck</span>
+    <div class="lang"><button class="on">DE</button><button>UA</button><button>EN</button></div>
+  </footer>
+</div>
+<a href="../KaM-in Konzepte.html" class="back">← Konzepte</a>
+</body>
+</html>

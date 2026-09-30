@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KAPi – Logo Ideen v2 (20 Varianten, einfarbig)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Archivo+Black&family=Caveat:wght@700&family=Schibsted+Grotesk:wght@400..700&display=swap" rel="stylesheet">
+<style>
+  body { margin: 0; font-family: 'Schibsted Grotesk', sans-serif; }
+  .lg { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; letter-spacing: -0.03em; line-height: 1; }
+  .board { width: 100%; height: 100%; display: grid; place-items: center; background: #fff; color: #161616; }
+  .board.dark { background: #161616; color: #f4f2ec; }
+  .board svg { display: block; }
+  .lock { display: flex; align-items: center; gap: 26px; }
+  .lock.v { flex-direction: column; gap: 18px; }
+  .sub { font-size: 12px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; opacity: .55; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="js/design-canvas.jsx"></script>
+
+<script type="text/babel">
+/* Bausteine */
+function Wort({ size = 54, children = 'KAPi' }) {
+  return <span className="lg" style={{ fontSize: size }}>{children}</span>;
+}
+function Lockup({ mark, size = 54, sub, vertical, word = 'KAPi' }) {
+  return (
+    <div className={'lock' + (vertical ? ' v' : '')}>
+      {mark}
+      <div style={{ display: 'grid', gap: 8, justifyItems: vertical ? 'center' : 'start' }}>
+        <Wort size={size}>{word}</Wort>
+        {sub ? <span className="sub">{sub}</span> : null}
+      </div>
+    </div>
+  );
+}
+const S = { stroke: 'currentColor', fill: 'none', strokeLinecap: 'round', strokeLinejoin: 'round' };
+
+function App() {
+  return (
+    <DesignCanvas>
+
+      <DCSection id="verbindung" title="Verbindung & Begegnung" subtitle="Einfarbige Zeichen — Menschen, die sich treffen">
+
+        <DCArtboard id="schleife" label="01 · Schleife" width={420} height={280}>
+          <div className="board">
+            <Lockup mark={
+              <svg width="120" height="74" viewBox="0 0 100 62">
+                <path {...S} strokeWidth="7" d="M26,31 C26,17 45,17 50,31 C55,45 74,45 74,31 C74,17 55,17 50,31 C45,45 26,45 26,31 Z" />
+              </svg>
+            } sub="ohne Anfang, ohne Ende" />
+          </div>
+        </DCArtboard>
+
+        <DCArtboard id="bruecke" label="02 · Brücke" width={420} height={280}>
+          <div className="board">
+            <Lockup mark={
+              <svg width="100" height="74" viewBox="0 0 100 74">
+                <path {...S} strokeWidth="7" d="M10,64 Q50,4 90,64" />
+                <line {...S} strokeWidth="7" x1="26" y1="42" x2="26" y2="64" />
+                <line {...S} strokeWidth="7" x1="74" y1="42" x2="74" y2="64" />
+              </svg>
+            } sub="Brücken bauen" />
+          </div>
+        </DCArtboard>
+
+        <DCArtboard id="stern" label="03 · Menschen-Stern" width={420} height={280}>
+          <div className="board">
+            <Lockup mark={
+              <svg width="96" height="96" viewBox="0 0 100 100">
+                {[0,60,120,180,240,300].map(function (a) {
+                  const r = a * Math.PI / 180;
+                  const x1 = 50 + 14 * Math.cos(r), y1 = 50 + 14 * Math.sin(r);
+                  const x2 = 50 + 32 * Math.cos(r), y2 = 50 + 32 * Math.sin(r);
+                  const hx = 50 + 43 * Math.cos(r), hy = 50 + 43 * Math.sin(r);
+                  return (
+                    <g key={a}>
+                      <line {...S} strokeWidth="6.5" x1={x1} y1={y1} x2={x2} y2={y2} />
+                      <circle cx={hx} cy={hy} r="6" fill="currentColor" />
+                    </g>
+                  );
+                })}
+              </svg>
+            } sub="alle um einen Tisch" />
+          </div>
+        </DCArtboard>
+
+        <DCArtboard id="netz" label="04 · Netzwerk-K" width={420} height={280}>
+          <div className="board">
+            <Lockup mark={
+              <svg width="86" height="96" viewBox="0 0 80 100">
+                <line {...S} strokeWidth="4" x1="18" y1="14" x2="18" y2="86" />
+                <line {...S} strokeWidth="4" x1="18" y1="52" x2="62" y2="14" />
+                <line {...S} strokeWidth="4" x1="18" y1="52" x2="62" y2="86" />
+                <circle cx="18" cy="14" r="7" fill="currentColor" />
+                <circle cx="18" cy="52" r="7" fill="currentColor" />
+                <circle cx="18" cy="86" r="7" fill="currentColor" />
+                <circle cx="62" cy="14" r="7" fill="currentColor" />
+                <circle cx="62" cy="86" r="7" fill="currentColor" />
+              </svg>
+            } sub="das Netzwerk" />
+          </div>
+        </DCArtboard>
+
+        <DCArtboard id="dialog" label="05 · Dialog" width={420} height={280}>
+          <div className="board">
+            <Lockup mark={
+              <svg width="104" height="84" viewBox="0 0 104 84">
+                <rect {...S} strokeWidth="6" x="6" y="8" width="56" height="40" rx="14" />
+                <path d="M30,48 L30,62 L44,48 Z" fill="currentColor" />
+                <rect x="46" y="30" width="52" height="36" rx="13" fill="currentColor" />
+                <path d="M76,66 L76,78 L63,66 Z" fill="currentColor" />
+              </svg>
+            } sub="im Gespräch" />
+          </div>
+        </DCArtboard>
+
+        <DCArtboard id="kette" label="06 · Kettenglieder" width={420} height={280}>
+          <div className="board">
+            <Lockup mark={
+              <svg width="110" height="70" viewBox="0 0 110 70">
+                <ellipse {...S} strokeWidth="7" cx="38" cy="35" rx="28" ry="20" transform="rotate(-20 38 35)" />
+                <ellipse {...S} strokeWidth="7" cx="72" cy="35" rx="28" ry="20" transform="rotate(20 72 35)" />
+              </svg>
+            } sub="fest verbunden" />
+          </div>
+        </DCArtboard>
+
+        <DCArtboard id="venn" label="07 · Schnittmenge" width={420} height={280}>
+          <div className="board">
+            <Lockup mark={
+              <svg width="104" height="72" viewBox="0 0 104 72">
+                <circle {...S} strokeWidth="6" cx="38" cy="36" r="28" />
+                <circle {...S} strokeWidth="6" cx="66" cy="36" r="28" />
+                <path d="M52,12 A28,28 0 0 1 52,60 A28,28 0 0 1 52,12 Z" fill="currentColor" />
+              </svg>
+            } sub="was uns gemeinsam ist" />
+          </div>
+        </DCArtboard>
+
+        <DCArtboard id="faden" label="08 · Ein Faden" width={420} height={280}>
+          <div className="board">
+            <Lockup mark={
+              <svg width="130" height="60" viewBox="0 0 130 60">
+                <path {...S} strokeWidth="6" d="M6,38 C24,14 38,16 48,30 C54,39 64,40 66,30 C68,19 56,18 54,28 C52,40 66,48 84,42 C98,37 110,28 124,16" />
+              </svg>
+            } sub="ein Faden verbindet" />
+          </div>
+        </DCArtboard>
+
+        <DCArtboard id="zipper" label="09 · Ineinander" width={420} height={280}>
+          <div className="board">
+            <Lockup mark={
+              <svg width="100" height="80" viewBox="0 0 100 80">
+                {[0,1,2,3].map(function (i) {
+                  return <rect key={'t'+i} x={10 + i * 22} y="8" width="12" height="38" rx="6" fill="currentColor" />;
+                })}
+                {[0,1,2,3].map(function (i) {
+                  return <rect key={'b'+i} x={21 + i * 22} y="34" width="12" height="38" rx="6" fill="currentColor" opacity=".45" />;
+                })}
+              </svg>
+            } sub="Integration heißt ineinander" />
+          </div>
+        </DCArtboard>
+
+      </DCSection>
+
+      <DCSection id="ort" title="Ort & Welt" subtitle="Kappelrodeck als offener Ort in der Welt">
+
+        <DCArtboard id="tuer" label="10 · Offene Tür" width={420} height={280}>
+          <div className="board">
+            <Lockup mark={
+              <svg width="84" height="96" viewBox="0 0 80 100">
+                <path {...S} strokeWidth="6.5" d="M14,92 L14,10 L66,10 L66,92" />
+                <path {...S} strokeWidth="5" d="M26,92 L26,26 L48,18 L48,92" />
+                <circle cx="42" cy="56" r="4" fill="currentColor" />
+              </svg>
+            } sub="komm rein" />
+          </div>
+        </DCArtboard>
+
+        <DCArtboard id="dach" label="11 · Unter einem Dach" width={420} height={280}>
+          <div className="board">
+            <Lockup vertical mark={
+              <svg width="120" height="46" viewBox="0 0 120 46">
+                <path {...S} strokeWidth="7" d="M8,40 L60,8 L112,40" />
+              </svg>
+            } sub="unter einem Dach" />
+          </div>
+        </DCArtboard>
+
+        <DCArtboard id="kompass" label="12 · Windrose" width={420} height={280}>
+          <div className="board">
+            <Lockup mark={
+              <svg width="96" height="96" viewBox="0 0 100 100">
+                <circle {...S} strokeWidth="5" cx="50" cy="50" r="40" />
+                <path d="M50,18 L58,50 L50,82 L42,50 Z" fill="currentColor" />
+                <path d="M18,50 L50,42 L82,50 L50,58 Z" fill="currentColor" opacity=".4" />
+              </svg>
+            } sub="aus allen Richtungen" />
+          </div>
+        </DCArtboard>
+
+        <DCArtboard id="globus" label="13 · Punkt-Welt" width={420} height={280}>
+          <div className="board">
+            <Lockup mark={
+              <svg width="96" height="96" viewBox="0 0 100 100">
+                {[0,30,60,90,120,150,180,210,240,270,300,330].map(function (a) {
+                  const r = a * Math.PI / 180;
+                  return <circle key={a} cx={50 + 38 * Math.cos(r)} cy={50 + 38 * Math.sin(r)} r="5.5" fill="currentColor" />;
+                })}
+                <circle cx="50" cy="50" r="8" fill="currentColor" />
+              </svg>
+            } sub="die Welt im Dorf" />
+          </div>
+        </DCArtboard>
+
+        <DCArtboard id="fenster" label="14 · Marktplatz" width={420} height={280}>
+          <div className="board">
+            <Lockup mark={
+              <svg width="96" height="96" viewBox="0 0 100 100">
+                <rect {...S} strokeWidth="6" x="10" y="10" width="80" height="80" rx="10" />
+                <circle cx="50" cy="50" r="13" fill="currentColor" />
+                <circle {...S} strokeWidth="5" cx="50" cy="50" r="26" strokeDasharray="2 11" />
+              </svg>
+            } sub="mitten im Dorf" />
+          </div>
+        </DCArtboard>
+
+      </DCSection>
+
+      <DCSection id="typo" title="Typografisch" subtitle="Wortmarken — das i trägt die Botschaft">
+
+        <DCArtboard id="tile" label="15 · K-Kachel" width={420} height={280}>
+          <div className="board">
+            <div className="lock">
+              <div style={{ width: 96, height: 96, background: '#161616', borderRadius: 22, display: 'grid', placeItems: 'center' }}>
+                <span className="lg" style={{ fontSize: 60, color: '#fff' }}>K</span>
+              </div>
+              <div style={{ display: 'grid', gap: 8 }}>
+                <Wort size={54}>KAPi</Wort>
+                <span className="sub">Kappelrodeck Int.</span>
+              </div>
+            </div>
+          </div>
+        </DCArtboard>
+
+        <DCArtboard id="mosaik" label="16 · Mosaik-i" width={420} height={280}>
+          <div className="board">
+            <Lockup mark={
+              <svg width="60" height="100" viewBox="0 0 48 100">
+                <rect x="12" y="2" width="24" height="24" rx="6" fill="currentColor" />
+                {[0,1,2].map(function (r) {
+                  return [0,1].map(function (c) {
+                    return <rect key={r + '-' + c} x={13 + c * 12} y={38 + r * 21} width="10" height="18" rx="4" fill="currentColor" opacity={r === 1 ? .55 : 1} />;
+                  });
+                })}
+              </svg>
+            } sub="viele Teile, ein Bild" />
+          </div>
+        </DCArtboard>
+
+        <DCArtboard id="rund" label="17 · Rundsiegel" width={420} height={280}>
+          <div className="board">
+            <svg width="190" height="190" viewBox="0 0 200 200">
+              <defs>
+                <path id="circ" d="M100,100 m-72,0 a72,72 0 1,1 144,0 a72,72 0 1,1 -144,0" />
+              </defs>
+              <circle {...S} strokeWidth="4" cx="100" cy="100" r="92" />
+              <text style={{ fontFamily: "'Schibsted Grotesk', sans-serif", fontWeight: 700, fontSize: 17.5, letterSpacing: '.34em' }} fill="currentColor">
+                <textPath href="#circ">KAPPELRODECK · INTERNATIONAL ·</textPath>
+              </text>
+              <text x="100" y="122" textAnchor="middle" className="lg" style={{ fontFamily: "'Bricolage Grotesque', sans-serif", fontWeight: 800, fontSize: 60 }} fill="currentColor">KAPi</text>
+            </svg>
+          </div>
+        </DCArtboard>
+
+        <DCArtboard id="fussnote" label="18 · Fußnote" width={420} height={280}>
+          <div className="board">
+            <div style={{ display: 'grid', gap: 14, justifyItems: 'start' }}>
+              <span className="lg" style={{ fontSize: 84 }}>KAPi<span style={{ verticalAlign: 'super', fontSize: 40 }}>*</span></span>
+              <span style={{ fontSize: 15, fontWeight: 600, opacity: .6 }}>* international, integrativ, inklusiv, inspirierend</span>
+            </div>
+          </div>
+        </DCArtboard>
+
+        <DCArtboard id="lower" label="19 · kapi." width={420} height={280}>
+          <div className="board">
+            <div style={{ display: 'grid', gap: 10, justifyItems: 'start' }}>
+              <span className="lg" style={{ fontSize: 92, letterSpacing: '-0.04em' }}>kapi<span style={{ opacity: .35 }}>.</span></span>
+              <span className="sub">stark durch vielfalt</span>
+            </div>
+          </div>
+        </DCArtboard>
+
+        <DCArtboard id="punkt" label="20 · Der Punkt" width={420} height={280}>
+          <div className="board dark">
+            <div style={{ display: 'grid', gap: 12, justifyItems: 'start' }}>
+              <span className="lg" style={{ fontSize: 92 }}>
+                KAP<span style={{ position: 'relative', display: 'inline-block' }}>ı<span style={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)', top: '0.04em', width: '0.34em', height: '0.34em', borderRadius: '50%', background: 'currentColor' }}></span></span>
+              </span>
+              <span className="sub">der Punkt sind wir</span>
+            </div>
+          </div>
+        </DCArtboard>
+
+      </DCSection>
+    </DesignCanvas>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

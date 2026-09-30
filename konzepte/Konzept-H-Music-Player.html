@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Konzept H · Music Player — KaM·in</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  :root{--bg:#0c0b10;--panel:#16141c;--card:#1d1b25;--ink:#f3f1f7;--dim:#9b97a8;--accent:#36e07a;--line:rgba(255,255,255,.07);}
+  body{font-family:'Figtree',sans-serif;background:var(--bg);color:var(--ink);height:100vh;overflow:hidden;}
+  .app{display:grid;grid-template-columns:240px 1fr;grid-template-rows:1fr 92px;height:100vh;}
+  /* sidebar */
+  .side{grid-row:1/2;background:#000;padding:22px 16px;display:flex;flex-direction:column;gap:6px;}
+  .side__brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.2rem;padding:6px 10px 18px;}
+  .side__brand img{width:30px;}
+  .side a{display:flex;align-items:center;gap:14px;color:var(--dim);text-decoration:none;font-weight:600;padding:11px 12px;border-radius:9px;transition:.15s;}
+  .side a:hover,.side a.on{color:#fff;background:rgba(255,255,255,.07);}
+  .side a svg{width:22px;height:22px;}
+  .side__lib{margin-top:18px;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);padding:0 12px 8px;}
+  .side__pl{padding:8px 12px;font-size:.92rem;color:var(--dim);border-radius:8px;cursor:pointer;}
+  .side__pl:hover{color:#fff;}
+  .side__lang{margin-top:auto;display:flex;gap:6px;}
+  .side__lang button{flex:1;background:rgba(255,255,255,.06);border:none;color:var(--dim);border-radius:8px;padding:8px 0;font-family:'Figtree';font-weight:700;cursor:pointer;}
+  .side__lang button.on{background:var(--accent);color:#06140c;}
+  /* main */
+  .main{grid-row:1/2;overflow-y:auto;background:linear-gradient(180deg,#2a2440,var(--bg) 320px);}
+  .hero{display:flex;align-items:flex-end;gap:24px;padding:48px 32px 24px;}
+  .hero__cover{width:200px;height:200px;border-radius:14px;background:linear-gradient(135deg,#36e07a,#22a7e6 50%,#e4458a);box-shadow:0 24px 50px -16px rgba(0,0,0,.7);display:grid;place-items:center;flex:none;}
+  .hero__cover img{width:70%;filter:drop-shadow(0 6px 12px rgba(0,0,0,.4));}
+  .hero__meta .k{font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;}
+  .hero__meta h1{font-size:clamp(2.4rem,6vw,4.6rem);font-weight:900;letter-spacing:-.03em;line-height:1;margin:10px 0;}
+  .hero__meta .sub{color:var(--dim);font-weight:600;}
+  .hero__meta .sub b{color:var(--ink);}
+  .playbar{display:flex;align-items:center;gap:20px;padding:18px 32px;}
+  .playbig{width:58px;height:58px;border-radius:50%;background:var(--accent);border:none;display:grid;place-items:center;cursor:pointer;transition:.15s;}
+  .playbig:hover{transform:scale(1.06);}
+  .playbar .ic{color:var(--dim);cursor:pointer;}.playbar .ic:hover{color:#fff;}
+  /* track list */
+  .tracks{padding:8px 16px 30px;}
+  .trow{display:grid;grid-template-columns:30px 1fr auto auto;gap:18px;align-items:center;padding:11px 16px;border-radius:8px;cursor:pointer;transition:.12s;}
+  .trow:hover{background:rgba(255,255,255,.06);}
+  .trow.on{background:rgba(54,224,122,.10);}
+  .trow .n{color:var(--dim);font-variant-numeric:tabular-nums;}
+  .trow.on .n{color:var(--accent);}
+  .trow .ti{font-weight:700;}.trow .ti small{display:block;color:var(--dim);font-weight:500;font-size:.84rem;}
+  .trow .badge{font-size:.74rem;font-weight:700;color:var(--accent);border:1px solid rgba(54,224,122,.3);border-radius:999px;padding:3px 9px;}
+  .trow .dur{color:var(--dim);font-variant-numeric:tabular-nums;font-size:.9rem;}
+  /* now playing bar */
+  .now{grid-column:1/3;grid-row:2/3;background:var(--panel);border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 22px;}
+  .now__l{display:flex;align-items:center;gap:14px;width:30%;}
+  .now__l .cv{width:54px;height:54px;border-radius:8px;background:linear-gradient(135deg,#ef8f1e,#e4458a);flex:none;}
+  .now__l b{font-weight:700;font-size:.95rem;}.now__l small{color:var(--dim);}
+  .now__c{flex:1;max-width:40%;display:flex;flex-direction:column;align-items:center;gap:8px;}
+  .now__btns{display:flex;align-items:center;gap:20px;}
+  .now__btns .p{width:40px;height:40px;border-radius:50%;background:#fff;border:none;display:grid;place-items:center;cursor:pointer;}
+  .prog{display:flex;align-items:center;gap:10px;width:100%;font-size:.74rem;color:var(--dim);font-variant-numeric:tabular-nums;}
+  .prog__bar{flex:1;height:5px;background:rgba(255,255,255,.14);border-radius:3px;overflow:hidden;}
+  .prog__fill{height:100%;width:32%;background:var(--accent);border-radius:3px;animation:grow 18s linear infinite;}
+  @keyframes grow{from{width:0;}to{width:100%;}}
+  .now__r{width:30%;display:flex;justify-content:flex-end;align-items:center;gap:12px;color:var(--dim);}
+  .eq{display:flex;align-items:flex-end;gap:2px;height:20px;}
+  .eq i{width:3px;background:var(--accent);animation:eq .8s ease-in-out infinite;}
+  .eq i:nth-child(2){animation-delay:.2s;}.eq i:nth-child(3){animation-delay:.4s;}.eq i:nth-child(4){animation-delay:.1s;}
+  @keyframes eq{0%,100%{height:5px;}50%{height:20px;}}
+  .back{position:fixed;right:16px;top:16px;z-index:50;font-size:.82rem;color:var(--dim);text-decoration:none;background:rgba(255,255,255,.07);padding:8px 14px;border-radius:999px;}
+  @media(max-width:820px){.app{grid-template-columns:1fr;}.side{display:none;}.now__l,.now__r{width:auto;}.now__r{display:none;}}
+</style>
+</head>
+<body>
+<div class="app">
+  <nav class="side">
+    <div class="side__brand"><img src="../assets/kamin-mark.png" alt="" /> KaM·in</div>
+    <a class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M3 11l9-8 9 8M5 10v10h14V10"/></svg>Start</a>
+    <a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>Entdecken</a>
+    <a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="4" y="6" width="16" height="15"/><path d="M4 10h16M8 3v4M16 3v4"/></svg>Termine</a>
+    <a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 3 2.5 15 0 18"/></svg>KAPi</a>
+    <div class="side__lib">Deine Treffs</div>
+    <div class="side__pl">★ Lieblings-Angebote</div>
+    <div class="side__pl">Diese Woche</div>
+    <div class="side__pl">Für Familien</div>
+    <div class="side__lang"><button class="on">DE</button><button>UA</button><button>EN</button></div>
+  </nav>
+
+  <main class="main">
+    <div class="hero">
+      <div class="hero__cover"><img src="../assets/kamin-mark.png" alt="" /></div>
+      <div class="hero__meta">
+        <div class="k">● Bürgertreff · Playlist</div>
+        <h1>Komm herein</h1>
+        <div class="sub"><b>KaM·in Kappelrodeck</b> · 7 Angebote · alle kostenlos · für alle Generationen</div>
+      </div>
+    </div>
+    <div class="playbar">
+      <button class="playbig"><svg width="24" height="24" viewBox="0 0 24 24" fill="#06140c"><path d="M8 5v14l11-7z"/></svg></button>
+      <svg class="ic" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20s-7-4.6-9.2-9C1.3 8.2 2.6 5 6 5c2 0 3.2 1.3 4 2.4C10.8 6.3 12 5 14 5c3.4 0 4.7 3.2 3.2 6-2.2 4.4-9.2 9-9.2 9z"/></svg>
+      <svg class="ic" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="2"/><circle cx="5" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>
+    </div>
+    <div class="tracks" id="tracks"></div>
+  </main>
+
+  <div class="now">
+    <div class="now__l"><div class="cv"></div><div><b>Wir sprechen Deutsch</b><small>Sprachtreff · Mo</small></div></div>
+    <div class="now__c">
+      <div class="now__btns">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="color:var(--dim)"><path d="M6 5h2v14H6zM20 5L9 12l11 7z"/></svg>
+        <button class="p"><svg width="18" height="18" viewBox="0 0 24 24" fill="#000"><path d="M8 5v14l11-7z"/></svg></button>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="color:var(--dim)"><path d="M16 5h2v14h-2zM4 5l11 7L4 19z"/></svg>
+      </div>
+      <div class="prog"><span>1:12</span><div class="prog__bar"><div class="prog__fill"></div></div><span>geöffnet</span></div>
+    </div>
+    <div class="now__r"><div class="eq"><i></i><i></i><i></i><i></i></div><span style="font-size:.84rem">läuft jetzt</span></div>
+  </div>
+</div>
+<a href="../KaM-in Konzepte.html" class="back">← Konzepte</a>
+<script>
+  const TR=[
+    {t:'Wir sprechen Deutsch',a:'Sprachtreff · alle Niveaus',b:'Mo 15:00',d:'90 Min',on:true},
+    {t:'Hausaufgabenhilfe / ABC',a:'Lernen · lesen & schreiben',b:'Mo 16:30',d:'90 Min'},
+    {t:'Nadelspielereien',a:'Handarbeitstreff',b:'Do 15:00',d:'120 Min'},
+    {t:'Spieletreff',a:'Karten & Brettspiele',b:'Fr 15:00',d:'120 Min'},
+    {t:'Offene Musikwerkstatt',a:'nach Vereinbarung',b:'Sa/So',d:'open'},
+    {t:'Feierabendtreff',a:'fröhliches Beisammensein',b:'1×/Monat',d:'Abend'},
+    {t:'Afrikanisches Trommeln',a:'Workshop · Kinder & Erwachsene',b:'bald',d:'Event'},
+  ];
+  const box=document.getElementById('tracks');
+  TR.forEach((r,i)=>{const d=document.createElement('div');d.className='trow'+(r.on?' on':'');
+    d.innerHTML=`<span class="n">${r.on?'▸':(i+1)}</span><div class="ti">${r.t}<small>${r.a}</small></div><span class="badge">${r.b}</span><span class="dur">${r.d}</span>`;
+    d.onclick=()=>{document.querySelectorAll('.trow').forEach(x=>x.classList.remove('on'));d.classList.add('on');d.querySelector('.n').textContent='▸';};
+    box.appendChild(d);});
+</script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Konzept X · Jahreszeiten-Baum — KaM·in</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  :root{--bark:#6e4a2c;--sky:#eaf4ec;--ink:#2f3a2c;--dim:#6f7a68;--green:#5a9e3e;--orange:#e3852a;--red:#cf3a2a;--gold:#e0a72e;--pink:#cf6b94;--blue:#3f93c9;}
+  body{font-family:'Nunito Sans',sans-serif;color:var(--ink);background:linear-gradient(#eaf4ec,#f6efe2);min-height:100vh;overflow-x:hidden;}
+  .serif{font-family:'Fraunces',serif;}
+  /* nav as seasons */
+  .nav{position:sticky;top:0;z-index:40;display:flex;align-items:center;justify-content:space-between;padding:14px 26px;background:rgba(255,255,255,.7);backdrop-filter:blur(10px);flex-wrap:wrap;gap:12px;border-bottom:1px solid #d8e2d0;}
+  .nav .brand{display:flex;align-items:center;gap:11px;font-family:'Fraunces';font-weight:600;font-size:1.4rem;}
+  .nav .brand img{height:38px;}
+  .nav nav{display:flex;gap:4px;flex-wrap:wrap;}
+  .nav nav a{text-decoration:none;font-weight:700;color:var(--ink);padding:8px 15px;border-radius:999px;transition:.15s;display:flex;align-items:center;gap:6px;}
+  .nav nav a:hover,.nav nav a.on{background:var(--green);color:#fff;}
+  .lang{display:flex;gap:5px;}
+  .lang button{font-family:'Nunito Sans';font-weight:700;background:#fff;border:1px solid #d8e2d0;border-radius:999px;padding:6px 12px;cursor:pointer;color:var(--ink);}
+  .lang button.on{background:var(--ink);color:#fff;}
+  /* hero */
+  .hero{text-align:center;padding:36px 24px 6px;}
+  .hero h1{font-family:'Fraunces';font-weight:600;font-size:clamp(2.6rem,7vw,4.6rem);line-height:1;}
+  .hero p{font-size:1.15rem;color:var(--dim);max-width:38ch;margin:12px auto 0;}
+  /* tree scene */
+  .scene{position:relative;max-width:1000px;margin:0 auto;height:640px;}
+  .trunk{position:absolute;left:50%;bottom:0;transform:translateX(-50%);width:70px;height:300px;background:linear-gradient(90deg,#5a3a20,var(--bark),#5a3a20);border-radius:14px 14px 0 0;}
+  .trunk::before,.trunk::after{content:'';position:absolute;width:50px;height:18px;background:var(--bark);border-radius:12px;top:60px;}
+  .trunk::before{left:-38px;transform:rotate(28deg);}.trunk::after{right:-38px;transform:rotate(-28deg);}
+  .crown{position:absolute;left:50%;top:0;transform:translateX(-50%);width:560px;height:420px;max-width:96vw;
+    background:radial-gradient(circle at 30% 35%,#7bbd5a,transparent 55%),radial-gradient(circle at 70% 30%,#6cae4d,transparent 55%),radial-gradient(circle at 50% 60%,#5a9e3e,transparent 60%),radial-gradient(circle at 50% 45%,#83c463,#4d8a36);border-radius:50%;filter:saturate(1.05);}
+  /* hanging fruit cards */
+  .fruit{position:absolute;width:128px;cursor:pointer;transform-origin:top center;animation:swing 4s ease-in-out infinite;z-index:3;}
+  .fruit:nth-child(even){animation-delay:-2s;}
+  @keyframes swing{0%,100%{transform:rotate(-3deg);}50%{transform:rotate(3deg);}}
+  .fruit .stem{width:2px;height:18px;background:#4d6b33;margin:0 auto;}
+  .fruit .body{background:#fff;border-radius:16px;padding:13px 12px;text-align:center;box-shadow:0 10px 20px -8px #0005;border:3px solid var(--c);}
+  .fruit .ic{font-size:1.5rem;}
+  .fruit h3{font-size:.98rem;font-weight:800;line-height:1;margin:3px 0;}
+  .fruit .w{font-size:.78rem;font-weight:700;color:var(--c);}
+  /* falling leaves */
+  .leaf{position:fixed;top:-30px;font-size:1.2rem;animation:drift linear infinite;z-index:1;pointer-events:none;opacity:.85;}
+  @keyframes drift{to{transform:translateY(105vh) translateX(60px) rotate(360deg);}}
+  /* ground */
+  .ground{height:60px;background:radial-gradient(ellipse at 50% 0,#cde3b8,#bcd6a4);}
+  .foot{background:#bcd6a4;text-align:center;padding:6px 24px 36px;font-weight:700;color:#46583a;}
+  .back{position:fixed;left:14px;bottom:14px;z-index:50;background:#fff;color:var(--ink);font-weight:700;padding:8px 15px;border-radius:999px;text-decoration:none;box-shadow:0 5px 12px -5px #0006;}
+  @media(max-width:680px){.scene{height:auto;padding-bottom:30px;}.crown,.trunk{display:none;}
+    .fruit{position:static;width:auto;animation:none;display:inline-block;margin:8px;}.scene{text-align:center;}.nav nav{display:none;}}
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="brand"><img src="../assets/kamin-mark.png" alt="" /> KaM·in</div>
+  <nav><a class="on">🌳 Baum</a><a>🌸 Termine</a><a>🍃 Projekte</a><a>☀️ KAPi</a><a>🍂 Kontakt</a></nav>
+  <div class="lang"><button class="on">DE</button><button>UA</button><button>EN</button></div>
+</header>
+
+<section class="hero">
+  <h1 class="serif">Komm herein.</h1>
+  <p>Wie ein Baum, an dem für jede:n etwas wächst — über alle Jahreszeiten. Alles kostenlos.</p>
+</section>
+
+<div class="scene" id="scene">
+  <div class="crown"></div>
+  <div class="trunk"></div>
+  <div class="fruit" style="left:20%;top:60px;--c:var(--green)"><div class="stem"></div><div class="body"><div class="ic">💬</div><h3>Deutsch</h3><div class="w">Mo 15:00</div></div></div>
+  <div class="fruit" style="left:42%;top:30px;--c:var(--orange)"><div class="stem"></div><div class="body"><div class="ic">🎲</div><h3>Spiele</h3><div class="w">Fr 15:00</div></div></div>
+  <div class="fruit" style="left:64%;top:64px;--c:var(--pink)"><div class="stem"></div><div class="body"><div class="ic">🧵</div><h3>Nadeln</h3><div class="w">Do 15:00</div></div></div>
+  <div class="fruit" style="left:30%;top:180px;--c:var(--blue)"><div class="stem"></div><div class="body"><div class="ic">🎵</div><h3>Musik</h3><div class="w">Sa/So</div></div></div>
+  <div class="fruit" style="left:54%;top:200px;--c:var(--gold)"><div class="stem"></div><div class="body"><div class="ic">🥁</div><h3>Trommeln</h3><div class="w">bald</div></div></div>
+  <div class="fruit" style="left:74%;top:200px;--c:var(--red)"><div class="stem"></div><div class="body"><div class="ic">🎉</div><h3>Feierabend</h3><div class="w">Mi 18:00</div></div></div>
+</div>
+<div class="ground"></div>
+<footer class="foot">KaM·in · Marktplatz 108 · Kappelrodeck · hier wächst Gemeinschaft</footer>
+<a href="../KaM-in Konzepte.html" class="back">← Konzepte</a>
+<script>
+  const leaves=['🍃','🍂','🌸','🍁'];
+  for(let i=0;i<16;i++){const l=document.createElement('div');l.className='leaf';l.textContent=leaves[i%4];
+    l.style.left=Math.random()*100+'vw';l.style.animationDuration=(7+Math.random()*7)+'s';l.style.animationDelay=(-Math.random()*10)+'s';document.body.appendChild(l);}
+</script>
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Konzept N · Terminal — KaM·in</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet" />
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  :root{--bg:#0d1117;--panel:#161b22;--line:#21262d;--ink:#c9d1d9;--dim:#7d8590;
+    --green:#3fb950;--blue:#58a6ff;--orange:#f0883e;--red:#f85149;--pink:#db61a2;--yellow:#e3b341;--purple:#bc8cff;}
+  body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--ink);height:100vh;overflow:hidden;font-size:14px;}
+  .ide{display:grid;grid-template-columns:54px 220px 1fr;grid-template-rows:38px 1fr 26px;height:100vh;}
+  /* activity bar */
+  .act{grid-row:1/4;background:#0b0e13;border-right:1px solid var(--line);display:flex;flex-direction:column;align-items:center;padding:12px 0;gap:18px;}
+  .act img{width:30px;}
+  .act a{color:var(--dim);text-decoration:none;width:38px;height:38px;display:grid;place-items:center;border-radius:8px;border-left:2px solid transparent;transition:.15s;}
+  .act a svg{width:22px;height:22px;}
+  .act a:hover{color:var(--ink);}
+  .act a.on{color:#fff;border-left-color:var(--blue);background:#161b22;}
+  .act .sp{margin-top:auto;}
+  /* sidebar tree */
+  .sb{grid-row:1/4;background:var(--panel);border-right:1px solid var(--line);overflow-y:auto;}
+  .sb__h{padding:11px 16px;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);}
+  .tree{padding:0 8px;}
+  .tnode{display:flex;align-items:center;gap:7px;padding:4px 10px;border-radius:5px;cursor:pointer;color:var(--ink);white-space:nowrap;}
+  .tnode:hover{background:#1f242c;}
+  .tnode.on{background:#202832;color:#fff;}
+  .tnode .dot{width:8px;height:8px;border-radius:50%;flex:none;}
+  .tnode.fold{color:var(--dim);font-weight:700;}
+  .tnode.child{padding-left:24px;}
+  /* tabs + editor */
+  .tabs{grid-row:1/2;grid-column:3/4;background:#0b0e13;display:flex;align-items:stretch;border-bottom:1px solid var(--line);overflow-x:auto;}
+  .tab{display:flex;align-items:center;gap:8px;padding:0 16px;border-right:1px solid var(--line);color:var(--dim);cursor:pointer;font-size:.82rem;white-space:nowrap;}
+  .tab.on{background:var(--bg);color:#fff;border-top:2px solid var(--blue);}
+  .editor{grid-row:2/3;grid-column:3/4;overflow:auto;display:flex;}
+  .gutter{padding:16px 0 16px;text-align:right;color:#484f58;user-select:none;flex:none;width:52px;}
+  .gutter div{padding:0 14px;line-height:1.7;}
+  .code{padding:16px 8px;line-height:1.7;flex:1;}
+  .code .ln{white-space:pre;}
+  .cm{color:var(--dim);}.kw{color:var(--pink);}.fn{color:var(--purple);}.str{color:var(--blue);}
+  .num{color:var(--orange);}.var{color:var(--ink);}.prop{color:var(--green);}.tag{color:var(--yellow);}
+  .typed{border-right:2px solid var(--ink);animation:cur 1s steps(2) infinite;}
+  @keyframes cur{50%{border-color:transparent;}}
+  /* terminal panel */
+  .term{grid-row:2/3;grid-column:3/4;align-self:end;background:#0b0e13;border-top:1px solid var(--line);height:160px;overflow-y:auto;padding:10px 16px;font-size:.82rem;display:none;}
+  /* statusbar */
+  .status{grid-row:3/4;grid-column:1/4;background:var(--blue);color:#04121f;display:flex;align-items:center;gap:18px;padding:0 14px;font-size:.74rem;font-weight:500;}
+  .status .s{display:flex;align-items:center;gap:5px;}
+  .status .lang{margin-left:auto;display:flex;gap:4px;}
+  .status .lang button{font-family:inherit;font-size:.72rem;font-weight:700;background:rgba(0,0,0,.2);border:none;color:#04121f;padding:2px 9px;border-radius:4px;cursor:pointer;}
+  .status .lang button.on{background:#04121f;color:var(--blue);}
+  .back{position:fixed;right:12px;bottom:34px;z-index:50;font-family:'JetBrains Mono';font-size:.76rem;color:var(--dim);text-decoration:none;background:var(--panel);border:1px solid var(--line);padding:6px 12px;border-radius:6px;}
+  .back:hover{color:var(--blue);}
+  @media(max-width:820px){.ide{grid-template-columns:54px 1fr;}.sb{display:none;}.tabs,.editor,.term{grid-column:2/3;}.status{grid-column:1/3;}}
+</style>
+</head>
+<body>
+<div class="ide">
+  <nav class="act">
+    <img src="../assets/kamin-mark.png" alt="" />
+    <a class="on" title="Explorer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19V6a2 2 0 012-2h5l2 3h5a2 2 0 012 2v10a2 2 0 01-2 2H6a2 2 0 01-2-2z"/></svg></a>
+    <a title="Suche"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg></a>
+    <a title="Kalender"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="6" width="16" height="15"/><path d="M4 10h16M8 3v4M16 3v4"/></svg></a>
+    <a title="KAPi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 3 2.5 15 0 18"/></svg></a>
+    <a class="sp" title="Kontakt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6h16v12H4z"/><path d="M4 7l8 6 8-6"/></svg></a>
+  </nav>
+
+  <aside class="sb">
+    <div class="sb__h">Explorer · kamin/</div>
+    <div class="tree" id="tree"></div>
+  </aside>
+
+  <div class="tabs">
+    <div class="tab on">📄 willkommen.md</div>
+    <div class="tab">⚙ angebote.json</div>
+    <div class="tab">🗓 termine.config</div>
+  </div>
+
+  <div class="editor">
+    <div class="gutter" id="gutter"></div>
+    <div class="code" id="code"></div>
+  </div>
+
+  <div class="status">
+    <span class="s">⎇ main</span>
+    <span class="s">● willkommen.md</span>
+    <span class="s">UTF-8</span>
+    <span class="s">Markdown</span>
+    <span class="s">✓ alle sind willkommen</span>
+    <div class="lang"><button class="on">DE</button><button>UA</button><button>EN</button></div>
+  </div>
+</div>
+<a href="../KaM-in Konzepte.html" class="back">← Konzepte</a>
+<script>
+  const tree=[
+    {t:'📂 kamin',f:1},
+    {t:'willkommen.md',c:'green',ch:1,on:1},
+    {t:'angebote.json',c:'orange',ch:1},
+    {t:'termine.config',c:'blue',ch:1},
+    {t:'📂 projekte',f:1},
+    {t:'deutsch.md',c:'green',ch:1},
+    {t:'spieletreff.md',c:'pink',ch:1},
+    {t:'feierabend.md',c:'red',ch:1},
+    {t:'📂 kapi',f:1},
+    {t:'vielfalt.md',c:'purple',ch:1},
+  ];
+  const C={green:'#3fb950',orange:'#f0883e',blue:'#58a6ff',pink:'#db61a2',red:'#f85149',purple:'#bc8cff'};
+  const tb=document.getElementById('tree');
+  tree.forEach(n=>{const d=document.createElement('div');d.className='tnode'+(n.f?' fold':' child')+(n.on?' on':'');
+    d.innerHTML=(n.ch?`<span class="dot" style="background:${C[n.c]}"></span>`:'')+n.t;tb.appendChild(d);
+    d.onclick=()=>{if(n.ch){document.querySelectorAll('.tnode').forEach(x=>x.classList.remove('on'));d.classList.add('on');}};});
+
+  // editor content (syntax-highlighted markdown)
+  const lines=[
+    '<span class="cm"># KaM·in — Bürgertreff Kappelrodeck</span>',
+    '',
+    '<span class="kw">## willkommen</span>',
+    '',
+    '<span class="var">Komm herein! Schön, dass du da bist.</span>',
+    '<span class="var">Ein offener Treffpunkt für </span><span class="str">"Alt und Jung"</span><span class="var">,</span>',
+    '<span class="var">für alle Kulturen. Alles </span><span class="prop">kostenlos</span><span class="var">.</span>',
+    '',
+    '<span class="kw">## fakten</span>',
+    '<span class="prop">- ort</span><span class="var">:    </span><span class="str">"Marktplatz 108, Kappelrodeck"</span>',
+    '<span class="prop">- offen</span><span class="var">:  </span><span class="str">"Mo–Sa nachmittags"</span>',
+    '<span class="prop">- preis</span><span class="var">:  </span><span class="num">0</span><span class="var"> € — immer</span>',
+    '<span class="prop">- nationen</span><span class="var">: </span><span class="num">50</span><span class="var">+</span>',
+    '',
+    '<span class="kw">## naechste_termine()</span>',
+    '<span class="fn">deutsch</span><span class="var">()    → </span><span class="str">"Mo 15:00"</span>',
+    '<span class="fn">spieletreff</span><span class="var">() → </span><span class="str">"Fr 15:00"</span>',
+    '<span class="fn">feierabend</span><span class="var">()  → </span><span class="str">"Mi 18:00 · 1×/Monat"</span>',
+    '',
+    '<span class="cm">// du bist willkommen — egal woher du kommst</span>',
+    '<span class="var">> komm_vorbei</span><span class="typed"> </span>',
+  ];
+  const code=document.getElementById('code'),gutter=document.getElementById('gutter');
+  lines.forEach((l,i)=>{const e=document.createElement('div');e.className='ln';e.innerHTML=l||' ';code.appendChild(e);
+    const g=document.createElement('div');g.textContent=i+1;gutter.appendChild(g);});
+</script>
+</body>
+</html>

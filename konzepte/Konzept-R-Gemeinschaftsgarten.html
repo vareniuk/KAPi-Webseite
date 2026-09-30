@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Konzept R · Gemeinschaftsgarten — KaM·in</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&family=Pacifico&display=swap" rel="stylesheet" />
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  :root{--leaf:#5b9e3f;--leaf2:#3f7a2c;--sky:#d6f0e4;--soil:#7a5230;--bloom:#e85d8a;--sun:#f6b73c;--sky2:#bfe6f5;--ink:#2c3b28;}
+  body{font-family:'Quicksand',sans-serif;color:var(--ink);background:linear-gradient(#bfe6f5,#d9f3e6 40%,#eaf7dd);min-height:100vh;overflow-x:hidden;}
+  .script{font-family:'Pacifico',cursive;}
+  /* sun */
+  .sun{position:fixed;top:40px;right:60px;width:90px;height:90px;border-radius:50%;background:radial-gradient(circle,#ffe08a,var(--sun));box-shadow:0 0 60px 12px #f6b73c66;animation:pulse 5s ease-in-out infinite;z-index:0;}
+  @keyframes pulse{50%{transform:scale(1.08);}}
+  /* top nav: leaves on a vine */
+  .vine{position:sticky;top:0;z-index:40;background:linear-gradient(#fffdf6,#f4f9ec);box-shadow:0 4px 14px -6px #3f7a2c55;padding:12px 26px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;border-bottom:3px solid #d6e8c4;}
+  .vine .brand{display:flex;align-items:center;gap:11px;}
+  .vine .brand img{height:40px;}
+  .vine .brand b{font-family:'Pacifico';font-size:1.5rem;color:var(--leaf2);}
+  .vine nav{display:flex;gap:8px;flex-wrap:wrap;}
+  .vine nav a{position:relative;text-decoration:none;font-weight:700;color:var(--leaf2);padding:9px 18px;border-radius:999px;background:#eaf6dd;transition:.18s;}
+  .vine nav a::before{content:'🌿';position:absolute;left:-2px;top:-8px;font-size:.8rem;opacity:0;transition:.18s;}
+  .vine nav a:hover,.vine nav a.on{background:var(--leaf);color:#fff;transform:translateY(-2px);}
+  .vine nav a:hover::before,.vine nav a.on::before{opacity:1;}
+  /* hero */
+  .hero{text-align:center;padding:60px 24px 30px;position:relative;z-index:2;}
+  .hero .script{font-size:clamp(3rem,9vw,6rem);color:var(--leaf2);line-height:1;}
+  .hero p{font-size:clamp(1.1rem,2.4vw,1.4rem);font-weight:600;max-width:38ch;margin:16px auto 0;color:#3c5036;}
+  .hero .seedbtn{display:inline-flex;gap:9px;margin-top:24px;background:var(--leaf);color:#fff;font-weight:700;font-size:1.1rem;padding:14px 28px;border-radius:999px;text-decoration:none;box-shadow:0 10px 22px -8px var(--leaf2);transition:.18s;}
+  .hero .seedbtn:hover{transform:translateY(-3px);}
+  /* garden beds */
+  .garden{max-width:1140px;margin:0 auto;padding:30px 24px 0;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;position:relative;z-index:2;}
+  .plant{background:#fffdf6;border-radius:24px 24px 18px 18px;padding:26px 22px 22px;box-shadow:0 14px 30px -16px #3f7a2c66;position:relative;text-align:center;transition:.2s;overflow:hidden;}
+  .plant:hover{transform:translateY(-6px);}
+  .plant::after{content:'';position:absolute;left:0;right:0;bottom:0;height:16px;background:repeating-linear-gradient(90deg,var(--soil) 0 10px,#8c6038 10px 20px);}
+  .stem{font-size:3.2rem;animation:sway 4s ease-in-out infinite;display:inline-block;transform-origin:bottom;}
+  @keyframes sway{50%{transform:rotate(5deg);}}
+  .plant:nth-child(2) .stem{animation-delay:-1s;}.plant:nth-child(3) .stem{animation-delay:-2s;}
+  .plant h3{font-size:1.4rem;margin:6px 0 4px;}
+  .plant .when{display:inline-block;font-weight:700;font-size:.9rem;color:#fff;background:var(--c);padding:5px 14px;border-radius:999px;margin:4px 0 10px;}
+  .plant p{font-weight:600;color:#4d5f46;font-size:.98rem;margin-bottom:18px;}
+  /* grass footer */
+  .grass{margin-top:40px;height:90px;background:
+    radial-gradient(circle at 10% 100%,var(--leaf) 0 18px,transparent 18px),
+    radial-gradient(circle at 20% 100%,var(--leaf2) 0 22px,transparent 22px),
+    radial-gradient(circle at 30% 100%,var(--leaf) 0 20px,transparent 20px),
+    radial-gradient(circle at 45% 100%,var(--leaf2) 0 26px,transparent 26px),
+    radial-gradient(circle at 60% 100%,var(--leaf) 0 20px,transparent 20px),
+    radial-gradient(circle at 75% 100%,var(--leaf2) 0 24px,transparent 24px),
+    radial-gradient(circle at 90% 100%,var(--leaf) 0 20px,transparent 20px),var(--leaf);
+    position:relative;z-index:2;}
+  .foot{background:var(--leaf);color:#eafbe0;text-align:center;padding:6px 20px 30px;font-weight:600;position:relative;z-index:2;}
+  .foot .lang{display:inline-flex;gap:6px;margin-top:12px;}
+  .foot .lang button{font-family:'Quicksand';font-weight:700;background:rgba(255,255,255,.2);border:none;color:#fff;border-radius:999px;padding:7px 15px;cursor:pointer;}
+  .foot .lang button.on{background:#fff;color:var(--leaf2);}
+  .back{position:fixed;left:14px;bottom:14px;z-index:50;background:#fffdf6;color:var(--leaf2);font-weight:700;padding:8px 15px;border-radius:999px;text-decoration:none;box-shadow:0 5px 12px -5px #3f7a2c88;}
+  @media(max-width:780px){.garden{grid-template-columns:1fr;}.sun{display:none;}.vine nav{display:none;}}
+</style>
+</head>
+<body>
+<div class="sun"></div>
+<header class="vine">
+  <div class="brand"><img src="../assets/kamin-mark.png" alt="" /><b>KaM·in</b></div>
+  <nav><a class="on">Start</a><a>Termine</a><a>Projekte</a><a>KAPi</a><a>Mitmachen</a></nav>
+</header>
+
+<section class="hero">
+  <div class="script">Komm herein!</div>
+  <p>Bei uns wächst Gemeinschaft — für Alt &amp; Jung, für alle Kulturen. Alles kostenlos.</p>
+  <a href="#" class="seedbtn">🌱 Säe dein Mitmachen</a>
+</section>
+
+<section class="garden">
+  <div class="plant" style="--c:var(--leaf)"><span class="stem">🌻</span><h3>Wir sprechen Deutsch</h3><div class="when">Mo · 15:00</div><p>Locker üben in der Runde, alle Niveaus.</p></div>
+  <div class="plant" style="--c:var(--bloom)"><span class="stem">🌷</span><h3>Nadelspielereien</h3><div class="when">Do · 15:00</div><p>Nähen, stricken, häkeln — Material da.</p></div>
+  <div class="plant" style="--c:var(--sun)"><span class="stem">🌼</span><h3>Spieletreff</h3><div class="when">Fr · 15:00</div><p>Karten &amp; Brettspiele für alle.</p></div>
+  <div class="plant" style="--c:#0a93d6"><span class="stem">🪴</span><h3>Musikwerkstatt</h3><div class="when">Sa/So</div><p>Gemeinsam Musik machen, nach Absprache.</p></div>
+  <div class="plant" style="--c:var(--bloom)"><span class="stem">🌺</span><h3>Trommel-Workshop</h3><div class="when">bald</div><p>Für Kinder &amp; Erwachsene gemeinsam.</p></div>
+  <div class="plant" style="--c:#e2231a"><span class="stem">🌹</span><h3>Feierabendtreff</h3><div class="when">Mi · 18:00</div><p>Fröhlich beisammen, 1× im Monat.</p></div>
+</section>
+
+<div class="grass"></div>
+<footer class="foot">
+  KaM·in · Marktplatz 108 · Kappelrodeck · hier darf jede:r wachsen
+  <div class="lang"><button class="on">DE</button><button>UA</button><button>EN</button></div>
+</footer>
+<a href="../KaM-in Konzepte.html" class="back">← Konzepte</a>
+</body>
+</html>

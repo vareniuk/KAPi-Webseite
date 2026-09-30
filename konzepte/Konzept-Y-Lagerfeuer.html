@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Konzept Y · Lagerfeuer — KaM·in</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  :root{--ink:#f3e9d8;--dim:#bfa988;--ember:#ff7a2f;--ember2:#ffb04a;--green:#9bd04a;--blue:#5cc6ff;--pink:#ff8ad4;--red:#ff6b5c;}
+  body{font-family:'Nunito',sans-serif;color:var(--ink);min-height:100vh;overflow:hidden;
+    background:radial-gradient(circle at 50% 92%,#3a2418,#1c120c 60%,#0d0805);}
+  .hand{font-family:'Caveat',cursive;}
+  /* nav: stones in a circle, simplified to pill row */
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:18px 26px;flex-wrap:wrap;gap:12px;position:relative;z-index:10;}
+  .nav .brand{display:flex;align-items:center;gap:11px;font-weight:800;font-size:1.3rem;}
+  .nav .brand img{height:38px;}
+  .nav nav{display:flex;gap:6px;flex-wrap:wrap;}
+  .nav nav a{text-decoration:none;font-weight:700;color:var(--ink);padding:8px 16px;border-radius:999px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);transition:.15s;}
+  .nav nav a:hover,.nav nav a.on{background:var(--ember);border-color:var(--ember);color:#2a1206;}
+  .lang{display:flex;gap:5px;}
+  .lang button{font-family:'Nunito';font-weight:800;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:var(--ink);border-radius:999px;padding:6px 12px;cursor:pointer;}
+  .lang button.on{background:var(--ember2);color:#2a1206;border-color:var(--ember2);}
+  /* scene */
+  .scene{position:relative;min-height:calc(100vh - 78px);display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding-top:20px;}
+  .hero{text-align:center;z-index:5;margin-bottom:6px;}
+  .hero .hand{font-size:1.7rem;color:var(--ember2);}
+  .hero h1{font-size:clamp(2.4rem,6vw,3.8rem);line-height:1.06;margin-bottom:.15em;text-shadow:0 2px 30px #ff7a2f55;}
+  .hero p{font-weight:600;color:var(--dim);max-width:34ch;margin:10px auto 0;}
+  /* fire area holds the fire + the surrounding ring of seats */
+  .firearea{position:relative;width:100%;max-width:760px;height:460px;margin-top:10px;}
+  /* fire */
+  .fire{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:160px;height:170px;filter:drop-shadow(0 0 40px #ff7a2faa);}
+  .fire .flame{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);width:70px;height:120px;background:linear-gradient(#fff3,var(--ember2),var(--ember));border-radius:50% 50% 50% 50%/60% 60% 40% 40%;animation:flick .4s ease-in-out infinite alternate;}
+  .fire .flame.f2{width:46px;height:90px;background:linear-gradient(#fff6,#ffd86a,var(--ember2));animation-duration:.3s;}
+  .fire .flame.f3{width:26px;height:62px;background:linear-gradient(#fff,#ffe9a0);animation-duration:.25s;}
+  @keyframes flick{from{transform:translateX(-50%) scaleY(1) skewX(-2deg);}to{transform:translateX(-52%) scaleY(1.12) skewX(3deg);}}
+  .logs{position:absolute;bottom:6px;left:50%;transform:translateX(-50%);width:130px;height:26px;}
+  .logs i{position:absolute;width:120px;height:16px;background:linear-gradient(#7a4a26,#4d2c14);border-radius:10px;top:6px;left:5px;}
+  .logs i:nth-child(2){transform:rotate(28deg);}.logs i:nth-child(3){transform:rotate(-28deg);}
+  .spark{position:absolute;width:4px;height:4px;border-radius:50%;background:var(--ember2);bottom:120px;left:50%;animation:rise 2.2s ease-in infinite;}
+  @keyframes rise{0%{opacity:0;transform:translate(-50%,0) scale(1);}20%{opacity:1;}100%{opacity:0;transform:translate(calc(-50% + var(--dx,10px)),-260px) scale(.3);}}
+  /* circle of cards around fire */
+  .ring{position:absolute;inset:0;pointer-events:none;}
+  .seat{position:absolute;width:150px;pointer-events:auto;background:rgba(40,26,16,.82);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:13px 14px;cursor:pointer;transition:.18s;box-shadow:0 10px 24px -10px #000;}
+  .seat:hover{transform:scale(1.06);border-color:var(--c);box-shadow:0 0 24px -4px var(--c);}
+  .seat .ic{font-size:1.4rem;}
+  .seat h3{font-size:1rem;font-weight:800;line-height:1;margin:3px 0;}
+  .seat .w{font-size:.8rem;font-weight:700;color:var(--c);}
+  .back{position:fixed;left:14px;bottom:14px;z-index:50;background:rgba(255,255,255,.1);color:var(--ink);font-weight:700;padding:8px 15px;border-radius:999px;text-decoration:none;border:1px solid rgba(255,255,255,.15);}
+  @media(max-width:760px){
+    .scene{height:auto;padding:20px 0 80px;}
+    .firearea{height:auto;}
+    .fire{position:relative;left:auto;top:auto;transform:none;margin:24px auto 0;}
+    .ring{position:static;display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:30px;}
+    .seat{position:static!important;}
+    .nav nav{display:none;}
+  }
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="brand"><img src="../assets/kamin-mark.png" alt="" /> KaM·in</div>
+  <nav><a class="on">Feuer</a><a>Termine</a><a>Projekte</a><a>KAPi</a><a>Kontakt</a></nav>
+  <div class="lang"><button class="on">DE</button><button>UA</button><button>EN</button></div>
+</header>
+
+<div class="scene">
+  <div class="hero">
+    <div class="hand">~ rück näher, schön dass du da bist ~</div>
+    <h1>Komm ans Feuer.</h1>
+    <p>Ein warmer Kreis für Alt &amp; Jung, für alle aus aller Welt. Setz dich dazu — alles kostenlos.</p>
+  </div>
+
+  <div class="firearea">
+    <div class="fire" id="fire">
+      <div class="flame"></div><div class="flame f2"></div><div class="flame f3"></div>
+      <div class="logs"><i></i><i></i><i></i></div>
+    </div>
+
+    <div class="ring">
+      <div class="seat" style="left:8%;top:4%;--c:var(--green)"><div class="ic">💬</div><h3>Deutsch-Treff</h3><div class="w">Mo · 15:00</div></div>
+      <div class="seat" style="right:8%;top:4%;--c:var(--blue)"><div class="ic">🎲</div><h3>Spieletreff</h3><div class="w">Fr · 15:00</div></div>
+      <div class="seat" style="left:0;top:42%;--c:var(--pink)"><div class="ic">🧵</div><h3>Nadelspielereien</h3><div class="w">Do · 15:00</div></div>
+      <div class="seat" style="right:0;top:42%;--c:var(--ember2)"><div class="ic">🥁</div><h3>Trommeln</h3><div class="w">bald</div></div>
+      <div class="seat" style="left:14%;bottom:2%;--c:var(--blue)"><div class="ic">🎵</div><h3>Musikwerkstatt</h3><div class="w">Sa/So</div></div>
+      <div class="seat" style="right:14%;bottom:2%;--c:var(--red)"><div class="ic">🎉</div><h3>Feierabendtreff</h3><div class="w">Mi · 18:00</div></div>
+    </div>
+  </div>
+</div>
+<a href="../KaM-in Konzepte.html" class="back">← Konzepte</a>
+<script>
+  const fire=document.getElementById('fire');
+  for(let i=0;i<10;i++){const s=document.createElement('div');s.className='spark';
+    s.style.setProperty('--dx',(Math.random()*60-30)+'px');s.style.left=(45+Math.random()*10)+'%';
+    s.style.animationDelay=(-Math.random()*2.2)+'s';fire.appendChild(s);}
+</script>
+</body>
+</html>

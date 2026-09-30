@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Konzept J · Stories — KaM·in</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  :root{--green:#6aa12f;--blue:#0a93d6;--orange:#ef8f1e;--red:#e2231a;--pink:#c52866;--yellow:#f4b400;}
+  body{font-family:'Onest',sans-serif;background:#101014;color:#fff;height:100vh;overflow:hidden;display:grid;place-items:center;}
+  .phone{width:min(420px,94vw);height:min(880px,94vh);background:#000;border-radius:38px;overflow:hidden;position:relative;box-shadow:0 40px 90px -30px rgba(0,0,0,.8);border:1px solid #2a2a30;}
+  /* story progress */
+  .bars{position:absolute;top:14px;left:14px;right:14px;z-index:20;display:flex;gap:5px;}
+  .bars i{flex:1;height:3px;background:rgba(255,255,255,.3);border-radius:3px;overflow:hidden;}
+  .bars i b{display:block;height:100%;width:0;background:#fff;}
+  .bars i.done b{width:100%;}
+  .bars i.active b{animation:fill 5s linear forwards;}
+  @keyframes fill{to{width:100%;}}
+  /* story top */
+  .stop{position:absolute;top:30px;left:16px;right:16px;z-index:20;display:flex;align-items:center;gap:11px;}
+  .stop img{width:38px;height:38px;border-radius:50%;background:#fff;padding:4px;}
+  .stop b{font-weight:700;font-size:.96rem;}.stop small{color:rgba(255,255,255,.7);font-size:.8rem;margin-left:6px;}
+  .stop .x{margin-left:auto;font-size:1.5rem;color:#fff;text-decoration:none;}
+  /* slides */
+  .slides{position:absolute;inset:0;}
+  .slide{position:absolute;inset:0;opacity:0;transition:opacity .4s;display:flex;flex-direction:column;justify-content:flex-end;padding:30px 26px 120px;}
+  .slide.on{opacity:1;}
+  .slide::before{content:'';position:absolute;inset:0;z-index:0;}
+  .slide::after{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(transparent 30%,rgba(0,0,0,.75));}
+  .slide>*{position:relative;z-index:2;}
+  .s1::before{background:radial-gradient(120% 90% at 30% 20%,var(--blue),#062a3d);}
+  .s2::before{background:radial-gradient(120% 90% at 70% 25%,var(--green),#16330b);}
+  .s3::before{background:radial-gradient(120% 90% at 40% 30%,var(--orange),#3d2206);}
+  .s4::before{background:radial-gradient(120% 90% at 60% 20%,var(--pink),#3d0a24);}
+  .s5::before{background:radial-gradient(120% 90% at 50% 25%,var(--red),#3d0a08);}
+  .emoji{font-size:4.5rem;margin-bottom:auto;margin-top:80px;}
+  .kick{font-weight:700;font-size:.86rem;letter-spacing:.05em;text-transform:uppercase;opacity:.85;}
+  .slide h2{font-size:2.5rem;font-weight:800;line-height:1.02;margin:8px 0 10px;letter-spacing:-.02em;}
+  .slide p{font-size:1.08rem;line-height:1.45;opacity:.92;max-width:30ch;}
+  .when{display:inline-flex;align-items:center;gap:7px;margin-top:16px;background:rgba(255,255,255,.18);backdrop-filter:blur(8px);padding:9px 16px;border-radius:999px;font-weight:600;font-size:.92rem;width:fit-content;}
+  /* tap zones */
+  .tapL,.tapR{position:absolute;top:70px;bottom:120px;width:40%;z-index:15;cursor:pointer;}
+  .tapL{left:0;}.tapR{right:0;}
+  /* nav chips at bottom */
+  .snav{position:absolute;bottom:0;left:0;right:0;z-index:20;padding:16px;display:flex;gap:8px;background:linear-gradient(transparent,rgba(0,0,0,.6));}
+  .snav button{flex:1;background:rgba(255,255,255,.14);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.2);color:#fff;border-radius:13px;padding:11px 0;font-family:'Onest';font-weight:600;font-size:.82rem;cursor:pointer;transition:.15s;}
+  .snav button:hover{background:rgba(255,255,255,.26);}
+  .react{position:absolute;bottom:78px;right:18px;z-index:20;display:flex;flex-direction:column;gap:16px;align-items:center;}
+  .react span{font-size:1.7rem;cursor:pointer;transition:.15s;}.react span:hover{transform:scale(1.25);}
+  .back{position:fixed;left:18px;top:18px;z-index:50;color:rgba(255,255,255,.7);text-decoration:none;font-size:.85rem;background:rgba(255,255,255,.1);padding:7px 13px;border-radius:999px;}
+</style>
+</head>
+<body>
+<div class="phone">
+  <div class="bars" id="bars"></div>
+  <div class="stop"><img src="../assets/kamin-mark.png" alt="" /><span><b>kamin.kappelrodeck</b><small>jetzt</small></span><a href="../KaM-in Konzepte.html" class="x">✕</a></div>
+
+  <div class="slides" id="slides">
+    <div class="slide s1 on"><div class="emoji">👋</div><div class="kick">Bürgertreff · Marktplatz 108</div><h2>Komm herein!</h2><p>Offen für Alt &amp; Jung, für alle Kulturen. Alles kostenlos.</p></div>
+    <div class="slide s2"><div class="emoji">💬</div><div class="kick">Sprachtreff</div><h2>Wir sprechen Deutsch</h2><p>Locker üben, alle Niveaus willkommen.</p><div class="when">🕒 Montag 15:00 Uhr</div></div>
+    <div class="slide s3"><div class="emoji">🎲</div><div class="kick">Für alle</div><h2>Spieletreff</h2><p>Karten &amp; Brettspiele für Jung und Alt.</p><div class="when">🕒 Freitag 15:00 Uhr</div></div>
+    <div class="slide s4"><div class="emoji">🥁</div><div class="kick">Workshop</div><h2>Afrikanisches Trommeln</h2><p>Für Kinder und Erwachsene. Bald wieder!</p><div class="when">🔔 Termin bald</div></div>
+    <div class="slide s5"><div class="emoji">🎉</div><div class="kick">1× im Monat</div><h2>Feierabendtreff</h2><p>Fröhliches Beisammensein für alle aus aller Welt.</p><div class="when">🕒 Mittwoch 18:00 Uhr</div></div>
+  </div>
+
+  <div class="tapL" id="tapL"></div><div class="tapR" id="tapR"></div>
+  <div class="react"><span>❤️</span><span>🙌</span><span>↗️</span></div>
+  <div class="snav"><button>Termine</button><button>Projekte</button><button>KAPi</button><button>Kontakt</button></div>
+</div>
+<a href="../KaM-in Konzepte.html" class="back">← Konzepte</a>
+<script>
+  const slides=[...document.querySelectorAll('.slide')];const bars=document.getElementById('bars');let cur=0,timer;
+  slides.forEach(()=>{const i=document.createElement('i');i.innerHTML='<b></b>';bars.appendChild(i);});
+  const bi=[...bars.children];
+  function go(n){
+    cur=(n+slides.length)%slides.length;
+    slides.forEach((s,i)=>s.classList.toggle('on',i===cur));
+    bi.forEach((b,i)=>{b.classList.toggle('done',i<cur);b.classList.toggle('active',i===cur);});
+    clearTimeout(timer);timer=setTimeout(()=>go(cur+1),5000);
+  }
+  document.getElementById('tapR').onclick=()=>go(cur+1);
+  document.getElementById('tapL').onclick=()=>go(cur-1);
+  go(0);
+</script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Konzept G · Zeitung — KaM·in</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,800;0,900;1,500&family=Spectral:ital,wght@0,400;0,500;1,400&family=Oswald:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  :root{--paper:#f5f1e8;--ink:#1c1a17;--dim:#6b665c;--rule:#1c1a17;--red:#b4231d;}
+  body{font-family:'Spectral',serif;background:#e6e0d2;color:var(--ink);}
+  .paper{max-width:1100px;margin:24px auto;background:var(--paper);padding:28px 40px 50px;box-shadow:0 30px 80px -30px rgba(0,0,0,.5);}
+  /* masthead */
+  .mast{text-align:center;border-bottom:4px double var(--ink);padding-bottom:14px;}
+  .mast__top{display:flex;justify-content:space-between;font-family:'Oswald';text-transform:uppercase;letter-spacing:.1em;font-size:.74rem;color:var(--dim);padding-bottom:10px;}
+  .mast h1{font-family:'Playfair Display';font-weight:900;font-size:clamp(2.8rem,9vw,6rem);line-height:.9;letter-spacing:-.02em;}
+  .mast__sub{font-family:'Oswald';text-transform:uppercase;letter-spacing:.3em;font-size:.8rem;margin-top:8px;color:var(--dim);}
+  /* nav as section line */
+  .secnav{display:flex;justify-content:center;flex-wrap:wrap;gap:0;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);margin-top:14px;font-family:'Oswald';text-transform:uppercase;letter-spacing:.12em;font-size:.82rem;}
+  .secnav a{padding:9px 18px;text-decoration:none;color:var(--ink);border-right:1px solid #00000022;transition:.15s;}
+  .secnav a:first-child{border-left:1px solid #00000022;}
+  .secnav a:hover,.secnav a.on{background:var(--ink);color:var(--paper);}
+  /* layout */
+  .cols{display:grid;grid-template-columns:2fr 1fr;gap:0 34px;margin-top:26px;}
+  .lead h2{font-family:'Playfair Display';font-weight:800;font-size:clamp(2rem,4.5vw,3.4rem);line-height:1.02;}
+  .byline{font-family:'Oswald';text-transform:uppercase;letter-spacing:.1em;font-size:.74rem;color:var(--red);margin:12px 0;}
+  .lead .img{height:280px;background:repeating-linear-gradient(45deg,#0000000d 0 12px,#00000003 12px 24px);border:1px solid #0003;margin:14px 0;display:grid;place-items:center;font-family:'Oswald';letter-spacing:.1em;color:var(--dim);text-transform:uppercase;font-size:.78rem;}
+  .dropcap p:first-of-type::first-letter{font-family:'Playfair Display';font-weight:900;float:left;font-size:4.2rem;line-height:.8;padding:6px 10px 0 0;}
+  .lead p{font-size:1.06rem;line-height:1.6;margin-bottom:12px;text-align:justify;hyphens:auto;}
+  .side{border-left:1px solid var(--ink);padding-left:24px;}
+  .side h3{font-family:'Oswald';text-transform:uppercase;letter-spacing:.08em;font-size:.92rem;border-bottom:2px solid var(--ink);padding-bottom:6px;margin-bottom:12px;}
+  .item{padding:12px 0;border-bottom:1px dotted #0006;}
+  .item b{font-family:'Playfair Display';font-weight:700;font-size:1.18rem;display:block;}
+  .item span{font-family:'Oswald';font-size:.8rem;letter-spacing:.04em;color:var(--red);text-transform:uppercase;}
+  .item p{font-size:.94rem;color:var(--dim);margin-top:4px;}
+  .boxad{border:3px double var(--ink);padding:18px;text-align:center;margin-top:20px;}
+  .boxad .k{font-family:'Oswald';text-transform:uppercase;letter-spacing:.2em;font-size:.72rem;color:var(--red);}
+  .boxad b{font-family:'Playfair Display';font-weight:800;font-size:1.5rem;display:block;margin:6px 0;}
+  .lang{display:flex;gap:6px;justify-content:center;margin-top:8px;}
+  .lang button{font-family:'Oswald';text-transform:uppercase;letter-spacing:.06em;font-size:.74rem;border:1px solid var(--ink);background:none;padding:5px 12px;cursor:pointer;}
+  .lang button.on{background:var(--ink);color:var(--paper);}
+  .foot{border-top:4px double var(--ink);margin-top:30px;padding-top:12px;text-align:center;font-family:'Oswald';text-transform:uppercase;letter-spacing:.12em;font-size:.74rem;color:var(--dim);}
+  .back{position:fixed;left:16px;bottom:16px;z-index:50;font-family:'Oswald';text-transform:uppercase;letter-spacing:.08em;font-size:.74rem;background:var(--ink);color:var(--paper);padding:8px 14px;text-decoration:none;}
+  @media(max-width:760px){.cols{grid-template-columns:1fr;}.side{border-left:none;padding-left:0;border-top:2px solid var(--ink);padding-top:16px;margin-top:20px;}}
+</style>
+</head>
+<body>
+<div class="paper">
+  <header class="mast">
+    <div class="mast__top"><span>Kappelrodeck · Ortenau</span><span>Dienstag, 2. Juni 2026</span><span>Ausgabe · Gratis</span></div>
+    <h1>Der KaM·in Anzeiger</h1>
+    <div class="mast__sub">Begegnung · Vielfalt · Miteinander seit der ersten Stunde</div>
+    <nav class="secnav"><a class="on">Titel</a><a>Termine</a><a>Projekte</a><a>KAPi</a><a>Leute</a><a>Kontakt</a></nav>
+  </header>
+
+  <div class="cols">
+    <article class="lead dropcap">
+      <h2>„Komm herein!“ — Ein Haus, in dem die ganze Welt zu Gast ist</h2>
+      <div class="byline">Bürgertreff · Marktplatz 108 · für alle Generationen</div>
+      <div class="img">[ FOTO: MENSCHEN IM KAM·IN, GROSS ]</div>
+      <p>Mitten am Kappler Marktplatz öffnet ein Ort seine Türen, der keine Eintrittskarte kennt und keine Herkunft fragt. Der Bürgertreff KaM·in bringt Alt und Jung, Einheimische und Zugezogene aus über fünfzig Nationen zusammen — bei Tee, Spiel und Gespräch.</p>
+      <p>Der Name spielt auf das englische „Come In“ an. Und genau so ist es gemeint: Wer mag, kommt herein. Alle Angebote sind kostenlos und ohne Anmeldung. Vom Sprachtreff über die Hausaufgabenhilfe bis zum monatlichen Feierabendtreff ist für jede und jeden etwas dabei.</p>
+    </article>
+
+    <aside class="side">
+      <h3>Diese Woche</h3>
+      <div class="item"><span>Mo 15:00</span><b>Wir sprechen Deutsch</b><p>Locker üben, alle Niveaus.</p></div>
+      <div class="item"><span>Do 15:00</span><b>Nadelspielereien</b><p>Handarbeitstreff für alle.</p></div>
+      <div class="item"><span>Fr 15:00</span><b>Spieletreff</b><p>Karten &amp; Brettspiele.</p></div>
+      <div class="boxad">
+        <div class="k">Anzeige</div>
+        <b>Mach mit!</b>
+        <p style="font-size:.92rem">Werde Sprachpate — schon 1 Stunde hilft.</p>
+        <div class="lang"><button class="on">DE</button><button>UA</button><button>EN</button></div>
+      </div>
+    </aside>
+  </div>
+
+  <div class="foot">KaM·in · Marktplatz 108 · 77876 Kappelrodeck · @kamin.kappelrodeck · alles kostenlos · willkommen sind alle</div>
+</div>
+<a href="../KaM-in Konzepte.html" class="back">← Konzepte</a>
+</body>
+</html>

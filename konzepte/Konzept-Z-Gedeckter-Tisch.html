@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Konzept Z · Gedeckter Tisch — KaM·in</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  :root{--cloth:#c9402f;--cloth2:#b8392a;--plate:#fdfaf3;--ink:#3a2420;--dim:#8a6f68;--green:#5a9a3e;--blue:#2f7bb0;--gold:#d99a2b;--ink2:#fff;}
+  body{font-family:'Nunito Sans',sans-serif;color:var(--ink);min-height:100vh;
+    background:var(--cloth);
+    background-image:linear-gradient(45deg,#fff2 25%,transparent 25%,transparent 75%,#fff2 75%),linear-gradient(45deg,#fff2 25%,transparent 25%,transparent 75%,#fff2 75%);
+    background-size:54px 54px;background-position:0 0,27px 27px;}
+  .serif{font-family:'DM Serif Display',serif;}
+  /* nav as menu ribbon */
+  .nav{position:sticky;top:0;z-index:40;background:var(--plate);box-shadow:0 4px 20px -6px #0005;padding:14px 26px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+  .nav .brand{display:flex;align-items:center;gap:11px;font-family:'DM Serif Display';font-size:1.5rem;}
+  .nav .brand img{height:38px;}
+  .nav nav{display:flex;gap:4px;flex-wrap:wrap;}
+  .nav nav a{font-family:'DM Serif Display';text-decoration:none;color:var(--ink);padding:7px 15px;border-radius:8px;transition:.15s;font-size:1.05rem;}
+  .nav nav a:hover,.nav nav a.on{background:var(--cloth);color:#fff;}
+  .lang{display:flex;gap:5px;}
+  .lang button{font-family:'Nunito Sans';font-weight:800;background:none;border:1.5px solid var(--ink);border-radius:8px;padding:5px 11px;cursor:pointer;color:var(--ink);}
+  .lang button.on{background:var(--ink);color:#fff;}
+  /* hero menu card */
+  .menucard{max-width:760px;margin:40px auto 30px;background:var(--plate);border-radius:8px;box-shadow:0 30px 60px -28px #0007;padding:40px 44px;text-align:center;border:1px solid #e7dcc8;position:relative;}
+  .menucard::before,.menucard::after{content:'';position:absolute;left:30px;right:30px;height:2px;background:var(--ink);opacity:.25;}
+  .menucard::before{top:18px;}.menucard::after{bottom:18px;}
+  .menucard .est{letter-spacing:.3em;text-transform:uppercase;font-size:.74rem;color:var(--dim);font-weight:700;}
+  .menucard h1{font-family:'DM Serif Display';font-size:clamp(2.6rem,7vw,4.4rem);line-height:1;margin:10px 0;}
+  .menucard .sub{font-style:italic;font-family:'DM Serif Display';color:var(--cloth);font-size:1.3rem;}
+  .menucard p{color:var(--dim);max-width:42ch;margin:14px auto 0;}
+  /* place settings grid */
+  .table{max-width:1040px;margin:0 auto;padding:10px 24px 90px;display:grid;grid-template-columns:repeat(3,1fr);gap:30px;}
+  .setting{text-align:center;cursor:pointer;}
+  .plate{aspect-ratio:1;border-radius:50%;background:var(--plate);box-shadow:0 16px 30px -14px #0006, inset 0 0 0 10px #fff, inset 0 0 0 12px #e2d6bf;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;position:relative;transition:.2s;}
+  .setting:hover .plate{transform:translateY(-6px) rotate(-2deg);}
+  /* fork & knife */
+  .plate::before,.plate::after{content:'';position:absolute;top:50%;transform:translateY(-50%);width:5px;height:64px;background:#c9bca0;border-radius:3px;}
+  .plate::before{left:-18px;}.plate::after{right:-18px;}
+  .plate .ic{font-size:2.4rem;}
+  .plate h3{font-family:'DM Serif Display';font-size:1.35rem;line-height:1;padding:0 16px;}
+  .plate .w{font-weight:800;color:var(--c);font-size:.86rem;}
+  .setting .course{margin-top:12px;font-style:italic;font-family:'DM Serif Display';color:var(--dim);}
+  .foot{text-align:center;color:#fff;padding:0 24px 40px;font-weight:700;}
+  .foot .lang{display:inline-flex;gap:6px;margin-top:14px;}
+  .foot .lang button{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.4);color:#fff;}
+  .foot .lang button.on{background:#fff;color:var(--cloth);border-color:#fff;}
+  .back{position:fixed;left:14px;bottom:14px;z-index:50;background:var(--plate);color:var(--ink);font-weight:800;padding:8px 15px;border-radius:999px;text-decoration:none;box-shadow:0 5px 12px -5px #0008;}
+  @media(max-width:760px){.table{grid-template-columns:1fr 1fr;gap:22px;}.nav nav{display:none;}.menucard{padding:30px 24px;}}
+  @media(max-width:460px){.table{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="brand"><img src="../assets/kamin-mark.png" alt="" /> KaM·in</div>
+  <nav><a class="on">Menü</a><a>Termine</a><a>Projekte</a><a>KAPi</a><a>Kontakt</a></nav>
+  <div class="lang"><button class="on">DE</button><button>UA</button><button>EN</button></div>
+</header>
+
+<section class="menucard">
+  <div class="est">Bürgertreff · seit der ersten Stunde</div>
+  <h1 class="serif">Komm herein.</h1>
+  <div class="sub">Ein gedeckter Tisch für alle</div>
+  <p>Bei uns ist immer ein Platz frei — für Alt &amp; Jung, für Menschen aus aller Welt. Und alles ist kostenlos.</p>
+</section>
+
+<main class="table">
+  <div class="setting"><div class="plate" style="--c:var(--green)"><div class="ic">💬</div><h3>Wir sprechen Deutsch</h3><div class="w">Mo · 15:00</div></div><div class="course">~ zum Auftakt ~</div></div>
+  <div class="setting"><div class="plate" style="--c:var(--blue)"><div class="ic">🎲</div><h3>Spieletreff</h3><div class="w">Fr · 15:00</div></div><div class="course">~ Hauptgang ~</div></div>
+  <div class="setting"><div class="plate" style="--c:var(--cloth)"><div class="ic">🧵</div><h3>Nadelspielereien</h3><div class="w">Do · 15:00</div></div><div class="course">~ feine Handarbeit ~</div></div>
+  <div class="setting"><div class="plate" style="--c:var(--gold)"><div class="ic">🎵</div><h3>Musikwerkstatt</h3><div class="w">Sa/So</div></div><div class="course">~ nach Geschmack ~</div></div>
+  <div class="setting"><div class="plate" style="--c:var(--blue)"><div class="ic">🥁</div><h3>Trommel-Workshop</h3><div class="w">bald</div></div><div class="course">~ mit Pfiff ~</div></div>
+  <div class="setting"><div class="plate" style="--c:var(--cloth)"><div class="ic">🎉</div><h3>Feierabendtreff</h3><div class="w">Mi · 18:00</div></div><div class="course">~ das Festmahl ~</div></div>
+</main>
+
+<footer class="foot">
+  KaM·in · Marktplatz 108 · Kappelrodeck · es ist angerichtet
+  <div class="lang"><button class="on">DE</button><button>UA</button><button>EN</button></div>
+</footer>
+<a href="../KaM-in Konzepte.html" class="back">← Konzepte</a>
+</body>
+</html>

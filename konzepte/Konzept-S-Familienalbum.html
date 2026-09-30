@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Konzept S · Familienalbum — KaM·in</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  :root{--paper:#efe7d6;--page:#f7f1e3;--ink:#3b3326;--dim:#897e69;--accent:#b9442e;--line:#d8cdb6;}
+  body{font-family:'Nunito Sans',sans-serif;color:var(--ink);background:#5a4632;
+    background-image:radial-gradient(circle at 50% 0,#6e5740,#4a3826);min-height:100vh;padding:24px 16px 90px;}
+  .hand{font-family:'Caveat',cursive;}
+  .serif{font-family:'Crimson Pro',serif;}
+  /* album cover/book */
+  .album{max-width:1000px;margin:0 auto;background:var(--page);border-radius:6px;
+    box-shadow:0 40px 80px -30px #000a, inset 0 0 0 14px var(--paper), inset 0 0 0 15px var(--line);
+    padding:42px 44px 48px;position:relative;}
+  .album::before{content:'';position:absolute;left:50%;top:18px;bottom:18px;width:2px;background:linear-gradient(#0000,#0002,#0000);transform:translateX(-50%);display:none;}
+  /* tabbed nav like album dividers */
+  .tabs{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-bottom:8px;}
+  .tabs a{font-family:'Caveat';font-weight:700;font-size:1.3rem;text-decoration:none;color:var(--ink);background:var(--paper);padding:7px 18px;border-radius:10px 10px 0 0;border:1px solid var(--line);border-bottom:none;transform:translateY(2px);transition:.15s;}
+  .tabs a:hover,.tabs a.on{background:var(--accent);color:#fff;transform:translateY(-2px);}
+  .pageline{border-top:2px solid var(--line);padding-top:8px;}
+  /* header */
+  .ah{text-align:center;margin-bottom:24px;}
+  .ah .y{font-family:'Caveat';font-size:1.5rem;color:var(--accent);}
+  .ah h1{font-family:'Crimson Pro';font-weight:600;font-size:clamp(2.4rem,6vw,4rem);line-height:1;}
+  .ah p{font-style:italic;color:var(--dim);font-family:'Crimson Pro';font-size:1.2rem;margin-top:6px;}
+  /* photo scatter */
+  .spread{display:grid;grid-template-columns:repeat(2,1fr);gap:30px 36px;}
+  .polaroid{background:#fff;padding:12px 12px 0;box-shadow:0 12px 26px -12px #0007;transition:.2s;cursor:pointer;}
+  .polaroid:nth-child(odd){transform:rotate(-2deg);}.polaroid:nth-child(even){transform:rotate(1.5deg);}
+  .polaroid:hover{transform:rotate(0) scale(1.03);z-index:5;}
+  .polaroid .img{aspect-ratio:4/3;background:repeating-linear-gradient(45deg,#0000000d 0 12px,#0000 12px 24px);display:grid;place-items:center;font-family:ui-monospace,monospace;font-size:.78rem;color:#0007;}
+  .polaroid .cap{font-family:'Caveat';font-size:1.5rem;text-align:center;padding:10px 6px 16px;line-height:1;}
+  .polaroid .cap small{display:block;font-family:'Nunito Sans';font-size:.82rem;color:var(--dim);font-weight:600;margin-top:5px;}
+  .corner{position:relative;}
+  .corner::before,.corner::after{content:'';position:absolute;width:22px;height:22px;border:0 solid #0003;top:6px;}
+  /* caption strip note */
+  .ribbon{grid-column:1/-1;text-align:center;font-family:'Crimson Pro';font-style:italic;font-size:1.3rem;color:var(--dim);padding:8px 0;}
+  .foot{margin-top:30px;border-top:2px solid var(--line);padding-top:16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-family:'Crimson Pro';color:var(--dim);}
+  .lang{display:flex;gap:6px;}
+  .lang button{font-family:'Caveat';font-weight:700;font-size:1.2rem;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:3px 13px;cursor:pointer;color:var(--ink);}
+  .lang button.on{background:var(--accent);color:#fff;border-color:var(--accent);}
+  .back{position:fixed;left:14px;bottom:14px;z-index:50;font-family:'Caveat';font-weight:700;font-size:1.2rem;background:var(--page);color:var(--ink);padding:7px 15px;border-radius:8px;text-decoration:none;box-shadow:0 5px 12px -5px #000a;}
+  @media(max-width:680px){.spread{grid-template-columns:1fr;}.album{padding:28px 22px 34px;}}
+</style>
+</head>
+<body>
+<div class="album">
+  <div class="tabs"><a class="on">Album</a><a>Termine</a><a>Projekte</a><a>KAPi</a><a>Kontakt</a></div>
+  <div class="pageline"></div>
+  <div class="ah">
+    <div class="y hand">~ unser Jahr, Seite 1 ~</div>
+    <h1 class="serif">Komm herein.</h1>
+    <p>Erinnerungen, die wir gemeinsam machen — für Alt &amp; Jung, aus aller Welt.</p>
+  </div>
+
+  <div class="spread">
+    <div class="polaroid"><div class="img">[ Foto: Deutsch-Treff ]</div><div class="cap">Wir sprechen Deutsch<small>jeden Montag · 15:00 Uhr</small></div></div>
+    <div class="polaroid"><div class="img">[ Foto: Spieletreff ]</div><div class="cap">Spieleabend mit allen<small>freitags · Karten &amp; Brettspiele</small></div></div>
+    <div class="ribbon">„Bei uns ist jede:r willkommen — egal woher.“</div>
+    <div class="polaroid"><div class="img">[ Foto: Handarbeit ]</div><div class="cap">Nadelspielereien<small>donnerstags · 15:00 Uhr</small></div></div>
+    <div class="polaroid"><div class="img">[ Foto: Feierabendtreff ]</div><div class="cap">Feierabend zusammen<small>1× im Monat · für alle</small></div></div>
+  </div>
+
+  <div class="foot">
+    <span>KaM·in · Marktplatz 108 · Kappelrodeck · Eintritt frei</span>
+    <div class="lang"><button class="on">DE</button><button>UA</button><button>EN</button></div>
+  </div>
+</div>
+<a href="../KaM-in Konzepte.html" class="back">← Konzepte</a>
+</body>
+</html>

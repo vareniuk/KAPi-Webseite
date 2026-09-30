@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Konzept W · Tagebuch — KaM·in</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Gaegu:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  :root{--ink:#33405a;--accent:#d6604a;--blue:#3b7bb5;--green:#5a9a4e;--pink:#c8638f;--line:#c5d3e6;}
+  body{font-family:'Kalam',cursive;color:var(--ink);background:#dfe6ef;min-height:100vh;padding:24px 16px 90px;}
+  .gaegu{font-family:'Gaegu',cursive;}
+  /* spiral notebook */
+  .book{max-width:880px;margin:0 auto;background:#fcfcf7;border-radius:8px;position:relative;
+    background-image:repeating-linear-gradient(#fcfcf7 0 31px,#cfe0f0 31px 32px);background-position:0 58px;
+    box-shadow:0 30px 70px -28px #0007;padding:24px 40px 50px 78px;}
+  /* red margin line */
+  .book::before{content:'';position:absolute;left:58px;top:0;bottom:0;width:2px;background:#e7a6a0;}
+  /* spiral holes */
+  .spiral{position:absolute;left:14px;top:0;bottom:0;width:34px;display:flex;flex-direction:column;justify-content:space-around;padding:30px 0;}
+  .spiral i{width:22px;height:22px;border-radius:50%;background:#dfe6ef;box-shadow:inset 0 2px 4px #0004;border:2px solid #c0cad8;position:relative;}
+  .spiral i::after{content:'';position:absolute;left:-12px;top:7px;width:30px;height:7px;border-radius:4px;background:linear-gradient(#bbb,#888);box-shadow:0 2px 3px #0005;}
+  /* tab nav */
+  .tabs{position:absolute;right:-10px;top:40px;display:flex;flex-direction:column;gap:10px;z-index:3;}
+  .tabs a{font-family:'Gaegu';font-weight:700;font-size:1.15rem;text-decoration:none;color:#fff;padding:9px 16px 9px 20px;border-radius:0 8px 8px 0;box-shadow:3px 3px 7px -2px #0006;transition:.15s;}
+  .tabs a:hover,.tabs a.on{transform:translateX(8px);}
+  .tabs a:nth-child(1){background:var(--accent);}.tabs a:nth-child(2){background:var(--blue);}
+  .tabs a:nth-child(3){background:var(--green);}.tabs a:nth-child(4){background:var(--pink);}
+  .tabs a:nth-child(5){background:#e0a02e;}
+  /* content */
+  .date{font-family:'Gaegu';font-weight:700;color:var(--accent);font-size:1.3rem;transform:rotate(-1deg);}
+  h1{font-family:'Gaegu';font-weight:700;font-size:clamp(2.6rem,7vw,4.2rem);line-height:1.1;margin:2px 0 6px;}
+  .lead{font-size:1.3rem;line-height:1.55;}
+  .doodle{display:inline-block;transform:rotate(-3deg);color:var(--accent);}
+  .underline{text-decoration:wavy underline var(--accent);text-underline-offset:5px;}
+  .entry{margin-top:30px;}
+  .entry h3{font-family:'Gaegu';font-weight:700;font-size:1.7rem;display:flex;align-items:center;gap:10px;}
+  .entry h3 .star{color:#e0a02e;}
+  .entry .when{font-size:1.15rem;color:var(--blue);}
+  .entry p{font-size:1.2rem;line-height:1.55;}
+  .tape{display:inline-block;background:#ffe9663d;border:1px dashed #d4b94a;padding:2px 10px;transform:rotate(-1deg);}
+  .sticker{display:inline-block;font-size:1.6rem;transform:rotate(8deg);}
+  .photo{float:right;width:200px;margin:0 0 10px 20px;background:#fff;padding:10px 10px 30px;box-shadow:3px 5px 12px -4px #0006;transform:rotate(3deg);}
+  .photo .in{aspect-ratio:1;background:repeating-linear-gradient(45deg,#0001 0 10px,#0000 10px 20px);display:grid;place-items:center;font-family:'Gaegu';color:#0007;}
+  .photo .cap{font-family:'Gaegu';text-align:center;font-size:1.1rem;padding-top:6px;}
+  .foot{margin-top:40px;border-top:2px dashed var(--line);padding-top:14px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-size:1.1rem;color:#6a7790;}
+  .lang{display:flex;gap:5px;}
+  .lang button{font-family:'Gaegu';font-weight:700;font-size:1.1rem;background:none;border:2px solid var(--ink);border-radius:8px;padding:2px 12px;cursor:pointer;color:var(--ink);}
+  .lang button.on{background:var(--ink);color:#fcfcf7;}
+  .back{position:fixed;left:14px;bottom:14px;z-index:50;font-family:'Gaegu';font-weight:700;font-size:1.1rem;background:#fcfcf7;color:var(--ink);padding:6px 14px;border-radius:8px;text-decoration:none;box-shadow:0 5px 12px -5px #0008;}
+  @media(max-width:680px){.book{padding-left:64px;padding-right:24px;}.tabs{position:static;flex-direction:row;flex-wrap:wrap;margin-bottom:16px;}.tabs a{border-radius:8px;}.photo{float:none;width:100%;margin:14px 0;}}
+</style>
+</head>
+<body>
+<div class="book">
+  <div class="spiral" id="spiral"></div>
+  <nav class="tabs"><a class="on">Heute</a><a>Termine</a><a>Projekte</a><a>KAPi</a><a>Kontakt</a></nav>
+
+  <div class="date">~ Liebes Tagebuch, heute ist Dienstag ~</div>
+  <h1>Komm herein! <span class="doodle">✿</span></h1>
+  <p class="lead">Heute war wieder so ein schöner Tag im <span class="underline">KaM·in</span>. Hier treffen sich Alt &amp; Jung, Menschen aus aller Welt — und <span class="tape">alles ist kostenlos</span>. <span class="sticker">🌟</span></p>
+
+  <div class="photo"><div class="in">[ Foto ]</div><div class="cap">unsere Runde ♥</div></div>
+
+  <div class="entry">
+    <h3><span class="star">★</span> Wir sprechen Deutsch</h3>
+    <div class="when">montags, 15:00 Uhr</div>
+    <p>Wir haben zusammen geübt und viel gelacht. Jede:r darf mitmachen, egal wie gut das Deutsch ist.</p>
+  </div>
+  <div class="entry">
+    <h3><span class="star">★</span> Spieletreff</h3>
+    <div class="when">freitags, 15:00 Uhr</div>
+    <p>Karten und Brettspiele für alle. Mein Lieblingstag in der Woche! <span class="sticker" style="font-size:1.2rem">🎲</span></p>
+  </div>
+  <div class="entry">
+    <h3><span class="star">★</span> Feierabendtreff</h3>
+    <div class="when">1× im Monat, mittwochs abends</div>
+    <p>Einmal im Monat feiern wir zusammen — Einheimische und Zugezogene aus aller Welt. Es war herzlich. <span class="sticker" style="font-size:1.2rem">🎉</span></p>
+  </div>
+
+  <div class="foot">
+    <span>KaM·in · Marktplatz 108 · Kappelrodeck</span>
+    <div class="lang"><button class="on">DE</button><button>UA</button><button>EN</button></div>
+  </div>
+</div>
+<a href="../KaM-in Konzepte.html" class="back">← Konzepte</a>
+<script>const s=document.getElementById('spiral');for(let i=0;i<11;i++){s.appendChild(document.createElement('i'));}</script>
+</body>
+</html>

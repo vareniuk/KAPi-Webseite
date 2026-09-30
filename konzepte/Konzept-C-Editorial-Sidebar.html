@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Konzept C · Editorial — KaM·in</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,500&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  :root{--ink:#23201b;--paper:#f3eee4;--soft:#fffdf8;--dim:#7d7669;--line:#e0d8c8;
+    --green:#5f9e2f;--blue:#1f8fd6;--orange:#e0851c;--red:#d83a2a;--pink:#c52866;--rail:#211d18;}
+  body{font-family:'Archivo',sans-serif;background:var(--paper);color:var(--ink);}
+  h1,h2,h3,.serif{font-family:'Newsreader',serif;font-weight:500;letter-spacing:-.01em;line-height:1.04;}
+  /* sidebar */
+  .rail{position:fixed;top:0;left:0;bottom:0;width:248px;background:var(--rail);color:#f3eee4;display:flex;flex-direction:column;padding:28px 22px;z-index:40;}
+  .rail__logo{background:#fffdf8;border-radius:14px;padding:12px;margin-bottom:36px;}
+  .rail__logo img{width:100%;height:auto;display:block;}
+  .rail__nav{display:flex;flex-direction:column;gap:4px;}
+  .rail__nav a{display:flex;align-items:center;gap:14px;color:#cfc7b8;text-decoration:none;padding:12px 14px;border-radius:11px;font-size:1.02rem;transition:.18s;position:relative;}
+  .rail__nav a:hover{background:rgba(255,255,255,.07);color:#fff;}
+  .rail__nav a.on{background:#fffdf8;color:var(--ink);font-weight:600;}
+  .rail__nav svg{width:21px;height:21px;flex:none;}
+  .rail__foot{margin-top:auto;}
+  .rail__lang{display:flex;gap:6px;}
+  .rail__lang button{flex:1;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#cfc7b8;border-radius:9px;padding:9px 0;font-family:'Archivo';font-weight:600;cursor:pointer;transition:.18s;}
+  .rail__lang button.on,.rail__lang button:hover{background:#fffdf8;color:var(--ink);border-color:transparent;}
+  .rail__addr{font-size:.84rem;color:#9a9384;margin-top:16px;line-height:1.5;}
+  /* content */
+  .content{margin-left:248px;padding:6vw clamp(28px,6vw,90px);}
+  .reveal{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1);}
+  .reveal.in{opacity:1;transform:none;}
+  .kicker{font-family:'Archivo';font-weight:600;letter-spacing:.16em;text-transform:uppercase;font-size:.8rem;color:var(--red);margin-bottom:22px;}
+  .hero h1{font-size:clamp(3rem,8vw,7rem);}
+  .hero h1 em{font-style:italic;color:var(--orange);}
+  .hero .lead{font-family:'Newsreader';font-size:clamp(1.3rem,2.6vw,1.9rem);color:var(--ink);max-width:30ch;margin-top:24px;line-height:1.35;}
+  .hero .meta{display:flex;gap:26px;flex-wrap:wrap;margin-top:34px;font-size:.96rem;color:var(--dim);border-top:1px solid var(--line);padding-top:22px;}
+  .hero .meta b{color:var(--ink);font-weight:600;}
+  .heroimg{margin-top:48px;height:46vh;min-height:300px;border-radius:18px;background:repeating-linear-gradient(135deg,rgba(95,158,47,.10) 0 18px,rgba(31,143,214,.08) 18px 36px);display:grid;place-items:center;font-family:ui-monospace,monospace;color:var(--dim);border:1px solid var(--line);}
+  /* editorial rows */
+  .row{display:grid;grid-template-columns:90px 1fr 38%;gap:32px;align-items:center;padding:48px 0;border-top:1px solid var(--line);}
+  .row__no{font-family:'Newsreader';font-size:2.4rem;color:var(--dim);font-style:italic;}
+  .row__t h3{font-size:clamp(1.8rem,3.6vw,2.8rem);}
+  .row__t p{color:var(--dim);font-size:1.1rem;margin-top:10px;max-width:42ch;}
+  .row__t .when{display:inline-block;margin-top:14px;font-family:'Archivo';font-weight:600;font-size:.92rem;padding:6px 14px;border-radius:999px;}
+  .row__img{height:200px;border-radius:14px;display:grid;place-items:center;font-family:ui-monospace,monospace;font-size:.8rem;color:var(--dim);}
+  .sectitle{font-size:clamp(2rem,5vw,3.4rem);margin:90px 0 10px;}
+  @media(max-width:880px){
+    .rail{width:100%;height:auto;bottom:auto;flex-direction:row;align-items:center;padding:12px 16px;gap:14px;}
+    .rail__logo{margin:0;padding:7px;width:120px;}
+    .rail__nav{flex-direction:row;overflow-x:auto;gap:2px;flex:1;}
+    .rail__nav a span{display:none;}.rail__nav a{padding:10px;}
+    .rail__foot{margin:0;}.rail__addr{display:none;}.rail__lang button{padding:8px 10px;}
+    .content{margin-left:0;padding-top:90px;}
+    .row{grid-template-columns:1fr;gap:14px;}.row__img{height:160px;}
+  }
+  .back{position:fixed;right:18px;bottom:18px;z-index:50;background:var(--ink);color:var(--paper);text-decoration:none;padding:10px 16px;border-radius:999px;font-size:.9rem;font-weight:600;}
+</style>
+</head>
+<body>
+<aside class="rail">
+  <div class="rail__logo"><img src="../assets/kamin-logo.png" alt="KaM·in" /></div>
+  <nav class="rail__nav">
+    <a href="#" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 11l9-8 9 8M5 10v10h14V10"/></svg><span>Start</span></a>
+    <a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="6" width="16" height="15"/><path d="M4 10h16M8 3v4M16 3v4"/></svg><span>Termine</span></a>
+    <a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19V6a2 2 0 012-2h7l2 3h3a2 2 0 012 2v10"/></svg><span>Projekte</span></a>
+    <a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 3 2.5 15 0 18M12 3c-2.5 3-2.5 15 0 18"/></svg><span>KAPi</span></a>
+    <a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-6 7-11a7 7 0 10-14 0c0 5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><span>Kontakt</span></a>
+  </nav>
+  <div class="rail__foot">
+    <div class="rail__lang"><button class="on">DE</button><button>UA</button><button>EN</button></div>
+    <div class="rail__addr">Marktplatz 108<br>77876 Kappelrodeck</div>
+  </div>
+</aside>
+
+<main class="content">
+  <section class="hero reveal in">
+    <div class="kicker">Bürgertreff · Kappler Marktplatz</div>
+    <h1>Komm <em>herein.</em></h1>
+    <p class="lead">Ein offener Treffpunkt für Alt und Jung, für alle Kulturen — und alles ist kostenlos.</p>
+    <div class="meta"><div><b>Wann?</b> Mo–Sa nachmittags</div><div><b>Wo?</b> Marktplatz 108</div><div><b>Willkommen?</b> Ja, jede und jeder.</div></div>
+    <div class="heroimg reveal">[ Foto von echten Menschen im KaM·in ]</div>
+  </section>
+
+  <h2 class="sectitle serif reveal">Unsere Projekte</h2>
+  <div class="row reveal"><div class="row__no">01</div><div class="row__t"><h3>Wir sprechen Deutsch</h3><p>Deutsch üben in lockerer Runde — für alle Sprach-Niveaus.</p><span class="when" style="background:rgba(95,158,47,.16);color:var(--green)">Mo 15:00–16:30</span></div><div class="row__img" style="background:rgba(95,158,47,.10)">[ Foto ]</div></div>
+  <div class="row reveal"><div class="row__no">02</div><div class="row__t"><h3>Spieletreff</h3><p>Karten- und Brettspiele für alle. Komm einfach mit.</p><span class="when" style="background:rgba(224,133,28,.16);color:var(--orange)">Fr 15:00–17:00</span></div><div class="row__img" style="background:rgba(224,133,28,.10)">[ Foto ]</div></div>
+  <div class="row reveal"><div class="row__no">03</div><div class="row__t"><h3>Feierabendtreff</h3><p>Fröhliches Beisammensein für Einheimische und Zugezogene aus aller Welt.</p><span class="when" style="background:rgba(216,58,42,.16);color:var(--red)">1× im Monat</span></div><div class="row__img" style="background:rgba(216,58,42,.10)">[ Foto ]</div></div>
+</main>
+
+<a href="../KaM-in Konzepte.html" class="back">← Konzepte</a>
+<script>
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');}),{threshold:.18});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

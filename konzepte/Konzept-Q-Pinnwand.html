@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Konzept Q · Pinnwand — KaM·in</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  :root{--green:#6aa12f;--blue:#0a93d6;--orange:#ef8f1e;--yellow:#f4b400;--red:#e2231a;--pink:#c52866;--ink:#3a3128;}
+  body{font-family:'Nunito',sans-serif;color:var(--ink);min-height:100vh;
+    background:#b9772f;
+    background-image:repeating-linear-gradient(90deg,#0000 0 5px,#00000010 5px 6px),repeating-linear-gradient(0deg,#0000 0 5px,#00000010 5px 6px),radial-gradient(circle at 30% 20%,#c9853a,#a8661f);
+    background-size:7px 7px,7px 7px,100% 100%;}
+  .hand{font-family:'Caveat',cursive;}
+  /* top wooden frame nav */
+  .frame{position:sticky;top:0;z-index:40;background:linear-gradient(#7c4a1d,#5e3613);border-bottom:5px solid #43260c;box-shadow:0 6px 16px -4px #0007;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+  .frame .brand{display:flex;align-items:center;gap:12px;color:#fff;}
+  .frame .brand img{height:40px;background:#fff;border-radius:8px;padding:5px;}
+  .frame .brand b{font-size:1.4rem;font-weight:900;}
+  .frame .brand .hand{display:block;font-size:1.15rem;color:#ffd9a0;line-height:.8;}
+  .frame nav{display:flex;gap:6px;flex-wrap:wrap;}
+  .frame nav a{font-family:'Caveat';font-size:1.35rem;font-weight:700;text-decoration:none;color:var(--ink);background:#fdf6e8;padding:5px 16px;border-radius:6px;transform:rotate(-1.5deg);box-shadow:0 3px 6px -2px #0006;transition:.15s;}
+  .frame nav a:nth-child(even){transform:rotate(1.5deg);}
+  .frame nav a:hover{transform:rotate(0) translateY(-2px) scale(1.05);}
+  .frame nav a.on{background:var(--yellow);}
+  /* board */
+  .board{max-width:1180px;margin:0 auto;padding:40px 24px 90px;columns:4;column-gap:22px;}
+  @media(max-width:1000px){.board{columns:3;}}
+  @media(max-width:740px){.board{columns:2;}}
+  @media(max-width:480px){.board{columns:1;}}
+  .note{break-inside:avoid;margin-bottom:22px;padding:20px 18px 18px;border-radius:3px;position:relative;box-shadow:0 8px 16px -6px #0006;transition:.18s;cursor:pointer;}
+  .note:hover{transform:scale(1.03) rotate(0)!important;z-index:5;box-shadow:0 16px 26px -8px #0007;}
+  .note::before{content:'';position:absolute;top:-9px;left:50%;transform:translateX(-50%);width:18px;height:18px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#ff8a8a,#c0241d);box-shadow:0 2px 4px #0007,inset -2px -2px 3px #0004;}
+  .note.tape::before{display:none;}
+  .note.tape::after{content:'';position:absolute;top:-10px;left:50%;transform:translateX(-50%) rotate(-4deg);width:64px;height:24px;background:rgba(255,255,255,.45);box-shadow:0 2px 4px #0003;}
+  .n1{background:#fff6a8;transform:rotate(-2deg);}.n2{background:#bfe6ff;transform:rotate(1.5deg);}
+  .n3{background:#ffd0e2;transform:rotate(-1deg);}.n4{background:#d4f3b0;transform:rotate(2deg);}
+  .n5{background:#ffe0b0;transform:rotate(-1.5deg);}.n6{background:#fff;transform:rotate(1deg);}
+  .note .day{font-family:'Caveat';font-weight:700;font-size:1.5rem;color:var(--red);}
+  .note h3{font-size:1.3rem;font-weight:800;margin:2px 0 6px;line-height:1.05;}
+  .note p{font-size:.98rem;line-height:1.4;color:#4a4034;}
+  .note .pic{height:120px;border-radius:4px;margin:8px 0;background:repeating-linear-gradient(45deg,#00000010 0 10px,#0000 10px 20px);display:grid;place-items:center;font-family:'Caveat';font-size:1.1rem;color:#0008;border:1px solid #0002;}
+  .note .meta{font-family:'Caveat';font-size:1.25rem;margin-top:6px;color:var(--ink);}
+  .note .free{display:inline-block;font-family:'Caveat';font-weight:700;font-size:1.2rem;color:var(--green);}
+  .big{font-family:'Caveat';color:#fff;text-shadow:2px 2px 0 #0005;}
+  .big .h{font-size:3.4rem;font-weight:700;line-height:.9;}
+  .big .s{font-size:1.6rem;}
+  .lang{display:flex;gap:5px;}
+  .lang button{font-family:'Caveat';font-weight:700;font-size:1.2rem;background:#fdf6e8;border:none;border-radius:6px;padding:3px 12px;cursor:pointer;color:var(--ink);}
+  .lang button.on{background:var(--yellow);}
+  .back{position:fixed;left:14px;bottom:14px;z-index:50;font-family:'Caveat';font-weight:700;font-size:1.2rem;background:#fdf6e8;padding:6px 14px;border-radius:6px;text-decoration:none;color:var(--ink);box-shadow:0 4px 8px -3px #0007;}
+</style>
+</head>
+<body>
+<header class="frame">
+  <div class="brand"><img src="../assets/kamin-mark.png" alt="" /><div><b>KaM·in</b><span class="hand">unsere Pinnwand</span></div></div>
+  <nav><a class="on">Start</a><a>Termine</a><a>Projekte</a><a>KAPi</a><a>Kontakt</a></nav>
+  <div class="lang"><button class="on">DE</button><button>UA</button><button>EN</button></div>
+</header>
+
+<main class="board">
+  <div class="note n1"><div class="big"><div class="h">Komm herein!</div></div><p style="margin-top:8px"><b>Schön, dass du da bist.</b> Offen für Alt &amp; Jung, für alle Kulturen.</p><div class="free">★ alles kostenlos</div></div>
+  <div class="note n2 tape"><div class="day">Montag</div><h3>Wir sprechen Deutsch</h3><p>Locker üben — alle Niveaus willkommen!</p><div class="meta">🕒 15:00–16:30</div></div>
+  <div class="note n6 tape"><div class="pic">[ Foto vom letzten Treffen ]</div><h3>Spieletreff</h3><p>Karten &amp; Brettspiele für alle.</p><div class="meta">Freitags · 15 Uhr</div></div>
+  <div class="note n3"><div class="day">Donnerstag</div><h3>Nadelspielereien</h3><p>Nähen, stricken, häkeln. Material ist da!</p><div class="meta">🧵 15:00–17:00</div></div>
+  <div class="note n4"><h3>🥁 Trommeln gesucht!</h3><p>Workshop für Kinder &amp; Erwachsene — bald wieder. Trag dich für Infos ein!</p><div class="free">mitmachen?</div></div>
+  <div class="note n5 tape"><div class="day">1× im Monat</div><h3>Feierabendtreff</h3><p>Fröhliches Beisammensein für alle aus aller Welt.</p><div class="meta">Mi · 18 Uhr</div></div>
+  <div class="note n2"><div class="pic">[ Gruppenfoto ]</div><h3 class="hand" style="font-size:1.8rem">Sprachpaten gesucht</h3><p>Schon 1 Stunde hilft. Melde dich einfach!</p></div>
+  <div class="note n1 tape"><h3>📍 So findest du uns</h3><p>Marktplatz 108<br>77876 Kappelrodeck</p><div class="meta">@kamin.kappelrodeck</div></div>
+  <div class="note n3 tape"><div class="day">Wochenende</div><h3>Offene Musikwerkstatt</h3><p>Gemeinsam Musik machen — nach Vereinbarung.</p></div>
+</main>
+<a href="../KaM-in Konzepte.html" class="back">← Konzepte</a>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Konzept K · Boarding-Pass — KaM·in</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  :root{--blue:#0a4d8c;--sky:#0a93d6;--ink:#16202c;--dim:#6a7686;--green:#3f9b2e;--orange:#ef8f1e;--paper:#fbfcfd;}
+  body{font-family:'Barlow',sans-serif;background:linear-gradient(135deg,#0a4d8c,#0a93d6);color:var(--ink);min-height:100vh;padding:30px 16px;display:flex;flex-direction:column;align-items:center;gap:22px;}
+  .cond{font-family:'Barlow Semi Condensed';}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  /* top nav as airline header */
+  .topnav{width:min(880px,100%);display:flex;align-items:center;justify-content:space-between;color:#fff;}
+  .topnav .brand{display:flex;align-items:center;gap:12px;font-family:'Barlow Semi Condensed';font-weight:700;font-size:1.4rem;letter-spacing:.02em;}
+  .topnav .brand img{height:36px;filter:brightness(0) invert(1);}
+  .topnav nav{display:flex;gap:4px;}
+  .topnav nav a{color:rgba(255,255,255,.85);text-decoration:none;font-family:'Barlow Semi Condensed';font-weight:600;text-transform:uppercase;letter-spacing:.06em;font-size:.84rem;padding:8px 13px;border-radius:7px;transition:.15s;}
+  .topnav nav a:hover,.topnav nav a.on{background:rgba(255,255,255,.18);color:#fff;}
+  /* pass */
+  .pass{width:min(880px,100%);background:var(--paper);border-radius:18px;overflow:hidden;box-shadow:0 40px 80px -30px rgba(0,0,0,.6);display:grid;grid-template-columns:1fr 280px;position:relative;}
+  .pass::before,.pass::after{content:'';position:absolute;width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#0a4d8c,#0a93d6);top:50%;transform:translateY(-50%);z-index:3;}
+  .pass::before{left:calc(100% - 280px - 17px);} 
+  .stub-line{position:absolute;left:calc(100% - 280px);top:18px;bottom:18px;border-left:2.5px dashed #cdd6e0;z-index:2;}
+  .main-sec{padding:26px 30px;}
+  .pass__top{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #eef1f5;padding-bottom:16px;}
+  .pass__top .air{font-family:'Barlow Semi Condensed';font-weight:700;font-size:1.3rem;color:var(--blue);display:flex;align-items:center;gap:10px;}
+  .pass__top .cls{font-family:'JetBrains Mono';font-size:.78rem;color:var(--dim);text-transform:uppercase;}
+  .route{display:flex;align-items:center;gap:18px;margin:24px 0;}
+  .route .ap{text-align:center;}
+  .route .code{font-family:'Barlow Semi Condensed';font-weight:700;font-size:3.2rem;line-height:1;color:var(--ink);}
+  .route .city{font-size:.82rem;color:var(--dim);text-transform:uppercase;letter-spacing:.08em;}
+  .route .path{flex:1;position:relative;height:2px;background:repeating-linear-gradient(90deg,#c4cedb 0 8px,transparent 8px 14px);}
+  .route .path svg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--paper);padding:0 8px;color:var(--sky);}
+  .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:20px;}
+  .fld .l{font-family:'JetBrains Mono';font-size:.68rem;color:var(--dim);text-transform:uppercase;letter-spacing:.06em;}
+  .fld .v{font-family:'Barlow Semi Condensed';font-weight:600;font-size:1.25rem;margin-top:2px;}
+  .fld .v.green{color:var(--green);}
+  .pass__note{margin-top:20px;background:#f0f7ff;border-radius:10px;padding:13px 16px;font-size:.92rem;color:var(--blue);}
+  /* stub */
+  .stub{padding:26px 24px;background:#f4f8fc;display:flex;flex-direction:column;}
+  .stub .air{font-family:'Barlow Semi Condensed';font-weight:700;color:var(--blue);font-size:1.05rem;}
+  .stub .fld{margin-top:14px;}
+  .barcode{margin-top:auto;height:60px;background:repeating-linear-gradient(90deg,var(--ink) 0 2px,transparent 2px 4px,var(--ink) 4px 5px,transparent 5px 9px);border-radius:4px;}
+  .stub .seat{font-family:'Barlow Semi Condensed';font-weight:700;font-size:2.4rem;color:var(--ink);}
+  /* boarding list */
+  .more{width:min(880px,100%);background:rgba(255,255,255,.12);backdrop-filter:blur(10px);border-radius:16px;padding:8px;}
+  .flight{display:grid;grid-template-columns:90px 1fr auto auto;gap:16px;align-items:center;padding:14px 18px;border-radius:11px;color:#fff;cursor:pointer;transition:.14s;}
+  .flight:hover{background:rgba(255,255,255,.12);}
+  .flight .time{font-family:'Barlow Semi Condensed';font-weight:700;font-size:1.5rem;}
+  .flight .nm{font-weight:600;font-size:1.1rem;}.flight .nm small{display:block;opacity:.7;font-size:.84rem;}
+  .flight .gate{font-family:'JetBrains Mono';font-size:.82rem;opacity:.85;}
+  .flight .st{font-family:'Barlow Semi Condensed';font-weight:700;text-transform:uppercase;font-size:.82rem;padding:5px 12px;border-radius:999px;background:rgba(63,155,46,.3);}
+  .lang{display:flex;gap:6px;}
+  .lang button{font-family:'Barlow Semi Condensed';font-weight:700;background:rgba(255,255,255,.16);border:none;color:#fff;border-radius:7px;padding:6px 12px;cursor:pointer;}
+  .lang button.on{background:#fff;color:var(--blue);}
+  .back{position:fixed;left:16px;bottom:16px;z-index:50;background:#fff;color:var(--blue);border-radius:999px;padding:8px 14px;font-weight:700;text-decoration:none;font-size:.85rem;}
+  @media(max-width:720px){.pass{grid-template-columns:1fr;}.pass::before{display:none;}.stub-line{display:none;}.grid4{grid-template-columns:repeat(2,1fr);}.topnav nav{display:none;}.flight{grid-template-columns:70px 1fr;}.flight .gate,.flight .st{grid-column:2;}}
+</style>
+</head>
+<body>
+  <div class="topnav">
+    <div class="brand"><img src="../assets/kamin-mark.png" alt="" /> KaM·in AIRLINES</div>
+    <nav><a class="on">Boarding</a><a>Termine</a><a>Projekte</a><a>KAPi</a><a>Kontakt</a></nav>
+    <div class="lang"><button class="on">DE</button><button>UA</button><button>EN</button></div>
+  </div>
+
+  <div class="pass">
+    <div class="stub-line"></div>
+    <div class="main-sec">
+      <div class="pass__top"><div class="air">✈ BOARDING PASS</div><div class="cls">Klasse: Willkommen · alle</div></div>
+      <div class="route">
+        <div class="ap"><div class="code">DU</div><div class="city">Wo du herkommst</div></div>
+        <div class="path"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M2 12l20-7-7 7 7 7z"/></svg></div>
+        <div class="ap"><div class="code">KAM</div><div class="city">Marktplatz 108</div></div>
+      </div>
+      <div class="grid4">
+        <div class="fld"><div class="l">Passagier</div><div class="v">Jede &amp; jeder</div></div>
+        <div class="fld"><div class="l">Gate</div><div class="v">Eingang Markt</div></div>
+        <div class="fld"><div class="l">Boarding</div><div class="v">Mo–Sa 15:00</div></div>
+        <div class="fld"><div class="l">Preis</div><div class="v green">€ 0,00</div></div>
+      </div>
+      <div class="pass__note">✦ Kein Ticket nötig. Keine Anmeldung. Komm einfach herein — wir freuen uns auf dich.</div>
+    </div>
+    <div class="stub">
+      <div class="air">✈ KaM·in</div>
+      <div class="fld"><div class="l">Flug</div><div class="v">KOMM HEREIN</div></div>
+      <div class="fld"><div class="l">Sitz</div><div class="seat">2B</div></div>
+      <div class="fld"><div class="l">Boarding bis</div><div class="v">immer offen</div></div>
+      <div class="barcode"></div>
+    </div>
+  </div>
+
+  <div class="more">
+    <div class="flight"><div class="time">15:00</div><div class="nm">Wir sprechen Deutsch<small>Sprachtreff · Montag</small></div><div class="gate">GATE A1</div><div class="st">Boarding</div></div>
+    <div class="flight"><div class="time">15:00</div><div class="nm">Spieletreff<small>Karten &amp; Brettspiele · Freitag</small></div><div class="gate">GATE A1</div><div class="st">Pünktlich</div></div>
+    <div class="flight"><div class="time">18:00</div><div class="nm">Feierabendtreff<small>1× im Monat · Mittwoch</small></div><div class="gate">SAAL</div><div class="st">Geplant</div></div>
+  </div>
+<a href="../KaM-in Konzepte.html" class="back">← Konzepte</a>
+</body>
+</html>
